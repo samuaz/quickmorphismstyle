@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>main.qml</file>
-        <file>Shape.qml</file>
-        <file>ShapeForm.ui.qml</file>
-    </qresource>
-</RCC>

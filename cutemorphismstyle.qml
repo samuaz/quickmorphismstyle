@@ -48,17 +48,26 @@
 **
 ****************************************************************************/
 
-#include <QApplication>
-#include <QQmlApplicationEngine>
+import QtQuick 2.12
+import QtQuick.Controls 2.12
+import Qt.labs.platform 1.0
+import Cutemorphism 1.0
 
-int main(int argc, char *argv[])
-{
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QApplication app(argc, argv);
+ApplicationWindow {
+    id: window
+    visible: true
+    minimumWidth: Cutemorphism.width
+    height: Cutemorphism.height
 
-    QQmlApplicationEngine engine;
-    engine.addImportPath(":/imports");
-    engine.load(QUrl(QStringLiteral("qrc:/cutemorphismstyle.qml")));
+    title: qsTr("Cutemorphism Style")
 
-    return app.exec();
+    MainForm {
+        id: form
+
+    }
+
+    ColorDialog {
+        id: colorDialog
+        onCurrentColorChanged: Cutemorphism.mainColor = currentColor
+    }
 }

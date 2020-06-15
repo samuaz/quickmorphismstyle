@@ -37,8 +37,6 @@ T.Button {
         pressed: false
         opacity: control.shadowOpacity
         visible: !control.flat
-        cornerRadius: 5
-        shadowOffSet: 5
     }
 
     background: Rectangle {

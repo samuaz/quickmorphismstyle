@@ -7,7 +7,7 @@ Page {
     id: page
 
     QuickMorphismUI {
-        theme: DarkTheme
+        theme: LightTheme
     }
 
     Button {

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<RCC>
+    <qresource prefix="/">
+        <file alias="Demo.qml">../quickmorphismexample/Demo.qml</file>
+        <file alias="MainForm.ui.qml">../quickmorphismexample/MainForm.ui.qml</file>
+    </qresource>
+</RCC>

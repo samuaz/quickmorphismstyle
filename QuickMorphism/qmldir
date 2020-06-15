@@ -1,0 +1,21 @@
+module QuickMorphism
+designersupported
+QuickMorphismUI 1.0 QuickMorphismUI.qml
+ApplicationWindow 1.0 ApplicationWindow.qml
+Button 1.0 Button.qml
+CheckBox 1.0 CheckBox.qml
+DirectoryFontLoader 1.0 DirectoryFontLoader.qml
+Elevation 1.0 Elevation.qml
+Image 1.0 Image.qml
+RoundImage 1.0 RoundImage.qml
+Switch 1.0 Switch.qml
+SwitchDelegate 1.0 SwitchDelegate.qml
+TextField 1.0 TextField.qml
+FontAwesomeRegular 1.0 FontAwesomeRegular.qml
+Page 1.0 Page.qml
+singleton Icons 1.0 Icons.qml
+singleton Fonts 1.0 Fonts.qml
+singleton Constants 1.0 def/Constants.qml
+singleton LightTheme 1.0 themes/QuickMorphismLightTheme.qml
+singleton DarkTheme 1.0 themes/QuickMorphismDarkTheme.qml
+singleton QuickMorphismConfig 1.0 Config.qml

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<RCC>
+    <qresource prefix="/QuickMorphism">
+        <file alias="qmldir">../../QuickMorphism/qmldir</file>
+        <file alias="Button.qml">../../QuickMorphism/Button.qml</file>
+        <file alias="CheckBox.qml">../../QuickMorphism/CheckBox.qml</file>
+        <file alias="Elevation.qml">../../QuickMorphism/Elevation.qml</file>
+        <file alias="Image.qml">../../QuickMorphism/Image.qml</file>
+        <file alias="RoundImage.qml">../../QuickMorphism/RoundImage.qml</file>
+        <file alias="Switch.qml">../../QuickMorphism/Switch.qml</file>
+        <file alias="SwitchDelegate.qml">../../QuickMorphism/SwitchDelegate.qml</file>
+        <file alias="TextField.qml">../../QuickMorphism/TextField.qml</file>
+        <file alias="def/Constants.qml">../../QuickMorphism/def/Constants.qml</file>
+        <file alias="def/DirectoryFontLoader.qml">../../QuickMorphism/def/DirectoryFontLoader.qml</file>
+        <file alias="def/qmldir">../../QuickMorphism/def/qmldir</file>
+        <file alias="QuickMorphismUI.qml">../../QuickMorphism/QuickMorphismUI.qml</file>
+        <file alias="Fonts.qml">../../QuickMorphism/Fonts.qml</file>
+        <file alias="assets/font/fa-brands-400.ttf">../../QuickMorphism/assets/font/fa-brands-400.ttf</file>
+        <file alias="assets/font/fa-regular-400.ttf">../../QuickMorphism/assets/font/fa-regular-400.ttf</file>
+        <file alias="assets/font/fa-solid-900.ttf">../../QuickMorphism/assets/font/fa-solid-900.ttf</file>
+        <file alias="FontAwesomeRegular.qml">../../QuickMorphism/FontAwesomeRegular.qml</file>
+        <file alias="Icons.qml">../../QuickMorphism/Icons.qml</file>
+        <file alias="assets/font/NunitoSans-Black.ttf">../../QuickMorphism/assets/font/NunitoSans-Black.ttf</file>
+        <file alias="assets/font/NunitoSans-Bold.ttf">../../QuickMorphism/assets/font/NunitoSans-Bold.ttf</file>
+        <file alias="assets/font/NunitoSans-Italic.ttf">../../QuickMorphism/assets/font/NunitoSans-Italic.ttf</file>
+        <file alias="assets/font/NunitoSans-Light.ttf">../../QuickMorphism/assets/font/NunitoSans-Light.ttf</file>
+        <file alias="assets/font/NunitoSans-Regular.ttf">../../QuickMorphism/assets/font/NunitoSans-Regular.ttf</file>
+    </qresource>
+</RCC>

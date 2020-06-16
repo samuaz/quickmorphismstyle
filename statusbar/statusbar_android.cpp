@@ -64,7 +64,7 @@ void StatusBarPrivate::setStatusBarColor_sys(const QColor &color) {
 
   if(QtAndroid::androidSdkVersion() < 23){
 
-      statusColor = color.lighter(80);
+      statusColor = color;
 
   }else {
       statusColor = color;

@@ -10,9 +10,9 @@
 #include <QVariantMap>
 #include <QPointer>
 #include "../statusbar/statusbar.h"
-#include "UI/quickmorphismui.h"
-#include "UI/theme/light_theme.h"
-#include "UI/theme/dark_theme.h"
+#include "ui/quickmorphismui.h"
+#include "ui/theme/light_theme.h"
+#include "ui/theme/dark_theme.h"
 #include <QSharedPointer>
 
 

@@ -22,8 +22,8 @@ private:
     const QColor _accentColor = QColor("#7CB342");
     const QColor _highlightedColor = QColor("#FFD54F");
     const QColor _hoverColor = QColor("#FFD54F");
-    const QColor _statusBarColor = QColor("#A3B1C6");
-    const QColor _navBarColor = QColor("#A3B1C6");
+    const QColor _statusBarColor = QColor("#E0E5EC");
+    const QColor _navBarColor = QColor("#E0E5EC");
     const float _shadowOpacity = 1.0;
     const int _shadowGlow = 5;
     const int _insetShadowGlow = 10;

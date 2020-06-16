@@ -1,6 +1,6 @@
-QT += qml quick svg
+QT += quick
 
-CONFIG += c++17 qtquickcompiler ##ltcg
+CONFIG += c++11
 
 #CONFIG += qmltypes
 #QML_IMPORT_NAME = QuickMorphism
@@ -13,30 +13,35 @@ QML_DESIGNER_IMPORT_PATH = $$PWD
 
 INCLUDEPATH += $$PWD/src
 INCLUDEPATH += $$PWD/src/config
-INCLUDEPATH += $$PWD/src/UI
-INCLUDEPATH += $$PWD/src/UI/theme
+INCLUDEPATH += $$PWD/src/ui
+INCLUDEPATH += $$PWD/src/ui/theme
 
 RESOURCES += \
-    $$PWD/QuickMorphism/quickmorphism.qrc
+    $$PWD/Quickmorphism/quickmorphism.qrc
 
 HEADERS += \
-    $$PWD/src/UI/quickmorphismui.h \
+    $$PWD/src/ui/quickmorphismui.h \
     $$PWD/src/quickmorphism.h \
-    $$PWD/src/config/colors.h \
-    $$PWD/src/config/configuration.h \
-    $$PWD/src/UI/theme/dark_theme.h \
-    $$PWD/src/UI/theme/light_theme.h \
-    $$PWD/src/UI/theme/theme.h
+    $$PWD/src/ui/theme/dark_theme.h \
+    $$PWD/src/ui/theme/light_theme.h \
+    $$PWD/src/ui/theme/theme.h
 
 
 SOURCES += \
-    $$PWD/src/UI/quickmorphismui.cpp \
-    $$PWD/src/quickmorphism.cpp \
-    $$PWD/src/config/colors.cpp \
-    $$PWD/src/config/configuration.cpp
+    $$PWD/src/ui/quickmorphismui.cpp \
+    $$PWD/src/quickmorphism.cpp
 
 include($$PWD/statusbar/statusbar.pri)
 
 android: {
     QT += androidextras
+}
+
+ios {
+
+    QT += gui-private
+
+    QMAKE_CXXFLAGS += -fobjc-arc
+
+    QMAKE_POST_LINK += /usr/libexec/PlistBuddy -c \"Add :UIViewControllerBasedStatusBarAppearance bool true\" $${OUT_PWD}/Info.plist
 }

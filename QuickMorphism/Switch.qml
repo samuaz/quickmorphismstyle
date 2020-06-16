@@ -72,17 +72,18 @@ T.Switch {
             radius: width / 2
             anchors.verticalCenterOffset: 0
             anchors.verticalCenter: parent.verticalCenter
-            color: QuickMorphismConfig.theme.foregroundColor
-            border.color: QuickMorphismConfig.theme.accentColor
+            color: QuickMorphismConfig.theme.highlightedColor
+            border.color: QuickMorphismConfig.theme.bottonShadowColor
+            border.width: 0
 
             Ripple {
                 x: parent.x
                 y: parent.y
-                width: parent.width - 5
-                height: parent.height - 5
+                width: parent.width - 10
+                height: parent.height - 10
                 pressed: control.pressed
                 active: control.down || control.visualFocus || control.hovered
-                color: control.checked ? QuickMorphismConfig.theme.accentColor : QuickMorphismConfig.theme.bottonShadowColor
+                color: control.checked ? QuickMorphismConfig.theme.bottonShadowColor : QuickMorphismConfig.theme.bottonShadowColor
                 opacity: 0.2
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -151,11 +152,11 @@ T.Switch {
             property: "x"
             Keyframe {
                 frame: 0
-                value: 0
+                value: -2
             }
 
             Keyframe {
-                value: switchHandle.implicitWidth - interruptor.width
+                value: switchHandle.implicitWidth - interruptor.width + 2
                 frame: 550
             }
         }

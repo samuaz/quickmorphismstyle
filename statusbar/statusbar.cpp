@@ -26,7 +26,7 @@ void StatusBar::setStatusBarColor(const QColor &color)
 {
     QColor statusColor;
     if (color.rgba() != QColor(Qt::transparent).rgba()) {
-        statusColor = color.darker(90);
+        statusColor = color;
     }else{
         QColor statusColor = color;
     }

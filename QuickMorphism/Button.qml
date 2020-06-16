@@ -15,7 +15,7 @@ T.Button {
 
     topInset: 0
     bottomInset: 0
-    padding: 12
+    padding: 10
     horizontalPadding: padding - 4
     spacing: 6
     icon.width: 24
@@ -42,7 +42,6 @@ T.Button {
     background: Rectangle {
         color: QuickMorphismConfig.theme.foregroundColor
         radius: control.radius
-        opacity: enabled ? 1 : 0.3
         implicitWidth: 100 * QuickMorphismConfig.dpScale
         implicitHeight: 38 * QuickMorphismConfig.dpScale
     }
@@ -77,9 +76,5 @@ T.Button {
     ]
 }
 
-/*##^##
-Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
-##^##*/
+
 

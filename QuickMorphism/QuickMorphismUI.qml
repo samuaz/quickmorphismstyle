@@ -7,6 +7,13 @@ Item {
     property double dpScale: 1.0
     property int dpi: 0
 
+    StatusBar {
+        id: statusBar
+        theme: theme.style
+        navBarColor: root.theme.navBarColor
+        statusBarColor: root.theme.statusBarColor
+    }
+
     onThemeChanged: {
         changeTheme()
     }
@@ -37,6 +44,9 @@ Item {
 
     function changeTheme() {
         QuickMorphismConfig.theme = root.theme
+        statusBar.theme = root.theme.style
+        statusBar.statusBarColor = root.theme.statusBarColor
+        statusBar.navBarColor = root.theme.navBarColor
     }
 }
 

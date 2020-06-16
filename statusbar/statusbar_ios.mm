@@ -27,6 +27,7 @@
 
 #include <QScreen>
 #include <QTimer>
+#include <QDebug>
 
 @interface QIOSViewController : UIViewController
 @property (nonatomic, assign) BOOL prefersStatusBarHidden;
@@ -39,18 +40,24 @@ bool StatusBarPrivate::isAvailable_sys()
     return true;
 }
 
-void StatusBarPrivate::setColor_sys(const QColor &color)
+void StatusBarPrivate::setStatusBarColor_sys(const QColor &color)
+{
+    Q_UNUSED(color);
+}
+
+void StatusBarPrivate::setNavBarColor_sys(const QColor &color)
 {
     Q_UNUSED(color);
 }
 
 static UIStatusBarStyle statusBarStyle(StatusBar::Theme theme)
 {
-    return theme == StatusBar::Light ? UIStatusBarStyleDefault : UIStatusBarStyleLightContent;
+    return theme == StatusBar::Light ? UIStatusBarStyleDarkContent : UIStatusBarStyleLightContent;
 }
 
 static void setPreferredStatusBarStyle(UIWindow *window, UIStatusBarStyle style)
 {
+    qDebug() <<  "setting ios statusbarStyle";
     QIOSViewController *viewController = static_cast<QIOSViewController *>([window rootViewController]);
     if (!viewController || viewController.preferredStatusBarStyle == style)
         return;

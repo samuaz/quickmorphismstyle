@@ -1,4 +1,5 @@
-CONFIG += c++1z qtquickcompiler
+CONFIG += c++11
+
 INCLUDEPATH += $$PWD
 
 HEADERS += \

@@ -15,10 +15,10 @@ QtObject {
     readonly property color primaryColor: "#E0E5EC"
     readonly property color sencondaryColor: "#E0E5EC"
     readonly property color accentColor: "#7CB342"
-    readonly property color highlightedColor: "#FFD54F"
-    readonly property color hoverColor: "#FFD54F"
-    readonly property color statusBarColor: "#A3B1C6"
-    readonly property color navBarColor: "#A3B1C6"
+    readonly property color highlightedColor: "#f4f4f4"
+    readonly property color hoverColor: "#7CB342"
+    readonly property color statusBarColor: "#E0E5EC"
+    readonly property color navBarColor: "#E0E5EC"
     readonly property double shadowOpacity: 1.0
     readonly property int shadowGlow: 5
     readonly property int insetShadowGlow: 10

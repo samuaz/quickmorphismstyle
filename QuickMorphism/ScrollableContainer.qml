@@ -4,9 +4,11 @@ import QtQuick.Layouts 1.15
 import QtGraphicalEffects 1.1
 
 Item {
+    id: root
     anchors.fill: parent
     property Item mainContent
     property alias source: container
+    property int contentPading: 15
 
     Component.onCompleted: {
         container.sourceComponent = content
@@ -26,17 +28,13 @@ Item {
 
     Rectangle {
         id: maincontainer
-        color: QuickMorphismUI.theme.backgroundColor
+        color: QuickMorphismConfig.theme.backgroundColor
         anchors.fill: parent
         border.width: 0
 
         Flickable {
             id: flickable
             width: parent.width
-            anchors.top: parent.top
-            anchors.topMargin: 24
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 0
             height: parent.height
             maximumFlickVelocity: 20000
             flickDeceleration: 2000
@@ -51,15 +49,16 @@ Item {
                 anchors.top: parent.top
                 anchors.topMargin: 20
                 anchors.right: parent.right
-                anchors.rightMargin: 10
+                anchors.rightMargin: parent.rightMargin - 10
                 background: Rectangle {
                     color: "#00ffffff"
                 }
                 contentItem: Rectangle {
                     implicitWidth: 5
                     radius: width / 2
-                    color: control.pressed ? QuickMorphismUI.theme.accentColor : QuickMorphismUI.theme.primaryColor
+                    color: control.pressed ? QuickMorphismConfig.theme.accentColor : QuickMorphismConfig.theme.primaryColor
                 }
+                clip: true
             }
 
             Loader {
@@ -67,14 +66,15 @@ Item {
                 asynchronous: true
                 anchors.fill: parent
                 anchors.top: parent.top
-                anchors.topMargin: 24
+                anchors.topMargin: root.contentPading
                 anchors.left: parent.left
-                //anchors.leftMargin: MainContent.margin
+                anchors.leftMargin: root.contentPading
                 anchors.right: parent.right
-                //anchors.rightMargin: MainContent.margin
+                anchors.rightMargin: root.contentPading
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: root.contentPading
                 visible: false
                 onLoaded: {
-
                     flickable.contentHeight = mainContent ? mainContent.height + 50 : 0
                     flickable.visible = true
                     visible = true
@@ -91,3 +91,10 @@ Item {
         }
     }
 }
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+##^##*/
+

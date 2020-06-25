@@ -6,10 +6,8 @@ import QuickMorphism 1.0
 Page {
     id: page
     property alias themeSwitch: themeSwitch
-    
-    MainContainer {
-    
-    }
+
+    Container {}
 
     Switch {
         id: themeSwitch

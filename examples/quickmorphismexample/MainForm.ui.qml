@@ -7,6 +7,8 @@ Page {
     id: page
     property alias themeSwitch: themeSwitch
 
+    Container {}
+
     Switch {
         id: themeSwitch
         text: qsTr("DarkMode")

@@ -29,6 +29,6 @@
         <file>Page.qml</file>
         <file>ApplicationWindow.qml</file>
         <file>themes/QuickMorphismDarkTheme.qml</file>
-        <file>Container.qml</file>
+        <file>ScrollableContainer.qml</file>
     </qresource>
 </RCC>

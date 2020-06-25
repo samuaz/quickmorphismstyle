@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtGraphicalEffects 1.1
 
-Container {
+Item {
     anchors.fill: parent
     property Item mainContent
     property alias source: container

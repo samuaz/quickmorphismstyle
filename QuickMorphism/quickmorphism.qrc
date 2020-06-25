@@ -32,5 +32,6 @@
         <file>ScrollableContainer.qml</file>
         <file>ToolBar.qml</file>
         <file>ToolButton.qml</file>
+        <file>Label.qml</file>
     </qresource>
 </RCC>

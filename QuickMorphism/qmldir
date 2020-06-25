@@ -13,6 +13,7 @@ SwitchDelegate 1.0 SwitchDelegate.qml
 TextField 1.0 TextField.qml
 FontAwesomeRegular 1.0 FontAwesomeRegular.qml
 Page 1.0 Page.qml
+MainContainer 1.0 MainContainer.qml
 singleton Icons 1.0 Icons.qml
 singleton Fonts 1.0 Fonts.qml
 singleton Constants 1.0 def/Constants.qml

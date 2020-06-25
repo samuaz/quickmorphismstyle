@@ -29,5 +29,6 @@
         <file>Page.qml</file>
         <file>ApplicationWindow.qml</file>
         <file>themes/QuickMorphismDarkTheme.qml</file>
+        <file>MainContainer.qml</file>
     </qresource>
 </RCC>

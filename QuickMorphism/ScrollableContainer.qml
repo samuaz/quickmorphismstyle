@@ -42,23 +42,23 @@ Item {
             boundsBehavior: Flickable.StopAtBounds
             visible: false
             clip: true
-
             ScrollBar.vertical: ScrollBar {
-                id: control
+                id: scrollbar
                 visible: flickable.contentHeight > flickable.height
                 anchors.top: parent.top
-                anchors.topMargin: 20
+                anchors.topMargin: 0
                 anchors.right: parent.right
-                anchors.rightMargin: parent.rightMargin - 10
+                anchors.rightMargin: parent.rightMargin
                 background: Rectangle {
                     color: "#00ffffff"
                 }
                 contentItem: Rectangle {
-                    implicitWidth: 5
+                    id: scrollbarIndicator
+                    implicitWidth: 2
                     radius: width / 2
-                    color: control.pressed ? QuickMorphismConfig.theme.accentColor : QuickMorphismConfig.theme.primaryColor
+                    color: scrollbar.pressed ? QuickMorphismConfig.theme.bottonShadowColor : QuickMorphismConfig.theme.backgroundColor
                 }
-                clip: true
+                //clip: true
             }
 
             Loader {
@@ -72,10 +72,10 @@ Item {
                 anchors.right: parent.right
                 anchors.rightMargin: root.contentPading
                 anchors.bottom: parent.bottom
-                anchors.bottomMargin: root.contentPading
+                anchors.bottomMargin: 0
                 visible: false
                 onLoaded: {
-                    flickable.contentHeight = mainContent ? mainContent.height + 50 : 0
+                    flickable.contentHeight = mainContent ? mainContent.height : 0
                     flickable.visible = true
                     visible = true
                     //loading.show = false
@@ -88,6 +88,32 @@ Item {
                     }
                 }
             }
+
+            onDragStarted: {
+                scrollbarIndicator.color = QuickMorphismConfig.theme.bottonShadowColor
+            }
+
+            onDragEnded: {
+                scrollbarIndicator.color = QuickMorphismConfig.theme.backgroundColor
+            }
+
+
+            /*
+            onContentYChanged: {
+                var contentPosition = (flickable.visibleArea.yPosition * flickable.height)
+
+                if (contentPosition > 50) {
+                    if (TocHeader.height !== TocHeader.minHeight) {
+                        TocHeader.height = TocHeader.minHeight
+                    }
+                } else {
+                    if (TocHeader.height != TocHeader.maxHeight) {
+                        TocHeader.height = TocHeader.maxHeight
+                    }
+                }
+            }
+
+            */
         }
     }
 }

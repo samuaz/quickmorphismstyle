@@ -30,5 +30,7 @@
         <file>ApplicationWindow.qml</file>
         <file>themes/QuickMorphismDarkTheme.qml</file>
         <file>ScrollableContainer.qml</file>
+        <file>ToolBar.qml</file>
+        <file>ToolButton.qml</file>
     </qresource>
 </RCC>

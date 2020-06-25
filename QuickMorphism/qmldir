@@ -14,7 +14,8 @@ TextField 1.0 TextField.qml
 FontAwesomeRegular 1.0 FontAwesomeRegular.qml
 Page 1.0 Page.qml
 ScrollableContainer 1.0 ScrollableContainer.qml
-Toolbar 1.0 Toolbar.qml
+ToolBar 1.0 ToolBar.qml
+ToolButton 1.0 ToolButton.qml
 singleton Icons 1.0 Icons.qml
 singleton Fonts 1.0 Fonts.qml
 singleton Constants 1.0 def/Constants.qml

@@ -7,7 +7,7 @@ Page {
     id: page
     property alias themeSwitch: themeSwitch
 
-    Container {}
+    ScrollableContainer {}
 
     Switch {
         id: themeSwitch

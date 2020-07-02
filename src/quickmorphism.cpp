@@ -35,6 +35,9 @@ void QuickMorphism::init(QQmlApplicationEngine &engine)
         QStringLiteral(":QuickMorphism/assets/font/NunitoSans-Regular.ttf"));
 
     QFont font("Nunito Sans");
+    font.setFamily("Regular");
+    qDebug() << "actual font point size " << font.pointSize();
+    font.setPointSize(font.pointSize()+2);
     qApp->setFont(font);
     QuickMorphismUI::registerSingleton(&engine);
 }

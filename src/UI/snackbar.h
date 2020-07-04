@@ -22,7 +22,7 @@ signals:
     void messageChanged();
 
 private:
-    bool _show;
+    bool _show = false;
     QString _message;
 };
 

@@ -33,5 +33,6 @@
         <file>ToolBar.qml</file>
         <file>ToolButton.qml</file>
         <file>Label.qml</file>
+        <file>SnackBar.qml</file>
     </qresource>
 </RCC>

@@ -1,4 +1,5 @@
 #include "quickmorphismui.h"
+#include "snackbar.h"
 
 static QuickMorphismUI *s_instance = nullptr;
 
@@ -14,6 +15,7 @@ void QuickMorphismUI::registerSingleton(QQmlEngine * qmlEngine)
     rootContext->setContextProperty("QuickMorphism", s_instance);
     rootContext->setContextProperty("QuickMorphismDarkTheme", new DarkTheme);
     rootContext->setContextProperty("QuickMorphismLightTheme", new LightTheme);
+    rootContext->setContextProperty("QuickMorphismSnackBar", new Snackbar);
 }
 
 Theme* QuickMorphismUI::theme() const

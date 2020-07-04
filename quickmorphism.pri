@@ -22,6 +22,7 @@ RESOURCES += \
 HEADERS += \
     $$PWD/src/ui/quickmorphismui.h \
     $$PWD/src/quickmorphism.h \
+    $$PWD/src/ui/snackbar.h \
     $$PWD/src/ui/theme/dark_theme.h \
     $$PWD/src/ui/theme/light_theme.h \
     $$PWD/src/ui/theme/theme.h
@@ -29,7 +30,8 @@ HEADERS += \
 
 SOURCES += \
     $$PWD/src/ui/quickmorphismui.cpp \
-    $$PWD/src/quickmorphism.cpp
+    $$PWD/src/quickmorphism.cpp \
+    $$PWD/src/ui/snackbar.cpp
 
 include($$PWD/statusbar/statusbar.pri)
 

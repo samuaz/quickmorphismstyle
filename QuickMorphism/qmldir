@@ -17,6 +17,7 @@ ScrollableContainer 1.0 ScrollableContainer.qml
 ToolBar 1.0 ToolBar.qml
 ToolButton 1.0 ToolButton.qml
 Label 1.0 Label.qml
+SnackBar 1.0 SnackBar.qml
 singleton Icons 1.0 Icons.qml
 singleton Fonts 1.0 Fonts.qml
 singleton Constants 1.0 def/Constants.qml

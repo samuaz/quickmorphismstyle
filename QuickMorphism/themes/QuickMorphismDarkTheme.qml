@@ -15,6 +15,7 @@ QtObject {
     readonly property color primaryColor: "#243441"
     readonly property color secondaryColor: "#243441"
     readonly property color accentColor: "#7CB342"
+    readonly property color errorColor: "#FF0000"
     readonly property color highlightedColor: "#4d5e6c"
     readonly property color hoverColor: "#7CB342"
     readonly property color statusBarColor: "#243441"

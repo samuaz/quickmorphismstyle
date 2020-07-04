@@ -20,6 +20,7 @@ Label 1.0 Label.qml
 SnackBar 1.0 SnackBar.qml
 CalendarPicker 1.0 CalendarPicker.qml
 DatePicker 1.0 DatePicker.qml
+Required 1.0 Required.qml
 singleton Icons 1.0 Icons.qml
 singleton Fonts 1.0 Fonts.qml
 singleton Constants 1.0 def/Constants.qml

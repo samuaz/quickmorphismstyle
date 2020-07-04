@@ -36,5 +36,6 @@
         <file>SnackBar.qml</file>
         <file>CalendarPicker.qml</file>
         <file>DatePicker.qml</file>
+        <file>Required.qml</file>
     </qresource>
 </RCC>

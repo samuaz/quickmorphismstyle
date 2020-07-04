@@ -65,13 +65,14 @@ Item {
             height: textDate.height - 10
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: textDate.right
-            anchors.rightMargin: 0
+            anchors.rightMargin: 3
             FontAwesomeRegular {
                 id: indicatorchecker
                 fontSizeMode: "Fit"
                 symbol: Icons.faCalendar
                 font.weight: Font.Bold
                 color: QuickMorphismConfig.theme.primaryTextColor
+                text: "\uf133"
                 anchors.fill: parent
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
@@ -230,28 +231,21 @@ Item {
         }
         enter: Transition {
 
-            /*
             NumberAnimation {
                 property: "y"
                 from: main.height - 200 * -1
                 to: main.height - 200
                 duration: 250
             }
-            */
         }
 
         exit: Transition {
-            /*
             NumberAnimation {
                 property: "y"
                 from: main.height - 200
                 to: main.height - 200 * -1
                 duration: 250
             }
-            */
         }
     }
 }
-
-
-

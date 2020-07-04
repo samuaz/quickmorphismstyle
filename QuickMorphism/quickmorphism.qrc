@@ -34,5 +34,7 @@
         <file>ToolButton.qml</file>
         <file>Label.qml</file>
         <file>SnackBar.qml</file>
+        <file>CalendarPicker.qml</file>
+        <file>DatePicker.qml</file>
     </qresource>
 </RCC>

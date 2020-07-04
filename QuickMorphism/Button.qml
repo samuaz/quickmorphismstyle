@@ -25,7 +25,6 @@ T.Button {
 
     property double shadowOpacity: QuickMorphismConfig.theme.shadowOpacity
 
-    text: "My Button"
     property int radius: Math.min(width, height) / 2
     font.capitalization: Font.MixedCase
 
@@ -75,6 +74,3 @@ T.Button {
         }
     ]
 }
-
-
-

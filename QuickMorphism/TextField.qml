@@ -88,18 +88,22 @@ T.TextField {
         visible: isPassword
         flat: true
         anchors.right: parent.right
-        anchors.rightMargin: 25
+        anchors.rightMargin: 20
         width: parent.height
         height: parent.height
         checked: false
         checkable: true
+        background: Rectangle {
+
+            color: "transparent"
+        }
         FontAwesomeRegular {
             id: indicatorchecker
             fontSizeMode: "Fit"
             anchors.fill: parent
             symbol: Icons.faEye
             font.weight: Font.Bold
-            color: QuickMorphismConfig.theme.primaryTextColor
+            color: showPassword.checked ? QuickMorphismConfig.theme.accentColor : QuickMorphismConfig.theme.primaryTextColor
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             anchors.verticalCenter: parent.verticalCenter

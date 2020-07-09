@@ -9,6 +9,7 @@ T.TextField {
     property string errorMessage
     property alias required: required
     property bool isRequired: false
+    property bool isPassword: false
 
     //font: Constants.font
     property int radius: 5
@@ -80,6 +81,34 @@ T.TextField {
         color: !control.acceptableInput
                && !control.text.length ? QuickMorphismConfig.theme.primaryTextColor : !control.acceptableInput
                                          && control.text.length ? QuickMorphismConfig.theme.errorColor : control.acceptableInput && control.text ? QuickMorphismConfig.theme.accentColor : QuickMorphismConfig.theme.primaryTextColor
+    }
+
+    Button {
+        id: showPassword
+        visible: isPassword
+        flat: true
+        anchors.right: parent.right
+        anchors.rightMargin: 25
+        width: parent.height
+        height: parent.height
+        checked: false
+        checkable: true
+        FontAwesomeRegular {
+            id: indicatorchecker
+            fontSizeMode: "Fit"
+            anchors.fill: parent
+            symbol: Icons.faEye
+            font.weight: Font.Bold
+            color: QuickMorphismConfig.theme.primaryTextColor
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            anchors.verticalCenter: parent.verticalCenter
+        }
+        onCheckedChanged: {
+
+            showPassword.checked ? control.echoMode = TextInput.Normal : control.echoMode
+                                   = TextInput.Password
+        }
     }
 
     MouseArea {

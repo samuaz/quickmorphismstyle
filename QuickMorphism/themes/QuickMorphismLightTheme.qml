@@ -26,4 +26,6 @@ QtObject {
     readonly property double shadowSpread: 0.5
     readonly property double insetShadowSpread: 0.5
     readonly property int shadowOffSet: 5
+    readonly property double titleSize: Qt.application.font.pixelSize * 1.6
+    readonly property double subTitleSize: Qt.application.font.pixelSize * 1.1
 }

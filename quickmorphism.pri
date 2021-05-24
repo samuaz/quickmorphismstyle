@@ -17,7 +17,7 @@ INCLUDEPATH += $$PWD/src/ui
 INCLUDEPATH += $$PWD/src/ui/theme
 
 RESOURCES += \
-    $$PWD/Quickmorphism/quickmorphism.qrc
+    $$PWD/QuickMorphism/quickmorphism.qrc
 
 HEADERS += \
     $$PWD/src/ui/quickmorphismui.h \

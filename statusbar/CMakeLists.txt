@@ -1,14 +1,17 @@
 cmake_minimum_required(VERSION 3.1)
-project(StatusBar LANGUAGES CXX)
+project(QuickMorphismStatusBar LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-find_package(Qt5 REQUIRED
-    Core
-    Gui
-    Qml
-    )
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick Gui Qml REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Gui Qml REQUIRED)
     
 # prevent error "You must build your code with position independent code if Qt was built with..
 if (Qt5_POSITION_INDEPENDENT_CODE)
@@ -18,29 +21,33 @@ endif()
 set(CMAKE_AUTOMOC ON)
 
 set(STATUSBAR_COMMON_SOURCES 
-statusbar.h
-statusbar.cpp
+include/statusbar.h
+src/statusbar.cpp
 )
 
 if (ANDROID)
-set(STATUSBAR_PLATFORM_SOURCES statusbar_android.cpp)
+set(STATUSBAR_PLATFORM_SOURCES src/statusbar_android.cpp)
 elseif (CMAKE_SYSTEM_NAME STREQUAL iOS)
-set(STATUSBAR_PLATFORM_SOURCES statusbar_ios.mm)
+set(STATUSBAR_PLATFORM_SOURCES src/statusbar_ios.mm)
 set(STATUSBAR_PLATFORM_LIBS "-framework UIKit")
 else()
-set(STATUSBAR_PLATFORM_SOURCES statusbar_dummy.cpp)
+set(STATUSBAR_PLATFORM_SOURCES src/statusbar_dummy.cpp)
 endif()
-find_package(Qt5 COMPONENTS Core REQUIRED)
 
 add_library(${PROJECT_NAME} OBJECT
     ${STATUSBAR_COMMON_SOURCES}
     ${STATUSBAR_PLATFORM_SOURCES}
     )
-target_link_libraries(StatusBar PRIVATE Qt5::Core Qt5::Gui Qt5::Qml ${STATUSBAR_PLATFORM_LIBS})
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Qml ${STATUSBAR_PLATFORM_LIBS})
 
-target_include_directories(StatusBar PUBLIC
+target_include_directories(${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}
-    $<TARGET_PROPERTY:Qt5::Core,INTERFACE_INCLUDE_DIRECTORIES>
-    $<TARGET_PROPERTY:Qt5::Gui,INTERFACE_INCLUDE_DIRECTORIES>
-    $<TARGET_PROPERTY:Qt5::Qml,INTERFACE_INCLUDE_DIRECTORIES>
+    $<TARGET_PROPERTY:Qt${QT_VERSION_MAJOR}::Core,INTERFACE_INCLUDE_DIRECTORIES>
+    $<TARGET_PROPERTY:Qt${QT_VERSION_MAJOR}::Gui,INTERFACE_INCLUDE_DIRECTORIES>
+    $<TARGET_PROPERTY:Qt${QT_VERSION_MAJOR}::Qml,INTERFACE_INCLUDE_DIRECTORIES>
     )
+
+target_include_directories(${PROJECT_NAME} PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
+        )

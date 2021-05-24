@@ -1,4 +1,4 @@
-#include "quickmorphism.h"
+#include <QuickMorphismStyle/quickmorphism.h>
 #include <QDebug>
 /*
 QuickMorphism::QuickMorphism(QQmlApplicationEngine & engine, QuickMorphismUI *quickMorphismUI): _engine(engine), _quickMorphismUI(quickMorphismUI){

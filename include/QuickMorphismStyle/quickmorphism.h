@@ -9,7 +9,7 @@
 #include <QtGui>
 #include <QVariantMap>
 #include <QPointer>
-#include "../statusbar/statusbar.h"
+#include "statusbar/include/statusbar.h"
 #include "ui/quickmorphismui.h"
 #include "ui/theme/light_theme.h"
 #include "ui/theme/dark_theme.h"

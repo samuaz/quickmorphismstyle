@@ -1,4 +1,4 @@
-#include "snackbar.h"
+#include <QuickMorphismStyle/ui/snackbar.h>
 
 Snackbar::Snackbar(){}
 

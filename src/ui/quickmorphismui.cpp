@@ -1,5 +1,5 @@
-#include "quickmorphismui.h"
-#include "snackbar.h"
+#include <QuickMorphismStyle/ui/quickmorphismui.h>
+#include <QuickMorphismStyle/ui/snackbar.h>
 
 static QuickMorphismUI *s_instance = nullptr;
 

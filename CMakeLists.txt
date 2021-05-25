@@ -58,7 +58,7 @@ if(QT_VERSION_MAJOR EQUAL 5)
     find_package(Qt5QuickCompiler)
     qtquick_compiler_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)
 endif()
-qt_add_binary_resources(RESOURCE QuickMorphism/quickmorphism.qrc)
+qt_add_resources(PROJECT_SOURCES QuickMorphism/quickmorphism.qrc)
 set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}" CACHE STRING "Qt Creator QuickMorphism paths")
 
 #####

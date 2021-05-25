@@ -50,6 +50,8 @@ set(PROJECT_SOURCES
 )
 
 qtquick_compiler_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)
+set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}" CACHE STRING "Qt Creator QuickMorphism paths")
+
 
 set(STATUSBAR_COMMON_SOURCES
 include/QuickMorphismStyle/statusbar/statusbar.h

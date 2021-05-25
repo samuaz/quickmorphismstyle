@@ -33,6 +33,9 @@ if (Qt5_POSITION_INDEPENDENT_CODE)
   SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
 endif()
 
+#file(GLOB_RECURSE PROJECT_SOURCES LIST_DIRECTORIES true include/QuickMorphismStyle/*.h src/*.cpp include/QuickMorphismStyle/*.tpp QuickMorphism/*.qrc)
+
+
 set(PROJECT_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/src/quickmorphism.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/ui/quickmorphismui.cpp
@@ -49,17 +52,17 @@ set(PROJECT_SOURCES
 qtquick_compiler_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)
 
 set(STATUSBAR_COMMON_SOURCES
-include/QuickMorphismStyle/statusbar/statusbar.h
-src/statusbar/statusbar.cpp
+${CMAKE_CURRENT_LIST_DIR}/include/QuickMorphismStyle/statusbar/statusbar.h
+${CMAKE_CURRENT_LIST_DIR}/src/statusbar/statusbar.cpp
 )
 
 if (ANDROID)
-set(STATUSBAR_PLATFORM_SOURCES src/statusbar/statusbar_android.cpp)
+set(STATUSBAR_PLATFORM_SOURCES ${CMAKE_CURRENT_LIST_DIR}/src/statusbar/statusbar_android.cpp)
 elseif (CMAKE_SYSTEM_NAME STREQUAL iOS)
-set(STATUSBAR_PLATFORM_SOURCES src/statusbar/statusbar_ios.mm)
+set(STATUSBAR_PLATFORM_SOURCES ${CMAKE_CURRENT_LIST_DIR}/src/statusbar/statusbar_ios.mm)
 set(STATUSBAR_PLATFORM_LIBS "-framework UIKit")
 else()
-set(STATUSBAR_PLATFORM_SOURCES src/statusbar/statusbar_dummy.cpp)
+set(STATUSBAR_PLATFORM_SOURCES ${CMAKE_CURRENT_LIST_DIR}/src/statusbar/statusbar_dummy.cpp)
 endif()
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

@@ -1,4 +1,4 @@
-#include "statusbar_p.h"
+#include <QuickMorphismStyle/statusbar/statusbar_p.h>
 
 bool StatusBarPrivate::isAvailable_sys()
 {

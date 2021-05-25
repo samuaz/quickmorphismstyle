@@ -24,8 +24,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #    endif()
 #endif()
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick Gui Qml REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Gui Qml REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR}QuickCompiler)
+
+# prevent error "You must build your code with position independent code if Qt was built with..
+if (Qt5_POSITION_INDEPENDENT_CODE)
+  SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
+endif()
 
 set(PROJECT_SOURCES
     src/quickmorphism.cpp
@@ -40,21 +46,41 @@ set(PROJECT_SOURCES
     QuickMorphism/quickmorphism.qrc
 )
 
-add_subdirectory(statusbar)
+qtquick_compiler_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)
+
+set(STATUSBAR_COMMON_SOURCES
+include/QuickMorphismStyle/statusbar/statusbar.h
+src/statusbar/statusbar.cpp
+)
+
+if (ANDROID)
+set(STATUSBAR_PLATFORM_SOURCES src/statusbar/statusbar_android.cpp)
+elseif (CMAKE_SYSTEM_NAME STREQUAL iOS)
+set(STATUSBAR_PLATFORM_SOURCES src/statusbar/statusbar_ios.mm)
+set(STATUSBAR_PLATFORM_LIBS "-framework UIKit")
+else()
+set(STATUSBAR_PLATFORM_SOURCES src/statusbar/statusbar_dummy.cpp)
+endif()
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_library(${PROJECT_NAME}
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        ${STATUSBAR_COMMON_SOURCES}
+        ${STATUSBAR_PLATFORM_SOURCES}
     )
 else()
     if(ANDROID)
         add_library(${PROJECT_NAME} SHARED
             ${PROJECT_SOURCES}
+            ${STATUSBAR_COMMON_SOURCES}
+            ${STATUSBAR_PLATFORM_SOURCES}
         )
     else()
         add_library(${PROJECT_NAME}
           ${PROJECT_SOURCES}
+          ${STATUSBAR_COMMON_SOURCES}
+          ${STATUSBAR_PLATFORM_SOURCES}
         )
     endif()
 endif()
@@ -62,7 +88,8 @@ endif()
 target_compile_definitions(${PROJECT_NAME}
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(${PROJECT_NAME}
-  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick QuickMorphismStatusBar)
+  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Qml ${STATUSBAR_PLATFORM_LIBS})
+
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER dev.theopencompany.${PROJECT_NAME}
@@ -80,20 +107,26 @@ target_include_directories(${PROJECT_NAME} PUBLIC
         $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
         )
 
-set(WINTER_INSTALL_DIR "$ENV{HOME}/winter-release/winter")
-
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/" # source directory
-            DESTINATION ${WINTER_INSTALL_DIR}/include/${PROJECT_NAME} # target directory
+            DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/include/${PROJECT_NAME} # target directory
             FILES_MATCHING # install only matched files
             PATTERN "*.h*" # select header files
             )
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/" # source directory
-            DESTINATION ${WINTER_INSTALL_DIR}/include/${PROJECT_NAME} # target directory
+            DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/include/${PROJECT_NAME} # target directory
             FILES_MATCHING # install only matched files
             PATTERN "*.tpp*" # select header files
             )
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cmake" # source directory
-            DESTINATION ${WINTER_INSTALL_DIR}/include/${PROJECT_NAME}/cmake # target directory
+            DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/include/${PROJECT_NAME}/cmake # target directory
             FILES_MATCHING # install only matched files
             PATTERN "*.cmake*" # select header files
             )
+
+install(
+    DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism/" # source directory
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/include/${PROJECT_NAME} # target directory
+    FILES_MATCHING # install only matched files
+    PATTERN "*.tpp*" # select header files
+    )
+

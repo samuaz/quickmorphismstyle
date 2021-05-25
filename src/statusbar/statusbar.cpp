@@ -1,5 +1,5 @@
-#include "statusbar.h"
-#include "statusbar_p.h"
+#include <QuickMorphismStyle/statusbar/statusbar.h>
+#include <QuickMorphismStyle/statusbar/statusbar_p.h>
 
 QColor StatusBarPrivate::statusBarColor;
 QColor StatusBarPrivate::navBarColor;

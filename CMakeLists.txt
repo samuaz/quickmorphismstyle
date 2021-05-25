@@ -26,7 +26,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick Gui Qml REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Gui Qml REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR}QuickCompiler)
+find_package(Qt5QuickCompiler)
 
 # prevent error "You must build your code with position independent code if Qt was built with..
 if (Qt5_POSITION_INDEPENDENT_CODE)

@@ -34,16 +34,16 @@ if (Qt5_POSITION_INDEPENDENT_CODE)
 endif()
 
 set(PROJECT_SOURCES
-    src/quickmorphism.cpp
-    src/ui/quickmorphismui.cpp
-    src/ui/snackbar.cpp
-    include/QuickMorphismStyle/quickmorphism.h
-    include/QuickMorphismStyle/ui/quickmorphismui.h
-    include/QuickMorphismStyle/ui/snackbar.h
-    include/QuickMorphismStyle/ui/theme/dark_theme.h
-    include/QuickMorphismStyle/ui/theme/light_theme.h
-    include/QuickMorphismStyle/ui/theme/theme.h
-    QuickMorphism/quickmorphism.qrc
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/quickmorphism.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/quickmorphismui.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui/snackbar.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/QuickMorphismStyle/quickmorphism.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/QuickMorphismStyle/ui/quickmorphismui.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/QuickMorphismStyle/ui/snackbar.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/QuickMorphismStyle/ui/theme/dark_theme.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/QuickMorphismStyle/ui/theme/light_theme.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/QuickMorphismStyle/ui/theme/theme.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism/quickmorphism.qrc
 )
 
 qtquick_compiler_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)

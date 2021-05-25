@@ -1,5 +1,4 @@
 module QuickMorphism
-plugin quickMorphism
 designersupported
 QuickMorphismUI 1.0 QuickMorphismUI.qml
 ApplicationWindow 1.0 ApplicationWindow.qml

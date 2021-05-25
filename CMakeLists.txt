@@ -8,7 +8,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
@@ -32,8 +32,10 @@ if (Qt5_POSITION_INDEPENDENT_CODE)
   SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
 endif()
 
-#file(GLOB_RECURSE PROJECT_SOURCES LIST_DIRECTORIES true include/QuickMorphismStyle/*.h src/*.cpp include/QuickMorphismStyle/*.tpp QuickMorphism/*.qrc)
 
+##### SET RESOURCES
+
+#file(GLOB_RECURSE PROJECT_SOURCES LIST_DIRECTORIES true include/QuickMorphismStyle/*.h src/*.cpp include/QuickMorphismStyle/*.tpp QuickMorphism/*.qrc)
 
 set(PROJECT_SOURCES
     src/quickmorphism.cpp
@@ -48,14 +50,20 @@ set(PROJECT_SOURCES
     QuickMorphism/quickmorphism.qrc
 )
 
+#####
+
+##### QML
+
 if(QT_VERSION_MAJOR EQUAL 5)
     find_package(Qt5QuickCompiler)
     qtquick_compiler_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)
 endif()
-
-
+qt_add_binary_resources(RESOURCE QuickMorphism/quickmorphism.qrc)
 set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}" CACHE STRING "Qt Creator QuickMorphism paths")
 
+#####
+
+##### STATUSBAR
 
 set(STATUSBAR_COMMON_SOURCES
 include/QuickMorphismStyle/statusbar/statusbar.h
@@ -71,13 +79,18 @@ else()
 set(STATUSBAR_PLATFORM_SOURCES src/statusbar/statusbar_dummy.cpp)
 endif()
 
+#####
+
+##### CREATE LIBRARY
+
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_library(${PROJECT_NAME}
-        MANUAL_FINALIZATION
+    #qt_add_library(${PROJECT_NAME}
+     #   MANUAL_FINALIZATION
+     add_library(${PROJECT_NAME}
         ${PROJECT_SOURCES}
         ${STATUSBAR_COMMON_SOURCES}
         ${STATUSBAR_PLATFORM_SOURCES}
-    )
+     )
 else()
     if(ANDROID)
         add_library(${PROJECT_NAME} SHARED
@@ -93,6 +106,10 @@ else()
         )
     endif()
 endif()
+
+#####
+
+##### TARGET COMPILE DEFINITIONS
 
 target_compile_definitions(${PROJECT_NAME}
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
@@ -110,6 +127,10 @@ if(QT_VERSION_MAJOR EQUAL 6)
     qt_import_qml_plugins(${PROJECT_NAME})
     qt_finalize_executable(${PROJECT_NAME})
 endif()
+
+#####
+
+##### INCLUDE AND INSTALL CONFIGURATION
 
 target_include_directories(${PROJECT_NAME} PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -138,4 +159,4 @@ install(
     FILES_MATCHING # install only matched files
     PATTERN "*.tpp*" # select header files
     )
-
+#####

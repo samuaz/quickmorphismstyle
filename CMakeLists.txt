@@ -37,32 +37,32 @@ endif()
 
 
 set(PROJECT_SOURCES
-    ${CMAKE_CURRENT_LIST_DIR}/src/quickmorphism.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/ui/quickmorphismui.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/ui/snackbar.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/include/QuickMorphismStyle/quickmorphism.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/QuickMorphismStyle/ui/quickmorphismui.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/QuickMorphismStyle/ui/snackbar.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/QuickMorphismStyle/ui/theme/dark_theme.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/QuickMorphismStyle/ui/theme/light_theme.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/QuickMorphismStyle/ui/theme/theme.h
-    ${CMAKE_CURRENT_LIST_DIR}/QuickMorphism/quickmorphism.qrc
+    src/quickmorphism.cpp
+    src/ui/quickmorphismui.cpp
+    src/ui/snackbar.cpp
+    include/QuickMorphismStyle/quickmorphism.h
+    include/QuickMorphismStyle/ui/quickmorphismui.h
+    include/QuickMorphismStyle/ui/snackbar.h
+    include/QuickMorphismStyle/ui/theme/dark_theme.h
+    include/QuickMorphismStyle/ui/theme/light_theme.h
+    include/QuickMorphismStyle/ui/theme/theme.h
+    QuickMorphism/quickmorphism.qrc
 )
 
 qtquick_compiler_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)
 
 set(STATUSBAR_COMMON_SOURCES
-${CMAKE_CURRENT_LIST_DIR}/include/QuickMorphismStyle/statusbar/statusbar.h
-${CMAKE_CURRENT_LIST_DIR}/src/statusbar/statusbar.cpp
+include/QuickMorphismStyle/statusbar/statusbar.h
+src/statusbar/statusbar.cpp
 )
 
 if (ANDROID)
-set(STATUSBAR_PLATFORM_SOURCES ${CMAKE_CURRENT_LIST_DIR}/src/statusbar/statusbar_android.cpp)
+set(STATUSBAR_PLATFORM_SOURCES src/statusbar/statusbar_android.cpp)
 elseif (CMAKE_SYSTEM_NAME STREQUAL iOS)
-set(STATUSBAR_PLATFORM_SOURCES ${CMAKE_CURRENT_LIST_DIR}/src/statusbar/statusbar_ios.mm)
+set(STATUSBAR_PLATFORM_SOURCES src/statusbar/statusbar_ios.mm)
 set(STATUSBAR_PLATFORM_LIBS "-framework UIKit")
 else()
-set(STATUSBAR_PLATFORM_SOURCES ${CMAKE_CURRENT_LIST_DIR}/src/statusbar/statusbar_dummy.cpp)
+set(STATUSBAR_PLATFORM_SOURCES src/statusbar/statusbar_dummy.cpp)
 endif()
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

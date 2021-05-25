@@ -26,7 +26,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick Gui Qml REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Gui Qml REQUIRED)
-find_package(Qt5QuickCompiler)
 
 # prevent error "You must build your code with position independent code if Qt was built with..
 if (Qt5_POSITION_INDEPENDENT_CODE)
@@ -49,7 +48,12 @@ set(PROJECT_SOURCES
     QuickMorphism/quickmorphism.qrc
 )
 
-qtquick_compiler_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)
+if(QT_VERSION_MAJOR EQUAL 5)
+    find_package(Qt5QuickCompiler)
+    qtquick_compiler_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)
+endif()
+
+
 set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}" CACHE STRING "Qt Creator QuickMorphism paths")
 
 

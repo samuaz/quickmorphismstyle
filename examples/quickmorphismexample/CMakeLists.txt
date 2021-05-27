@@ -1,144 +1,107 @@
-# Generated from quickmorphismexample.pro.
+cmake_minimum_required(VERSION 3.18)
 
-#####################################################################
-## quickmorphismexample Binary:
-#####################################################################
+project(QuickMorphismExample VERSION 0.1 LANGUAGES CXX)
 
-qt_internal_add_executable(quickmorphismexample
-    GUI
-    SOURCES
-        ../../src/quickmorphism.cpp ../../src/quickmorphism.h
-        ../../src/ui/quickmorphismui.cpp ../../src/ui/quickmorphismui.h
-        ../../src/ui/snackbar.cpp ../../src/ui/snackbar.h
-        ../../src/ui/theme/dark_theme.h
-        ../../src/ui/theme/light_theme.h
-        ../../src/ui/theme/theme.h
-        ../../statusbar/statusbar.cpp ../../statusbar/statusbar.h
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# QtCreator supports the following variables for Android, which are identical to qmake Android variables.
+# Check https://doc.qt.io/qt/deployment-android.html for more information.
+# They need to be set before the find_package(...) calls below.
+
+#if(ANDROID)
+#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
+#    if (ANDROID_ABI STREQUAL "armeabi-v7a")
+#        set(ANDROID_EXTRA_LIBS
+#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so
+#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so)
+#    endif()
+#endif()
+
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick LinguistTools REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick LinguistTools REQUIRED)
+
+include(FetchContent)
+set(FETCHCONTENT_QUIET OFF)
+set(THIRD_PARTY_DIR ${CMAKE_SOURCE_DIR}/third_party)
+
+
+FetchContent_Declare(
+        QuickMorphismStyle
+        GIT_REPOSITORY https://samuaz@bitbucket.org/samuaz/quickmorphismstyle.git
+        GIT_TAG        CMAKE
+        GIT_PROGRESS   TRUE
+        SOURCE_DIR ${THIRD_PARTY_DIR}/QuickMorphismStyle
+)
+FetchContent_GetProperties(QuickMorphismStyle)
+if(NOT QuickMorphismStyle_POPULATED)
+    FetchContent_Populate(QuickMorphismStyle)
+    add_subdirectory(${THIRD_PARTY_DIR}/QuickMorphismStyle)
+endif()
+
+#include(${THIRD_PARTY_DIR}/QuickMorphismStyle/CMakeLists.txt)
+
+#FetchContent_Declare(
+#        QuickMorphismStyle
+#        GIT_REPOSITORY https://samuaz@bitbucket.org/samuaz/quickmorphismstyle.git
+#        GIT_TAG        CMAKE
+#        SOURCE_DIR ${THIRD_PARTY_DIR}/QuickMorphismStyle
+#)
+#FetchContent_MakeAvailable(QuickMorphismStyle)
+set(QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP ON)
+
+#include(${QuickMorphismStyle_SOURCE_DIR}/CMakeLists.txt)
+
+set(TS_FILES QuickMorphismExample_es_ES.ts)
+
+set(PROJECT_SOURCES
         main.cpp
-    DEFINES
-        QT_DEPRECATED_WARNINGS
-    INCLUDE_DIRECTORIES
-        ../../src
-        ../../src/config
-        ../../src/ui
-        ../../src/ui/theme
-        ../../statusbar
-    PUBLIC_LIBRARIES
-        Qt::Gui
-        Qt::Quick
-)
-
-# Resources:
-set(qml_resource_files
-    "Demo.qml"
-    "MainForm.ui.qml"
-)
-
-qt_internal_add_resource(quickmorphismexample "qml"
-    PREFIX
-        "/"
-    FILES
-        ${qml_resource_files}
-)
-set(quickmorphism_resource_files
-    "../../QuickMorphism/ApplicationWindow.qml"
-    "../../QuickMorphism/Button.qml"
-    "../../QuickMorphism/CalendarPicker.qml"
-    "../../QuickMorphism/CheckBox.qml"
-    "../../QuickMorphism/Config.qml"
-    "../../QuickMorphism/DatePicker.qml"
-    "../../QuickMorphism/Elevation.qml"
-    "../../QuickMorphism/FontAwesomeRegular.qml"
-    "../../QuickMorphism/Fonts.qml"
-    "../../QuickMorphism/Icons.qml"
-    "../../QuickMorphism/Image.qml"
-    "../../QuickMorphism/Label.qml"
-    "../../QuickMorphism/Page.qml"
-    "../../QuickMorphism/QuickMorphismUI.qml"
-    "../../QuickMorphism/Required.qml"
-    "../../QuickMorphism/RoundImage.qml"
-    "../../QuickMorphism/ScrollableContainer.qml"
-    "../../QuickMorphism/SnackBar.qml"
-    "../../QuickMorphism/Switch.qml"
-    "../../QuickMorphism/SwitchDelegate.qml"
-    "../../QuickMorphism/TextField.qml"
-    "../../QuickMorphism/Title.qml"
-    "../../QuickMorphism/ToolBar.qml"
-    "../../QuickMorphism/ToolButton.qml"
-    "../../QuickMorphism/assets/font/NunitoSans-Black.ttf"
-    "../../QuickMorphism/assets/font/NunitoSans-Bold.ttf"
-    "../../QuickMorphism/assets/font/NunitoSans-Italic.ttf"
-    "../../QuickMorphism/assets/font/NunitoSans-Light.ttf"
-    "../../QuickMorphism/assets/font/NunitoSans-Regular.ttf"
-    "../../QuickMorphism/assets/font/fa-brands-400.ttf"
-    "../../QuickMorphism/assets/font/fa-regular-400.ttf"
-    "../../QuickMorphism/assets/font/fa-solid-900.ttf"
-    "../../QuickMorphism/def/Constants.qml"
-    "../../QuickMorphism/def/DirectoryFontLoader.qml"
-    "../../QuickMorphism/def/qmldir"
-    "../../QuickMorphism/qmldir"
-    "../../QuickMorphism/themes/QuickMorphismDarkTheme.qml"
-    "../../QuickMorphism/themes/QuickMorphismLightTheme.qml"
-)
-
-qt_internal_add_resource(quickmorphismexample "quickmorphism"
-    PREFIX
-        "/QuickMorphism"
-    BASE
-        "../../QuickMorphism"
-    FILES
-        ${quickmorphism_resource_files}
-)
-set(qmake_immediate_resource_files
-    "qtquickcontrols2.conf"
-)
-
-qt_internal_add_resource(quickmorphismexample "qmake_immediate"
-    PREFIX
-        "/"
-    FILES
-        ${qmake_immediate_resource_files}
+        qml.qrc
+        ${TS_FILES}
 )
 
 
-#### Keys ignored in scope 1:.:.:quickmorphismexample.pro:<TRUE>:
-# QML_DESIGNER_IMPORT_PATH = "$$PWD"
-# QML_IMPORT_PATH = "$$PWD"
-# TRANSLATIONS = "quickmorphismexample_en_US.ts"
+if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
+    qt_add_executable(QuickMorphismExample
+        MANUAL_FINALIZATION
+        ${PROJECT_SOURCES}
+    )
 
-## Scopes:
-#####################################################################
+    qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+else()
+    if(ANDROID)
+        add_library(QuickMorphismExample SHARED
+            ${PROJECT_SOURCES}
+        )
+    else()
+        add_executable(QuickMorphismExample
+          ${PROJECT_SOURCES}
+        )
+    endif()
 
-#### Keys ignored in scope 2:.:.:quickmorphismexample.pro:QNX:
-# target.path = "/tmp/$${TARGET}/bin"
+    qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+endif()
 
-#### Keys ignored in scope 4:.:.:quickmorphismexample.pro:UNIX AND NOT ANDROID:
-# target.path = "/opt/$${TARGET}/bin"
+target_compile_definitions(QuickMorphismExample
+  PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
+target_link_libraries(QuickMorphismExample
+  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick QuickMorphismStyle)
 
-#### Keys ignored in scope 5:.:.:quickmorphismexample.pro:NOT target.path_ISEMPTY:
-# INSTALLS = "target"
-
-qt_internal_extend_target(quickmorphismexample CONDITION ANDROID
-    SOURCES
-        ../../statusbar/statusbar_android.cpp
-    PUBLIC_LIBRARIES
-        Qt::AndroidExtras
+set_target_properties(QuickMorphismExample PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
 )
 
-qt_internal_extend_target(quickmorphismexample CONDITION IOS
-    SOURCES
-        ../../statusbar/statusbar_ios.mm
-    PUBLIC_LIBRARIES
-        ${FWUIKit}
-        Qt::GuiPrivate
-    COMPILE_OPTIONS
-        -fobjc-arc
-)
+if(QT_VERSION_MAJOR EQUAL 6)
+    qt_import_qml_plugins(QuickMorphismExample)
+    qt_finalize_executable(QuickMorphismExample)
+endif()
 
-#### Keys ignored in scope 8:.:../..:../../quickmorphism.pri:IOS:
-# QMAKE_POST_LINK = "/usr/libexec/PlistBuddy" "-c" "\"Add" ":UIViewControllerBasedStatusBarAppearance" "bool" "true\"" "$${OUT_PWD}/Info.plist"
 
-qt_internal_extend_target(quickmorphismexample CONDITION NOT ANDROID AND NOT IOS
-    SOURCES
-        ../../statusbar/statusbar_dummy.cpp
-)

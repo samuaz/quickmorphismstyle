@@ -1,6 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "quickmorphism.h"
+#include <QuickMorphismStyle/quickmorphism.h>
 #include <QSharedPointer>
 
 int main(int argc, char *argv[])
@@ -14,8 +14,6 @@ int main(int argc, char *argv[])
 
     // QuickMorphism Init
     QuickMorphism::init(engine);
-
-
 
     const QUrl url(QStringLiteral("qrc:/Demo.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

@@ -6,11 +6,10 @@ import QuickMorphism 1.0
 Page {
     id: page
     property alias themeSwitch: themeSwitch
-
-    ScrollableContainer {}
+    property alias snackbarButton: snackBarButton
 
     Switch {
-        id: themeSwitch
+          id: themeSwitch
         text: qsTr("DarkMode")
         anchors.right: parent.right
         anchors.rightMargin: 40
@@ -33,7 +32,10 @@ Page {
             placeholderText: qsTr("Text Field")
         }
 
-        Button {}
+        Button {
+            id: snackBarButton
+            text: qsTr("Open snackbar!")
+        }
 
         Switch {
             id: element

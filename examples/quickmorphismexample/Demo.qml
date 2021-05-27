@@ -6,9 +6,16 @@ ApplicationWindow {
     id: window
     visible: true
     minimumWidth: 360
+    width: 360
     height: 640
 
     title: qsTr("Cutemorphism Style")
+
+
+    SnackBar {
+        id: snackBar
+
+    }
 
     QuickMorphismUI {
         id: quickMorphismUI
@@ -23,7 +30,15 @@ ApplicationWindow {
             onCheckedChanged: themeSwitch.checked ? quickMorphismUI.theme
                                                     = DarkTheme : quickMorphismUI.theme = LightTheme
         }
+
+        snackbarButton {
+            onClicked: function (){
+                QuickMorphismSnackBar.message = "I'm snackbar"
+                QuickMorphismSnackBar.show = true
+            }
+        }
     }
+
 }
 
 /*##^##

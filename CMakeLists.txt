@@ -24,8 +24,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #    endif()
 #endif()
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick Gui Qml REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Gui Qml REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick Gui Qml AndroidExtras REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Gui Qml AndroidExtras REQUIRED)
 
 # prevent error "You must build your code with position independent code if Qt was built with..
 if (Qt5_POSITION_INDEPENDENT_CODE)
@@ -54,10 +54,10 @@ set(PROJECT_SOURCES
 
 ##### QML
 
-if(QT_VERSION_MAJOR EQUAL 5)
-    find_package(Qt5QuickCompiler)
-    qtquick_compiler_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)
-endif()
+#if(QT_VERSION_MAJOR EQUAL 5)
+#    find_package(Qt5QuickCompiler)
+#    qtquick_compiler_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)
+#endif()
 qt_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)
 set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}" CACHE STRING "Qt Creator QuickMorphism paths")
 
@@ -117,7 +117,7 @@ endif()
 target_compile_definitions(${PROJECT_NAME}
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(${PROJECT_NAME}
-  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Qml ${STATUSBAR_PLATFORM_LIBS})
+  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Qml Qt${QT_VERSION_MAJOR}::AndroidExtras ${STATUSBAR_PLATFORM_LIBS})
 
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

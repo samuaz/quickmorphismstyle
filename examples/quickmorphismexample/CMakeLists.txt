@@ -41,7 +41,7 @@ set(THIRD_PARTY_DIR ${CMAKE_SOURCE_DIR}/third_party)
 FetchContent_Declare(
         QuickMorphismStyle
         GIT_REPOSITORY https://samuaz@bitbucket.org/samuaz/quickmorphismstyle.git
-        GIT_TAG        CMAKE
+        GIT_TAG        master
         GIT_PROGRESS   TRUE
         SOURCE_DIR ${THIRD_PARTY_DIR}/QuickMorphismStyle
 )

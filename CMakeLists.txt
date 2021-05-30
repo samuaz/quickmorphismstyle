@@ -24,14 +24,20 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #    endif()
 #endif()
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick Gui Qml AndroidExtras REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Gui Qml AndroidExtras REQUIRED)
+
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick Gui Qml REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Gui Qml REQUIRED)
+
+if(ANDROID)
+    find_package(QT NAMES Qt6 Qt5 COMPONENTS AndroidExtras REQUIRED)
+    find_package(Qt${QT_VERSION_MAJOR} AndroidExtras REQUIRED)
+endif()
+
 
 # prevent error "You must build your code with position independent code if Qt was built with..
 if (Qt5_POSITION_INDEPENDENT_CODE)
   SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
 endif()
-
 
 ##### SET RESOURCES
 
@@ -116,9 +122,15 @@ endif()
 
 target_compile_definitions(${PROJECT_NAME}
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
-target_link_libraries(${PROJECT_NAME}
-  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Qml Qt${QT_VERSION_MAJOR}::AndroidExtras ${STATUSBAR_PLATFORM_LIBS})
 
+  if(ANDROID)
+    target_link_libraries(${PROJECT_NAME}
+                            PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Qml Qt${QT_VERSION_MAJOR}::AndroidExtras ${STATUSBAR_PLATFORM_LIBS})
+
+    else()
+    target_link_libraries(${PROJECT_NAME}
+                            PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Qml ${STATUSBAR_PLATFORM_LIBS})  
+endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER dev.theopencompany.${PROJECT_NAME}

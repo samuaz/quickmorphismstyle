@@ -209,4 +209,4 @@ compile_commands.json
 
 *_qmlcache.qrc
 .vscode
-examples/quickmorphismexample/third_party
+**/third_party

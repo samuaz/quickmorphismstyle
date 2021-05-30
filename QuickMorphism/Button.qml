@@ -15,7 +15,10 @@ T.Button {
 
     topInset: 0
     bottomInset: 0
-    padding: 10
+    topPadding: 10
+    bottomPadding: 10
+    rightPadding: 20
+    leftPadding: 20
     horizontalPadding: padding - 4
     spacing: 6
     icon.width: 24

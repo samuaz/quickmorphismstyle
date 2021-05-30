@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 3.18)
 project(QuickMorphismExample VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+#set(CMAKE_PREFIX_PATH "/home/samuaz/Qt/5.15.2/gcc_64"  CACHE PATH "Initial cahe" FORCE)
+
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)

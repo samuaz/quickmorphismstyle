@@ -208,3 +208,5 @@ compile_commands.json
 *creator.user*
 
 *_qmlcache.qrc
+.vscode
+examples/quickmorphismexample/third_party

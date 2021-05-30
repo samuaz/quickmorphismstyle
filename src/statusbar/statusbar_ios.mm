@@ -20,7 +20,8 @@
  * SOFTWARE.
 */
 
-#include "statusbar_p.h"
+#include <QuickMorphismStyle/statusbar/statusbar_p.h>
+
 
 #include <UIKit/UIKit.h>
 #include <QGuiApplication>

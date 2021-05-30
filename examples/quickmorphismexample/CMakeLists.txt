@@ -3,8 +3,12 @@ cmake_minimum_required(VERSION 3.18)
 project(QuickMorphismExample VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-#set(CMAKE_PREFIX_PATH "/home/samuaz/Qt/5.15.2/gcc_64"  CACHE PATH "Initial cahe" FORCE)
 
+#set(Qt5Core_DIR "/home/samuaz/Qt/5.15.2/gcc_64/lib/cmake/Qt5Core")
+#set(Qt5_DIR "/home/samuaz/Qt/5.15.2/gcc_64/lib/cmake/Qt5")
+#set(QT_QMAKE_EXECUTABLE "/home/samuaz/Qt/5.15.2/gcc_64/bin/qmake")
+#set(CMAKE_PREFIX_PATH "/home/samuaz/Qt/5.15.2/gcc_64"  CACHE PATH "Initial cahe" FORCE)
+#include_directories("/home/samuaz/Qt/5.15.2/gcc_64/include/")
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)

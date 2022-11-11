@@ -1,47 +1,13 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.16)
 
 project(QuickMorphismStyle VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
-set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-
-set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(QT_QML_OUTPUT_DIRECTORY  ${CMAKE_BINARY_DIR})
 
-# QtCreator supports the following variables for Android, which are identical to qmake Android variables.
-# Check https://doc.qt.io/qt/deployment-android.html for more information.
-# They need to be set before the find_package(...) calls below.
-
-#if(ANDROID)
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-#    if (ANDROID_ABI STREQUAL "armeabi-v7a")
-#        set(ANDROID_EXTRA_LIBS
-#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so
-#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so)
-#    endif()
-#endif()
-
-
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick Gui Qml REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Gui Qml REQUIRED)
-
-if(ANDROID)
-    find_package(QT NAMES Qt6 Qt5 COMPONENTS AndroidExtras REQUIRED)
-    find_package(Qt${QT_VERSION_MAJOR} AndroidExtras REQUIRED)
-endif()
-
-
-# prevent error "You must build your code with position independent code if Qt was built with..
-if (Qt5_POSITION_INDEPENDENT_CODE)
-  SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
-endif()
-
-##### SET RESOURCES
-
-#file(GLOB_RECURSE PROJECT_SOURCES LIST_DIRECTORIES true include/QuickMorphismStyle/*.h src/*.cpp include/QuickMorphismStyle/*.tpp QuickMorphism/*.qrc)
+find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
 set(PROJECT_SOURCES
     src/quickmorphism.cpp
@@ -53,21 +19,7 @@ set(PROJECT_SOURCES
     include/QuickMorphismStyle/ui/theme/dark_theme.h
     include/QuickMorphismStyle/ui/theme/light_theme.h
     include/QuickMorphismStyle/ui/theme/theme.h
-    QuickMorphism/quickmorphism.qrc
 )
-
-#####
-
-##### QML
-
-#if(QT_VERSION_MAJOR EQUAL 5)
-#    find_package(Qt5QuickCompiler)
-#    qtquick_compiler_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)
-#endif()
-qt_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)
-set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}" CACHE STRING "Qt Creator QuickMorphism paths")
-
-#####
 
 ##### STATUSBAR
 
@@ -87,91 +39,47 @@ endif()
 
 #####
 
-##### CREATE LIBRARY
+file(GLOB_RECURSE QML_SOURCES LIST_DIRECTORIES false QuickMorphism/*.qml)
+file(GLOB_RECURSE QML_RESOURCES LIST_DIRECTORIES false QuickMorphism/*.ttf)
 
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    #qt_add_library(${PROJECT_NAME}
-     #   MANUAL_FINALIZATION
-     add_library(${PROJECT_NAME}
-        ${PROJECT_SOURCES}
-        ${STATUSBAR_COMMON_SOURCES}
-        ${STATUSBAR_PLATFORM_SOURCES}
-        ${RESOURCES}
-     )
-else()
-    if(ANDROID)
-        add_library(${PROJECT_NAME} SHARED
-            ${PROJECT_SOURCES}
-            ${STATUSBAR_COMMON_SOURCES}
-            ${STATUSBAR_PLATFORM_SOURCES}
-            ${RESOURCES}
-        )
-    else()
-        add_library(${PROJECT_NAME}
-          ${PROJECT_SOURCES}
-          ${STATUSBAR_COMMON_SOURCES}
-          ${STATUSBAR_PLATFORM_SOURCES}
-          ${RESOURCES}
-        )
-    endif()
-endif()
 
-#####
-
-##### TARGET COMPILE DEFINITIONS
-
-target_compile_definitions(${PROJECT_NAME}
-  PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
-
-  if(ANDROID)
-    target_link_libraries(${PROJECT_NAME}
-                            PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Qml Qt${QT_VERSION_MAJOR}::AndroidExtras ${STATUSBAR_PLATFORM_LIBS})
-
-    else()
-    target_link_libraries(${PROJECT_NAME}
-                            PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Qml ${STATUSBAR_PLATFORM_LIBS})  
-endif()
-
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER dev.theopencompany.${PROJECT_NAME}
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+qt_add_library(QuickMorphismStyle STATIC)
+qt_add_qml_module(QuickMorphismStyle
+    URI QuickMorphismStyle
+    VERSION 1.0
+    QML_FILES ${QML_SOURCES}
+    RESOURCES ${QML_RESOURCES}
+    SOURCES ${PROJECT_SOURCES}
 )
 
-if(QT_VERSION_MAJOR EQUAL 6)
-    qt_import_qml_plugins(${PROJECT_NAME})
-    qt_finalize_executable(${PROJECT_NAME})
-endif()
+qt_add_qml_module(Statusbar
+    VERSION 1.0
+    URI Statusbar
+    SOURCES ${STATUSBAR_COMMON_SOURCES} ${STATUSBAR_PLATFORM_SOURCES}
+)
 
-#####
+set_target_properties(QuickMorphismStyle PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+    MACOSX_BUNDLE TRUE
+    WIN32_EXECUTABLE TRUE
+)
 
-##### INCLUDE AND INSTALL CONFIGURATION
+target_compile_definitions(QuickMorphismStyle
+    PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
+target_link_libraries(QuickMorphismStyle
+    PRIVATE Qt6::Quick)
 
-target_include_directories(${PROJECT_NAME} PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-        $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
-        )
+target_include_directories(QuickMorphismStyle PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/" # source directory
-            DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/include/${PROJECT_NAME} # target directory
-            FILES_MATCHING # install only matched files
-            PATTERN "*.h*" # select header files
-            )
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/" # source directory
-            DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/include/${PROJECT_NAME} # target directory
-            FILES_MATCHING # install only matched files
-            PATTERN "*.tpp*" # select header files
-            )
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cmake" # source directory
-            DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/include/${PROJECT_NAME}/cmake # target directory
-            FILES_MATCHING # install only matched files
-            PATTERN "*.cmake*" # select header files
-            )
+# Example Project
+qt_add_executable(ExampleProject example/example.cpp)
+qt_add_qml_module(ExampleProject
+    URI ExampleProjectApp
+    VERSION 1.0
+    QML_FILES example/example.qml
+)
+target_link_libraries(ExampleProject PRIVATE Qt6::Quick QuickMorphismStyleplugin)
+target_compile_definitions(ExampleProject PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 
-install(
-    DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism/" # source directory
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/include/${PROJECT_NAME} # target directory
-    FILES_MATCHING # install only matched files
-    PATTERN "*.tpp*" # select header files
-    )
-#####

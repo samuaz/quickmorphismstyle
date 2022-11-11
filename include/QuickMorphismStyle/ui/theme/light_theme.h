@@ -5,7 +5,7 @@
 #include "theme.h"
 
 
-class LightTheme : public virtual Theme {
+class LightTheme final: public virtual Theme {
     Q_OBJECT
 private:
     const QString _name = "QuickMorphismLight";

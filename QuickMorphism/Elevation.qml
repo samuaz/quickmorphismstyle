@@ -1,6 +1,6 @@
-import QtQuick 2.15
-import QtGraphicalEffects 1.15
-import QtQuick.Timeline 1.0
+import QtQuick
+import Qt5Compat.GraphicalEffects
+import QtQuick.Timeline
 
 Item {
     id: root

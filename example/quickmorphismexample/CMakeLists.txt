@@ -14,11 +14,32 @@ qt_add_executable(appquickmorphismexample
 qt_add_qml_module(appquickmorphismexample
     URI quickmorphismexample
     VERSION 1.0
-    QML_FILES main.qml 
+    QML_FILES demo.qml
 )
 
+include(FetchContent)
+set(FETCHCONTENT_QUIET OFF)
+set(THIRD_PARTY_DIR ${CMAKE_SOURCE_DIR}/third_party)
+
+FetchContent_Declare(
+        QuickMorphismStyle
+        GIT_REPOSITORY git@github.com:samuaz/quickmorphismstyle.git
+        GIT_TAG        QT6
+        GIT_PROGRESS   TRUE
+        SOURCE_DIR ${THIRD_PARTY_DIR}/QuickMorphismStyle
+)
+FetchContent_GetProperties(QuickMorphismStyle)
+if(NOT QuickMorphismStyle_POPULATED)
+    FetchContent_Populate(QuickMorphismStyle)
+    add_subdirectory(${THIRD_PARTY_DIR}/QuickMorphismStyle)
+endif()
+
+#include(${THIRD_PARTY_DIR}/QuickMorphismStyle/CMakeLists.txt)
+
+#FetchContent_MakeAvailable(QuickMorphismStyle)
+
 set_target_properties(appquickmorphismexample PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
+    MACOSX_BUNDLE_GUI_IDENTIFIER theopencompany.dev
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE

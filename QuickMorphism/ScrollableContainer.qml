@@ -83,8 +83,10 @@ Item {
 
                 onStatusChanged: {
                     if (status == Loader.Loading) {
-
-                        //loading.show = true
+                        loading.show = true;
+                    }
+                    if(status == Loader.Ready) {
+                        loading.show = false;
                     }
                 }
             }

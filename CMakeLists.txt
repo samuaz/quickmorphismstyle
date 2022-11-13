@@ -42,7 +42,7 @@ endif()
 file(GLOB_RECURSE QML_SOURCES LIST_DIRECTORIES false QuickMorphism/*.qml)
 file(GLOB_RECURSE QML_RESOURCES LIST_DIRECTORIES false QuickMorphism/*.ttf)
 
-qt_add_library(${PROJECT_NAME} STATIC)
+qt_add_library(${PROJECT_NAME} STATIC ${PROJECT_SOURCES} ${STATUSBAR_COMMON_SOURCES} ${STATUSBAR_PLATFORM_SOURCES})
 qt_add_qml_module(QuickMorphismStyle
     URI QuickMorphismStyle
     VERSION 1.0

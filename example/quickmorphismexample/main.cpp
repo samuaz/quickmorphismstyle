@@ -4,6 +4,10 @@
 #include <QSharedPointer>
 #include <QLocale>
 #include <QTranslator>
+#include <QtQml/qqmlextensionplugin.h>
+
+Q_IMPORT_QML_PLUGIN(QuickMorphismStylePlugin)
+
 
 //int main(int argc, char *argv[])
 //{

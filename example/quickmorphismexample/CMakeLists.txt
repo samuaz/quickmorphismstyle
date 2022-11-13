@@ -19,7 +19,7 @@ qt_add_executable(appquickmorphismexample
 qt_add_qml_module(appquickmorphismexample
     URI quickmorphismexample
     VERSION 1.0
-    QML_FILES demo.qml
+    QML_FILES demo.qml MainForm.ui.qml
 )
 
 include(FetchContent)
@@ -52,7 +52,7 @@ set_target_properties(appquickmorphismexample PROPERTIES
 )
 
 target_link_libraries(appquickmorphismexample
-    PRIVATE Qt6::Quick QuickMorphismStyle QuickMorphismStyleplugin)
+    PRIVATE Qt6::Quick QuickMorphismStyle)
 
 install(TARGETS appquickmorphismexample
     BUNDLE DESTINATION .

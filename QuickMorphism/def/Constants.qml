@@ -6,12 +6,12 @@ QtObject {
     readonly property int width: 480
     readonly property int height: 960
 
-    readonly property FontLoader mySystemFont: FontLoader {
-        name: "Reem"
-    }
+//    readonly property FontLoader mySystemFont: FontLoader {
+//        name: "Reem"
+//    }
 
-    property alias fontDirectory: directoryFontLoader.fontDirectory
-    property alias relativeFontDirectory: directoryFontLoader.relativeFontDirectory
+//    property alias fontDirectory: directoryFontLoader.fontDirectory
+//    property alias relativeFontDirectory: directoryFontLoader.relativeFontDirectory
 
     /* Edit this comment to add your custom font */
     readonly property font font: Qt.font({
@@ -68,7 +68,7 @@ QtObject {
     readonly property color controlsDisabledColor: "#959EA8"
     readonly property color controlsHoverColor: "#ffffff"
 
-    property DirectoryFontLoader directoryFontLoader: DirectoryFontLoader {
-        id: directoryFontLoader
-    }
+//    property DirectoryFontLoader directoryFontLoader: DirectoryFontLoader {
+//        id: directoryFontLoader
+//    }
 }

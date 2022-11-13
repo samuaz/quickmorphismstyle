@@ -43,8 +43,8 @@ file(GLOB_RECURSE QML_SOURCES LIST_DIRECTORIES false QuickMorphism/*.qml)
 file(GLOB_RECURSE QML_RESOURCES LIST_DIRECTORIES false QuickMorphism/*.ttf)
 
 qt_add_library(${PROJECT_NAME} STATIC)
-qt_add_qml_module(${PROJECT_NAME}
-    URI ${PROJECT_NAME}
+qt_add_qml_module(QuickMorphismStyle
+    URI QuickMorphismStyle
     VERSION 1.0
     QML_FILES ${QML_SOURCES}
     RESOURCES ${QML_RESOURCES}
@@ -67,7 +67,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 
 target_compile_definitions(${PROJECT_NAME}
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
-target_link_libraries(QuickMorphismStyle
+target_link_libraries(${PROJECT_NAME}
     PRIVATE Qt6::Quick)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)

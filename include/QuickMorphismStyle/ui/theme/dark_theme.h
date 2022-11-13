@@ -5,7 +5,7 @@
 #include <QColor>
 #include "theme.h"
 
-class DarkTheme final: public virtual Theme {
+class DarkTheme: public virtual Theme {
     Q_OBJECT
 private:
     const QString _name = "QuickMorphismDark";

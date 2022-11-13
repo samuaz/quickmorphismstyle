@@ -9,7 +9,7 @@
 #include "theme/dark_theme.h"
 #include "theme/light_theme.h"
 
-class QuickMorphismUI final: public QObject
+class QuickMorphismUI: public QObject
 {
     Q_OBJECT
     Q_PROPERTY(Theme* theme READ theme WRITE setTheme NOTIFY themeChanged)

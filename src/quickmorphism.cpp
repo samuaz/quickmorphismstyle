@@ -44,8 +44,8 @@ void QuickMorphism::init(QQmlApplicationEngine &engine)
 
 static void registerTypes() {
     qRegisterMetaType<Theme *>();
-    //qmlRegisterType<StatusBar>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "StatusBar");
-    //qmlRegisterType<QuickMorphismUI>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "QuickMorphismUI");
+    qmlRegisterType<StatusBar>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "StatusBar");
+    qmlRegisterType<QuickMorphismUI>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "QuickMorphismUI");
 }
 
 

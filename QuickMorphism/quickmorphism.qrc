@@ -1,0 +1,42 @@
+<RCC>
+    <qresource prefix="/QuickMorphism">
+        <file>qmldir</file>
+        <file>Button.qml</file>
+        <file>CheckBox.qml</file>
+        <file>Elevation.qml</file>
+        <file>Image.qml</file>
+        <file>RoundImage.qml</file>
+        <file>Switch.qml</file>
+        <file>SwitchDelegate.qml</file>
+        <file>TextField.qml</file>
+        <file>def/Constants.qml</file>
+        <file>def/DirectoryFontLoader.qml</file>
+        <file>def/qmldir</file>
+        <file>QuickMorphismUI.qml</file>
+        <file>Fonts.qml</file>
+        <file>assets/font/fa-brands-400.ttf</file>
+        <file>assets/font/fa-regular-400.ttf</file>
+        <file>assets/font/fa-solid-900.ttf</file>
+        <file>FontAwesomeRegular.qml</file>
+        <file>Icons.qml</file>
+        <file>assets/font/NunitoSans-Black.ttf</file>
+        <file>assets/font/NunitoSans-Bold.ttf</file>
+        <file>assets/font/NunitoSans-Italic.ttf</file>
+        <file>assets/font/NunitoSans-Light.ttf</file>
+        <file>assets/font/NunitoSans-Regular.ttf</file>
+        <file>themes/QuickMorphismLightTheme.qml</file>
+        <file>Config.qml</file>
+        <file>Page.qml</file>
+        <file>ApplicationWindow.qml</file>
+        <file>themes/QuickMorphismDarkTheme.qml</file>
+        <file>ScrollableContainer.qml</file>
+        <file>ToolBar.qml</file>
+        <file>ToolButton.qml</file>
+        <file>Label.qml</file>
+        <file>SnackBar.qml</file>
+        <file>CalendarPicker.qml</file>
+        <file>DatePicker.qml</file>
+        <file>Required.qml</file>
+        <file>Title.qml</file>
+    </qresource>
+</RCC>

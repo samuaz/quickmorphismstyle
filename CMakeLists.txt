@@ -42,9 +42,9 @@ endif()
 file(GLOB_RECURSE QML_SOURCES LIST_DIRECTORIES false QuickMorphism/*.qml)
 file(GLOB_RECURSE QML_RESOURCES LIST_DIRECTORIES false QuickMorphism/*.ttf)
 
-qt_add_library(QuickMorphismStyle STATIC)
-qt_add_qml_module(QuickMorphismStyle
-    URI QuickMorphismStyle
+qt_add_library(${PROJECT_NAME} STATIC)
+qt_add_qml_module(${PROJECT_NAME}
+    URI ${PROJECT_NAME}
     VERSION 1.0
     QML_FILES ${QML_SOURCES}
     RESOURCES ${QML_RESOURCES}
@@ -57,7 +57,7 @@ qt_add_qml_module(QuickMorphismStyle
 #    SOURCES ${STATUSBAR_COMMON_SOURCES} ${STATUSBAR_PLATFORM_SOURCES}
 #)
 
-set_target_properties(QuickMorphismStyle PROPERTIES
+set_target_properties(${PROJECT_NAME} PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER quickmorphismStyle.theopencompany.dev
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -65,12 +65,13 @@ set_target_properties(QuickMorphismStyle PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-target_compile_definitions(QuickMorphismStyle
+target_compile_definitions(${PROJECT_NAME}
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(QuickMorphismStyle
     PRIVATE Qt6::Quick)
 
-target_include_directories(QuickMorphismStyle PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 
 # Example Project
 #qt_add_executable(ExampleProject example/example.cpp)

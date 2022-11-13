@@ -4,6 +4,11 @@ project(quickmorphismexample VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(QT_QML_OUTPUT_DIRECTORY  ${CMAKE_BINARY_DIR})
+set(Qt6_DIR ${Qt6_DIR})
+set(QT_DIR ${Qt6_DIR})
+
+message("qt dir is ${QT_DIR}" )
 
 find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
@@ -47,7 +52,7 @@ set_target_properties(appquickmorphismexample PROPERTIES
 )
 
 target_link_libraries(appquickmorphismexample
-    PRIVATE Qt6::Quick)
+    PRIVATE Qt6::Quick QuickMorphismStyle)
 
 install(TARGETS appquickmorphismexample
     BUNDLE DESTINATION .

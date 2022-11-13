@@ -10,7 +10,7 @@ set(QT_DIR ${Qt6_DIR})
 
 message("qt dir is ${QT_DIR}" )
 
-find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
+find_package(Qt6 6.2 COMPONENTS COMPONENTS Core Quick Gui Qml REQUIRED)
 
 qt_add_executable(appquickmorphismexample
     main.cpp

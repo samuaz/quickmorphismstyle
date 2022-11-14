@@ -39,6 +39,23 @@ ApplicationWindow {
         }
     }
 
+    Connections {
+        target: QuickMorphism
+
+        function onThemeChanged(signalTheme) {
+            console.log("llamando a cambiar theme");
+            //root.theme = signalTheme
+        }
+
+        function onDpiChanged(signalDpi) {
+            //root.dpi = signalDpi
+        }
+
+        function onDpScaleChanged(signalDpScale) {
+            //root.dpScale = signalDpScale
+        }
+    }
+
 }
 
 /*##^##

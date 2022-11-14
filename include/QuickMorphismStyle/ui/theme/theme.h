@@ -19,6 +19,7 @@ class Theme : public QObject
     Q_PROPERTY(QColor primaryColor READ primaryColor NOTIFY primaryColorChanged)
     Q_PROPERTY(QColor secondaryColor READ secondaryColor NOTIFY secondaryColorChanged)
     Q_PROPERTY(QColor accentColor READ accentColor NOTIFY accentColorChanged)
+    Q_PROPERTY(QColor errorColor READ errorColor NOTIFY errorColorChanged)
     Q_PROPERTY(QColor highlightedColor READ highlightedColor NOTIFY highlightedColorChanged)
     Q_PROPERTY(QColor hoverColor READ hoverColor NOTIFY hoverColorChanged)
     Q_PROPERTY(QColor statusBarColor READ statusBarColor NOTIFY statusBarColorChanged)
@@ -29,6 +30,18 @@ class Theme : public QObject
     Q_PROPERTY(float shadowSpread READ shadowSpread NOTIFY shadowSpreadChanged)
     Q_PROPERTY(float insetShadowSpread READ insetShadowSpread NOTIFY insetShadowSpreadChanged)
     Q_PROPERTY(int shadowOffSet READ shadowOffSet NOTIFY shadowOffSetChanged)
+    Q_PROPERTY(float titleSizeMultiplier READ titleSizeMultiplier NOTIFY titleSizeMultiplierChanged)
+    Q_PROPERTY(float subTitleSizeMultiplier READ subTitleSizeMultiplier NOTIFY subTitleSizeMultiplierChanged)
+
+protected:
+    const float _shadowOpacity = 1.0;
+    const int _shadowGlow = 5;
+    const int _insetShadowGlow = 10;
+    const float _shadowSpread = 0.5;
+    const float _insetShadowSpread = 0.5;
+    const int _shadowOffSet = 5;
+    const float _titleSizeMultiplier = 2.0;
+    const float _subTitleSizeMultiplier = 1.1;
 
 public:
     enum Style { Light, Dark };
@@ -48,16 +61,46 @@ public:
     virtual QColor primaryColor() const = 0;
     virtual QColor secondaryColor() const = 0;
     virtual QColor accentColor() const = 0;
+    virtual QColor errorColor() const = 0;
     virtual QColor highlightedColor() const = 0;
     virtual QColor hoverColor() const = 0;
     virtual QColor statusBarColor() const = 0;
     virtual QColor navBarColor() const = 0;
-    virtual float shadowOpacity() const = 0;
-    virtual int shadowGlow() const = 0;
-    virtual int insetShadowGlow() const = 0;
-    virtual float shadowSpread() const = 0;
-    virtual float insetShadowSpread() const = 0;
-    virtual int shadowOffSet() const = 0;
+
+    virtual float titleSizeMultiplier() const {
+        return _titleSizeMultiplier;
+    }
+    virtual float subTitleSizeMultiplier() const {
+        return _subTitleSizeMultiplier;
+    }
+
+    float shadowOpacity() const
+    {
+        return _shadowOpacity;
+    }
+
+    int shadowGlow() const
+    {
+        return _shadowGlow;
+    }
+    int insetShadowGlow() const
+    {
+        return _insetShadowGlow;
+    }
+
+    float shadowSpread() const
+    {
+        return _shadowSpread;
+    }
+
+    float insetShadowSpread() const
+    {
+        return _insetShadowSpread;
+    }
+
+    int shadowOffSet() const {
+        return _shadowOffSet;
+    }
 
 signals:
     void nameChanged();
@@ -72,6 +115,7 @@ signals:
     void primaryColorChanged();
     void secondaryColorChanged();
     void accentColorChanged();
+    void errorColorChanged();
     void highlightedColorChanged();
     void hoverColorChanged();
     void statusBarColorChanged();
@@ -85,6 +129,8 @@ signals:
     void shadowSpreadChanged();
     void insetShadowSpreadChanged();
     void shadowOffSetChanged();
+    void titleSizeMultiplierChanged();
+    void subTitleSizeMultiplierChanged();
 
 };
 

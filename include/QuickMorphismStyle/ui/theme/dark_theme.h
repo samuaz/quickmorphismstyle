@@ -20,16 +20,11 @@ private:
     const QColor _primaryColor = QColor("#243441");
     const QColor _secondaryColor = QColor("#243441");
     const QColor _accentColor = QColor("#0affef");
+    const QColor _errorColor = QColor("#FF0000");
     const QColor _highlightedColor = QColor("#c2c2c2");
     const QColor _hoverColor = QColor("#c2c2c2");
     const QColor _statusBarColor = QColor("#243441");
     const QColor _navBarColor = QColor("#243441");
-    const float _shadowOpacity = 1.0;
-    const int _shadowGlow = 5;
-    const int _insetShadowGlow = 10;
-    const float _shadowSpread = 0.5;
-    const float _insetShadowSpread = 0.5;
-    const int _shadowOffSet = 5;
 
     // Theme interface
 public:
@@ -116,33 +111,9 @@ public:
         return _navBarColor;
     }
 
-    float shadowOpacity() const override
-    {
-        return _shadowOpacity;
-    }
-
-    int shadowGlow() const override
-    {
-        return _shadowGlow;
-    }
-    int insetShadowGlow() const override
-    {
-        return _insetShadowGlow;
-    }
-
-    float shadowSpread() const override
-    {
-        return _shadowSpread;
-    }
-
-    float insetShadowSpread() const override
-    {
-        return _insetShadowSpread;
-    }
-
-    int shadowOffSet() const override {
-        return _shadowOffSet;
-    }
+    QColor errorColor() const override {
+        return _errorColor;
+    };
 
 };
 

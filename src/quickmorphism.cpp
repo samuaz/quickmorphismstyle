@@ -38,14 +38,17 @@ void QuickMorphism::init(QQmlApplicationEngine &engine)
 
     QFont font("Nunito Sans");
     //font.setPointSize(font.pointSize());
-    qApp->setFont(font);
+    //qApp->setFont(font);
     QuickMorphismUI::registerSingleton(&engine);
 }
 
 static void registerTypes() {
     qRegisterMetaType<Theme *>();
     qmlRegisterType<StatusBar>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "StatusBar");
-    qmlRegisterType<QuickMorphismUI>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "QuickMorphismUI");
+    qmlRegisterType<QuickMorphismUI>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "QuickMorphism");
+    qmlRegisterType<LightTheme>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "QuickMorphismLightTheme");
+    qmlRegisterType<DarkTheme>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "QuickMorphismDarkTheme");
+
 }
 
 

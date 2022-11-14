@@ -35,6 +35,7 @@ QuickMorphismUI::Dpi QuickMorphismUI::dpi()
 
 void QuickMorphismUI::setTheme(Theme* theme)
 {
+    qDebug() << "change theme";
     _theme.reset(theme);
     emit themeChanged(_theme.get());
 }

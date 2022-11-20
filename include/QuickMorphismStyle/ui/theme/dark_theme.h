@@ -5,26 +5,27 @@
 #include <QColor>
 #include "theme.h"
 
-class DarkTheme: public virtual Theme {
+class DarkTheme: public Theme {
     Q_OBJECT
+    Q_INTERFACES(Theme)
 private:
     const QString _name = "QuickMorphismDark";
     const Style _style = Style::Dark;
-    const QColor _backgroundColor = QColor("#243441");
-    const QColor _foregroundColor = QColor("#243441");
-    const QColor _primaryTextColor = QColor("#ebebeb");
-    const QColor _secondaryTextColor = QColor("#ebebeb");
-    const QColor _hintTextColor = QColor("#959EA8");
-    const QColor _topShadowColor = QColor("#293a46");
-    const QColor _bottonShadowColor = QColor("#092836");
-    const QColor _primaryColor = QColor("#243441");
-    const QColor _secondaryColor = QColor("#243441");
-    const QColor _accentColor = QColor("#0affef");
-    const QColor _errorColor = QColor("#FF0000");
-    const QColor _highlightedColor = QColor("#c2c2c2");
-    const QColor _hoverColor = QColor("#c2c2c2");
-    const QColor _statusBarColor = QColor("#243441");
-    const QColor _navBarColor = QColor("#243441");
+    QColor _backgroundColor = QColor("#243441");
+    QColor _foregroundColor = QColor("#243441");
+    QColor _primaryTextColor = QColor("#ebebeb");
+    QColor _secondaryTextColor = QColor("#ebebeb");
+    QColor _hintTextColor = QColor("#959EA8");
+    QColor _topShadowColor = QColor("#293a46");
+    QColor _bottonShadowColor = QColor("#092836");
+    QColor _primaryColor = QColor("#243441");
+    QColor _secondaryColor = QColor("#243441");
+    QColor _accentColor = QColor("#0affef");
+    QColor _errorColor = QColor("#FF0000");
+    QColor _highlightedColor = QColor("#c2c2c2");
+    QColor _hoverColor = QColor("#c2c2c2");
+    QColor _statusBarColor = QColor("#243441");
+    QColor _navBarColor = QColor("#243441");
 
     // Theme interface
 public:
@@ -115,6 +116,81 @@ public:
         return _errorColor;
     };
 
+
+    void backgroundColor(QColor color) override
+    {
+     _backgroundColor = color;
+    }
+    void foregroundColor(QColor color) override
+    {
+        _foregroundColor = color;
+
+    }
+    void primaryTextColor(QColor color) override
+    {
+        _primaryTextColor = color;
+
+    }
+    void secondaryTextColor(QColor color) override
+    {
+        _secondaryTextColor = color;
+
+    }
+    void hintTextColor(QColor color) override
+    {
+        _hintTextColor = color;
+
+    }
+    void topShadowColor(QColor color) override
+    {
+        _topShadowColor = color;
+
+    }
+    void bottonShadowColor(QColor color) override
+    {
+        _bottonShadowColor = color;
+
+    }
+    void primaryColor(QColor color) override
+    {
+        _primaryColor = color;
+
+    }
+    void secondaryColor(QColor color) override
+    {
+        _secondaryColor = color;
+
+    }
+    void accentColor(QColor color) override
+    {
+        _accentColor = color;
+
+    }
+    void errorColor(QColor color) override
+    {
+        _errorColor = color;
+
+    }
+    void highlightedColor(QColor color) override
+    {
+        _highlightedColor = color;
+
+    }
+    void hoverColor(QColor color) override
+    {
+        _hoverColor = color;
+
+    }
+    void statusBarColor(QColor color) override
+    {
+        _statusBarColor = color;
+
+    }
+    void navBarColor(QColor color) override
+    {
+        _navBarColor = color;
+
+    }
 };
 
 

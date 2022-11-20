@@ -23,7 +23,7 @@ public:
 private:
     float _dpScale = 1.0f;
     Dpi _dpi = Dpi::HDPI;
-    QSharedPointer<Theme> _theme;
+    Theme * _theme;
 
 public:
     explicit QuickMorphismUI(QObject* parent = nullptr);

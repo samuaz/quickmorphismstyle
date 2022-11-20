@@ -20,7 +20,7 @@ void QuickMorphismUI::registerSingleton(QQmlEngine * qmlEngine)
 
 Theme* QuickMorphismUI::theme() const
 {
-    return _theme.get();
+    return _theme;
 }
 
 float QuickMorphismUI::dpScale() const
@@ -36,8 +36,8 @@ QuickMorphismUI::Dpi QuickMorphismUI::dpi()
 void QuickMorphismUI::setTheme(Theme* theme)
 {
     qDebug() << "change theme";
-    _theme.reset(theme);
-    emit themeChanged(_theme.get());
+    _theme = theme;
+    emit themeChanged(_theme);
 }
 
 void QuickMorphismUI::setDpScale(float scale)

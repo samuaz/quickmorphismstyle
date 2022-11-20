@@ -19,35 +19,15 @@ Item {
     }
 
     onDpScaleChanged: {
-        QuickMorphismConfig.dpScale = root.dpScale
+        QuickMorphism.dpScale = root.dpScale
     }
 
     onDpiChanged: {
-        QuickMorphismConfig.dpi = root.dpi
-    }
-
-    Connections {
-        target: QuickMorphism
-
-        function onThemeChanged(signalTheme) {
-            console.log("llamando a cambiar theme");
-            root.theme = signalTheme
-        }
-
-        function onDpiChanged(signalDpi) {
-            root.dpi = signalDpi
-        }
-
-        function onDpScaleChanged(signalDpScale) {
-            root.dpScale = signalDpScale
-        }
+        QuickMorphism.dpi = root.dpi
     }
 
     function changeTheme() {
-        console.log("seteando theme")
-        console.log(root.theme.name)
         QuickMorphism.theme = root.theme;
-        //QuickMorphismConfig.theme = root.theme;
         statusBar.theme = root.theme.style;
         statusBar.statusBarColor = root.theme.statusBarColor;
         statusBar.navBarColor = root.theme.navBarColor;

@@ -17,17 +17,17 @@ ApplicationWindow {
 
     }
 
-    LightTheme2 {
-    id: light
+    QuickMorphismLightTheme {
+    id: lightTheme
     }
 
-    DarkTheme2 {
-    id: dark
+    QuickMorphismDarkTheme {
+    id: darkTheme
     }
 
     QuickMorphismUI {
         id: quickMorphismUI
-        theme: light
+        theme: lightTheme
     }
 
     MainForm {
@@ -36,7 +36,7 @@ ApplicationWindow {
 
         themeSwitch {
             onCheckedChanged: themeSwitch.checked ? quickMorphismUI.theme
-                                                    = dark : quickMorphismUI.theme = light
+                                                    = darkTheme : quickMorphismUI.theme = lightTheme
         }
 
         snackbarButton {

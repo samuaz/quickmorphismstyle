@@ -45,9 +45,8 @@ void QuickMorphism::init(QQmlApplicationEngine &engine)
 static void registerTypes() {
     qRegisterMetaType<Theme *>();
     qmlRegisterType<StatusBar>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "StatusBar");
-    //qmlRegisterType<QuickMorphismUI>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "QuickMorphism");
-    qmlRegisterType<LightTheme>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "LightTheme2");
-    qmlRegisterType<DarkTheme>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "DarkTheme2");
+    qmlRegisterType<LightTheme>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "QuickMorphismLightTheme");
+    qmlRegisterType<DarkTheme>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "QuickMorphismDarkTheme");
 
 }
 

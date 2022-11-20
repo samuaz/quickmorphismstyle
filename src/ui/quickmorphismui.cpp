@@ -3,7 +3,7 @@
 
 static QuickMorphismUI *s_instance = nullptr;
 
-QuickMorphismUI::QuickMorphismUI(QObject *parent): QObject(parent), _theme(new LightTheme()){}
+QuickMorphismUI::QuickMorphismUI(QObject *parent): QObject(parent){}
 
 void QuickMorphismUI::registerSingleton(QQmlEngine * qmlEngine)
 {
@@ -13,8 +13,8 @@ void QuickMorphismUI::registerSingleton(QQmlEngine * qmlEngine)
 
     QQmlContext *rootContext = qmlEngine->rootContext();
     rootContext->setContextProperty("QuickMorphism", s_instance);
-    rootContext->setContextProperty("QuickMorphismDarkTheme", new DarkTheme);
-    rootContext->setContextProperty("QuickMorphismLightTheme", new LightTheme);
+    //rootContext->setContextProperty("QuickMorphismDarkTheme", new DarkTheme);
+    //rootContext->setContextProperty("QuickMorphismLightTheme", new LightTheme);
     rootContext->setContextProperty("QuickMorphismSnackBar", new Snackbar);
 }
 

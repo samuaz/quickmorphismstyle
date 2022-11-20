@@ -4,27 +4,30 @@
 #include <QString>
 #include <QColor>
 
+enum Style { Light, Dark };
+
 class Theme : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
     Q_PROPERTY(Style style READ style NOTIFY styleChanged)
 
-    Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE backgroundColor NOTIFY backgroundColorChanged)
-    Q_PROPERTY(QColor foregroundColor READ foregroundColor WRITE foregroundColor NOTIFY foregroundColorChanged)
-    Q_PROPERTY(QColor primaryTextColor READ primaryTextColor WRITE primaryTextColor NOTIFY primaryTextColorChanged)
-    Q_PROPERTY(QColor secondaryTextColor READ secondaryTextColor WRITE secondaryTextColor NOTIFY secondaryTextColorChanged)
-    Q_PROPERTY(QColor hintTextColor READ hintTextColor WRITE hintTextColor NOTIFY hintTextColorChanged)
-    Q_PROPERTY(QColor topShadowColor READ topShadowColor WRITE topShadowColor NOTIFY topShadowColorChanged)
-    Q_PROPERTY(QColor bottonShadowColor READ bottonShadowColor WRITE bottonShadowColor NOTIFY bottonShadowColorChanged)
-    Q_PROPERTY(QColor primaryColor READ primaryColor WRITE primaryColor NOTIFY primaryColorChanged)
-    Q_PROPERTY(QColor secondaryColor READ secondaryColor WRITE secondaryColor NOTIFY secondaryColorChanged)
-    Q_PROPERTY(QColor accentColor READ accentColor WRITE accentColor NOTIFY accentColorChanged)
-    Q_PROPERTY(QColor errorColor READ errorColor WRITE errorColor NOTIFY errorColorChanged)
-    Q_PROPERTY(QColor highlightedColor READ highlightedColor WRITE highlightedColor NOTIFY highlightedColorChanged)
-    Q_PROPERTY(QColor hoverColor READ hoverColor WRITE hoverColor NOTIFY hoverColorChanged)
-    Q_PROPERTY(QColor statusBarColor READ statusBarColor WRITE statusBarColor NOTIFY statusBarColorChanged)
-    Q_PROPERTY(QColor navBarColor READ navBarColor WRITE navBarColor NOTIFY navBarColorChanged)
+    Q_PROPERTY(QColor backgroundColor MEMBER _backgroundColor NOTIFY backgroundColorChanged)
+    Q_PROPERTY(QColor foregroundColor MEMBER _foregroundColor NOTIFY foregroundColorChanged)
+    Q_PROPERTY(QColor primaryTextColor MEMBER _primaryTextColor NOTIFY primaryTextColorChanged)
+    Q_PROPERTY(QColor secondaryTextColor MEMBER _secondaryTextColor NOTIFY secondaryTextColorChanged)
+    Q_PROPERTY(QColor hintTextColor MEMBER _hintTextColor NOTIFY hintTextColorChanged)
+    Q_PROPERTY(QColor topShadowColor MEMBER _topShadowColor NOTIFY topShadowColorChanged)
+    Q_PROPERTY(QColor bottonShadowColor MEMBER _bottonShadowColor NOTIFY bottonShadowColorChanged)
+    Q_PROPERTY(QColor primaryColor MEMBER _primaryColor NOTIFY primaryColorChanged)
+    Q_PROPERTY(QColor secondaryColor MEMBER _secondaryColor NOTIFY secondaryColorChanged)
+    Q_PROPERTY(QColor accentColor MEMBER _accentColor NOTIFY accentColorChanged)
+    Q_PROPERTY(QColor errorColor MEMBER _errorColor NOTIFY errorColorChanged)
+    Q_PROPERTY(QColor highlightedColor MEMBER _highlightedColor NOTIFY highlightedColorChanged)
+    Q_PROPERTY(QColor hoverColor MEMBER _hoverColor NOTIFY hoverColorChanged)
+    Q_PROPERTY(QColor statusBarColor MEMBER _statusBarColor NOTIFY statusBarColorChanged)
+    Q_PROPERTY(QColor navBarColor MEMBER _navBarColor NOTIFY navBarColorChanged)
+
     Q_PROPERTY(float titleSizeMultiplier READ titleSizeMultiplier NOTIFY titleSizeMultiplierChanged)
     Q_PROPERTY(float subTitleSizeMultiplier READ subTitleSizeMultiplier NOTIFY subTitleSizeMultiplierChanged)
 
@@ -36,6 +39,23 @@ class Theme : public QObject
     Q_PROPERTY(int shadowOffSet READ shadowOffSet NOTIFY shadowOffSetChanged)
 
 protected:
+    QString _name;
+    Style _style;
+    QColor _backgroundColor;
+    QColor _foregroundColor;
+    QColor _primaryTextColor;
+    QColor _secondaryTextColor;
+    QColor _hintTextColor;
+    QColor _topShadowColor;
+    QColor _bottonShadowColor;
+    QColor _primaryColor;
+    QColor _secondaryColor;
+    QColor _accentColor;
+    QColor _errorColor;
+    QColor _highlightedColor;
+    QColor _hoverColor;
+    QColor _statusBarColor;
+    QColor _navBarColor;
     const float _shadowOpacity = 1.0;
     const int _shadowGlow = 5;
     const int _insetShadowGlow = 10;
@@ -46,60 +66,37 @@ protected:
     const float _subTitleSizeMultiplier = 1.1;
 
 public:
-    enum Style { Light, Dark };
+    Theme(const QString &name, Style style, const QColor &backgroundColor, const QColor &foregroundColor, const QColor &primaryTextColor, const QColor &secondaryTextColor, const QColor &hintTextColor, const QColor &topShadowColor, const QColor &bottonShadowColor, const QColor &primaryColor, const QColor &secondaryColor, const QColor &accentColor, const QColor &errorColor, const QColor &highlightedColor, const QColor &hoverColor, const QColor &statusBarColor, const QColor &navBarColor) : _name(name),
+        _style(style),
+        _backgroundColor(backgroundColor),
+        _foregroundColor(foregroundColor),
+        _primaryTextColor(primaryTextColor),
+        _secondaryTextColor(secondaryTextColor),
+        _hintTextColor(hintTextColor),
+        _topShadowColor(topShadowColor),
+        _bottonShadowColor(bottonShadowColor),
+        _primaryColor(primaryColor),
+        _secondaryColor(secondaryColor),
+        _accentColor(accentColor),
+        _errorColor(errorColor),
+        _highlightedColor(highlightedColor),
+        _hoverColor(hoverColor),
+        _statusBarColor(statusBarColor),
+        _navBarColor(navBarColor)
+    {}
+
     Q_ENUM(Style)
 
-    Theme(QObject* parent = nullptr) : QObject(parent) {}
-
-    virtual QString name() const = 0;
-    virtual Style style() const = 0;
-
-    virtual QColor backgroundColor() const = 0;
-    virtual void backgroundColor(QColor) = 0;
-
-    virtual QColor foregroundColor() const = 0;
-    virtual void foregroundColor(QColor) = 0;
+    //Theme(QObject* parent = nullptr) : QObject(parent) {}
 
 
-    virtual QColor primaryTextColor() const = 0;
-    virtual void primaryTextColor(QColor) = 0;
+    QString name() const {
+      return _name;
+    };
 
-    virtual QColor secondaryTextColor() const = 0;
-    virtual void secondaryTextColor(QColor) = 0;
-
-    virtual QColor hintTextColor() const = 0;
-    virtual void hintTextColor(QColor) = 0;
-
-    virtual QColor topShadowColor() const = 0;
-    virtual void topShadowColor(QColor) = 0;
-
-    virtual QColor bottonShadowColor() const = 0;
-    virtual void bottonShadowColor(QColor) = 0;
-
-    virtual QColor primaryColor() const = 0;
-    virtual void primaryColor(QColor) = 0;
-
-    virtual QColor secondaryColor() const = 0;
-    virtual void secondaryColor(QColor) = 0;
-
-    virtual QColor accentColor() const = 0;
-    virtual void accentColor(QColor) = 0;
-
-    virtual QColor errorColor() const = 0;
-    virtual void errorColor(QColor) = 0;
-
-    virtual QColor highlightedColor() const = 0;
-    virtual void highlightedColor(QColor) = 0;
-
-    virtual QColor hoverColor() const = 0;
-    virtual void hoverColor(QColor) = 0;
-
-    virtual QColor statusBarColor() const = 0;
-    virtual void statusBarColor(QColor) = 0;
-
-    virtual QColor navBarColor() const = 0;
-    virtual void navBarColor(QColor) = 0;
-
+    Style style() const {
+        return _style;
+    }
 
     virtual float titleSizeMultiplier() const {
         return _titleSizeMultiplier;
@@ -171,3 +168,5 @@ signals:
 Q_DECLARE_INTERFACE (Theme,"quickmorphism.Theme/1.0")
 
 #endif // THEME_H
+
+

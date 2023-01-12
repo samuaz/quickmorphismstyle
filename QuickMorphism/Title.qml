@@ -7,14 +7,14 @@ Item {
     property string subTitle
     property double textWidth
     height: title.height + subTitle.height + 5
-    property int titleFontSize: 10
-    property int subTitleFontSize: 10
+    property int titleFontSize: 10 * QuickMorphismConfig.theme.titleSizeMultiplier
+    property int subTitleFontSize: 10 * QuickMorphismConfig.theme.subTitleSizeMultiplier
 
     Label {
         id: title
         text: control.pageTitle
         wrapMode: Text.WordWrap
-        font.pointSize: titleFontSize * QuickMorphismConfig.theme.titleSizeMultiplier
+        font.pointSize: titleFontSize
         color: QuickMorphismConfig.theme.primaryTextColor
         width: control.textWidth
 
@@ -34,7 +34,7 @@ Item {
         Label {
             id: subTitle
             text: control.subTitle
-            font.pointSize: subTitleFontSize * QuickMorphismConfig.theme.subTitleSizeMultiplier
+            font.pointSize: subTitleFontSize
             anchors.top: separator.bottom
             anchors.topMargin: 5
             color: QuickMorphismConfig.theme.primaryTextColor

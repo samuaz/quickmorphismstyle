@@ -63,7 +63,7 @@ protected:
     const float _insetShadowSpread = 0.5;
     const int _shadowOffSet = 5;
     const float _titleSizeMultiplier = 2.0;
-    const float _subTitleSizeMultiplier = 1.1;
+    const float _subTitleSizeMultiplier = 1.5;
 
 public:
     Theme(const QString &name, Style style, const QColor &backgroundColor, const QColor &foregroundColor, const QColor &primaryTextColor, const QColor &secondaryTextColor, const QColor &hintTextColor, const QColor &topShadowColor, const QColor &bottonShadowColor, const QColor &primaryColor, const QColor &secondaryColor, const QColor &accentColor, const QColor &errorColor, const QColor &highlightedColor, const QColor &hoverColor, const QColor &statusBarColor, const QColor &navBarColor) : _name(name),

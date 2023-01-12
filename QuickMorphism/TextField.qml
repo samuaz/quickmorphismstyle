@@ -77,7 +77,7 @@ T.TextField {
         id: required
         show: isRequired
         errorMsg: control.errorMessage
-        showErrorMsg: !control.acceptableInput && control.text.length
+        showErrorMsg: !control.acceptableInput || !control.text.length
         color: !control.acceptableInput
                && !control.text.length ? QuickMorphismConfig.theme.primaryTextColor : !control.acceptableInput
                                          && control.text.length ? QuickMorphismConfig.theme.errorColor : control.acceptableInput && control.text ? QuickMorphismConfig.theme.accentColor : QuickMorphismConfig.theme.primaryTextColor

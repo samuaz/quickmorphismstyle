@@ -8,7 +8,9 @@ Item {
     property bool show: true
     property bool showErrorMsg: false
     property string color: QuickMorphismConfig.theme.errorColor
+    property int errorMsgSize: 10
     anchors.fill: parent
+
 
     FontAwesomeRegular {
         id: indicatorchecker
@@ -23,13 +25,15 @@ Item {
     }
 
     Label {
+        id: givenLabel
         color: control.color
         text: errorMsg
+        font.pointSize: control.errorMsgSize
         verticalAlignment: Text.AlignBottom
-        anchors.left: parent.left
-        anchors.leftMargin: 0
+        anchors.right: parent.right
+        anchors.rightMargin: 0
         anchors.top: parent.top
-        anchors.topMargin: parent.height
+        anchors.topMargin: parent.height + 10
         visible: control.showErrorMsg && control.errorMsg ? true : false
     }
 }

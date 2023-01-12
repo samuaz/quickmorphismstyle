@@ -26,10 +26,24 @@ Page {
         anchors.topMargin: 100
         spacing: 40
 
+        Title {
+            id: title
+            pageTitle: qsTr("QuickMorphism UI Demo")
+            subTitle: qsTr("by Samuaz")
+        }
+
         TextField {
             id: textField
             Layout.fillWidth: true
             placeholderText: qsTr("Text Field")
+        }
+
+        TextField {
+            id: textFieldRequired
+            Layout.fillWidth: true
+            placeholderText: qsTr("Required Text Field")
+            isRequired: true
+            errorMessage: qsTr("This field is Mandatory")
         }
 
         Button {

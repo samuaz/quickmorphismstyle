@@ -6,7 +6,7 @@
 #include "theme.h"
 
 #define DEFAULT_DARK_THEME_NAME "QuickMorphismDark"
-#define DEFAULT_DARK_THEME_STYLE Style::Dark
+#define DEFAULT_DARK_THEME_STYLE StyleNamespace::Style::DARK
 #define DEFAULT_DARK_THEME_BACKGROUNDCOLOR QColor("#243441")
 #define DEFAULT_DARK_THEME_FOREGROUNDCOLOR QColor("#243441")
 #define DEFAULT_DARK_THEME_PRIMARYTEXTCOLOR QColor("#ebebeb")

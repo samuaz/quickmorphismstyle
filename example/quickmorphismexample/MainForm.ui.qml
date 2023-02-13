@@ -9,7 +9,7 @@ Page {
     property alias snackbarButton: snackBarButton
 
     Switch {
-          id: themeSwitch
+        id: themeSwitch
         text: qsTr("DarkMode")
         anchors.right: parent.right
         anchors.rightMargin: 40

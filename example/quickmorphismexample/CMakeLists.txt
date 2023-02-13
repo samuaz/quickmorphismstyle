@@ -26,6 +26,8 @@ include(FetchContent)
 set(FETCHCONTENT_QUIET OFF)
 set(THIRD_PARTY_DIR ${CMAKE_SOURCE_DIR}/third_party)
 
+
+
 FetchContent_Declare(
         QuickMorphismStyle
         GIT_REPOSITORY git@github.com:samuaz/quickmorphismstyle.git
@@ -42,6 +44,8 @@ endif()
 #include(${THIRD_PARTY_DIR}/QuickMorphismStyle/CMakeLists.txt)
 
 #FetchContent_MakeAvailable(QuickMorphismStyle)
+
+set(QML_IMPORT_PATH ${THIRD_PARTY_DIR}/QuickMorphismStyle/QuickMorphism ${CMAKE_BINARY_DIR}/imports CACHE STRING "" FORCE)
 
 set_target_properties(appquickmorphismexample PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER theopencompany.dev

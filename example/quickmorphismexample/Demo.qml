@@ -17,9 +17,9 @@ ApplicationWindow {
 
     }
 
-    QuickMorphismTheme {
+    Theme {
      id: customTheme
-     style: Theme.LIGHT
+     style: QuickMorphismStyle.LIGHT
      backgroundColor: "#E0E5EC"
      foregroundColor: "#E0E5EC"
      primaryTextColor: "#666666"

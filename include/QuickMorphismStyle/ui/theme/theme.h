@@ -1,5 +1,6 @@
 #ifndef THEME_H
 #define THEME_H
+#include <QtQml/qqml.h>
 #include <QObject>
 #include <QString>
 #include <QColor>
@@ -21,7 +22,7 @@ class Theme : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString name MEMBER _name NOTIFY nameChanged)
-    Q_PROPERTY(Style style MEMBER _style NOTIFY styleChanged)
+    Q_PROPERTY(StyleNamespace::Style style MEMBER _style NOTIFY styleChanged)
     Q_PROPERTY(QColor backgroundColor MEMBER _backgroundColor NOTIFY backgroundColorChanged)
     Q_PROPERTY(QColor foregroundColor MEMBER _foregroundColor NOTIFY foregroundColorChanged)
     Q_PROPERTY(QColor primaryTextColor MEMBER _primaryTextColor NOTIFY primaryTextColorChanged)
@@ -47,6 +48,7 @@ class Theme : public QObject
     Q_PROPERTY(float shadowSpread READ shadowSpread NOTIFY shadowSpreadChanged)
     Q_PROPERTY(float insetShadowSpread READ insetShadowSpread NOTIFY insetShadowSpreadChanged)
     Q_PROPERTY(int shadowOffSet READ shadowOffSet NOTIFY shadowOffSetChanged)
+    QML_ELEMENT
 
 protected:
     QString _name;

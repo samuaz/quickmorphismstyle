@@ -2,7 +2,8 @@
 #define LIGHT_THEME_H
 #include <QString>
 #include <QColor>
-#include "theme.h"
+#include <QuickMorphismStyle/ui/theme/theme.h>
+#include <QtQml>
 
 #define DEFAULT_LIGHT_THEME_NAME "QuickMorphismLight"
 #define DEFAULT_LIGHT_THEME_STYLE StyleNamespace::Style::LIGHT
@@ -25,6 +26,7 @@
 class LightTheme: public  Theme {
     Q_OBJECT
     Q_INTERFACES(Theme)
+    QML_ELEMENT
 
     // Theme interface
 public:

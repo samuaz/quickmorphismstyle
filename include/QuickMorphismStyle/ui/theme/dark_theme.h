@@ -3,7 +3,7 @@
 
 #include <QString>
 #include <QColor>
-#include "theme.h"
+#include <QuickMorphismStyle/ui/theme/theme.h>
 
 #define DEFAULT_DARK_THEME_NAME "QuickMorphismDark"
 #define DEFAULT_DARK_THEME_STYLE StyleNamespace::Style::DARK

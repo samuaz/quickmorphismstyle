@@ -6,7 +6,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(QT_QML_OUTPUT_DIRECTORY  ${CMAKE_BINARY_DIR})
-find_package(Qt6 6.2 COMPONENTS COMPONENTS Core Quick Gui Qml REQUIRED)
+find_package(Qt6 COMPONENTS COMPONENTS Core Quick Gui Qml REQUIRED)
 
 if(ANDROID)
     find_package(QT NAMES Qt6 COMPONENTS AndroidExtras REQUIRED)
@@ -74,10 +74,13 @@ set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}" CACHE STRING "Qt Creator Quick
 qt_add_qml_module(QuickMorphism
     URI QuickMorphism
     VERSION 1.0
+    STATIC
     QML_FILES
         ${QML_SOURCES}
     SOURCES
-        ${PROJECT_SOURCES} ${STATUSBAR_COMMON_SOURCES} ${STATUSBAR_PLATFORM_SOURCES}
+        ${PROJECT_SOURCES}
+        ${STATUSBAR_COMMON_SOURCES}
+        ${STATUSBAR_PLATFORM_SOURCES}
     RESOURCES
         ${RESOURCES}
 )
@@ -126,6 +129,11 @@ endif()
 
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/QuickMorphismStyle)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/QuickMorphismStyle/statusbar/)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/QuickMorphismStyle/ui)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/QuickMorphismStyle/ui/theme)
 
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_import_qml_plugins(${PROJECT_NAME})
@@ -143,17 +151,10 @@ endif()
 #target_link_libraries(ExampleProject PRIVATE Qt6::Quick QuickMorphismStyleplugin)
 #target_compile_definitions(ExampleProject PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
 include(GenerateExportHeader)
 generate_export_header(${PROJECT_NAME})
-
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml QuickControls2)
-
-target_link_libraries(${PROJECT_NAME} PRIVATE
-    Qt::Core
-    Qt::Gui
-    Qt::Qml
-    Qt::QuickControls2
-)
 
 #install(TARGETS ${PROJECT_NAME}
 #    RUNTIME DESTINATION "${INSTALL_EXAMPLEDIR}"

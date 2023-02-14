@@ -1,6 +1,6 @@
 #ifndef THEME_H
 #define THEME_H
-#include <QtQml/qqml.h>
+#include <QtQml>
 #include <QObject>
 #include <QString>
 #include <QColor>

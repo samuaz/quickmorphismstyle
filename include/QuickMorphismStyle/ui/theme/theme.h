@@ -21,6 +21,7 @@ namespace StyleNamespace
 class Theme : public QObject
 {
     Q_OBJECT
+    QML_NAMED_ELEMENT("QuickTheme")
     Q_PROPERTY(QString name MEMBER _name NOTIFY nameChanged)
     Q_PROPERTY(StyleNamespace::Style style MEMBER _style NOTIFY styleChanged)
     Q_PROPERTY(QColor backgroundColor MEMBER _backgroundColor NOTIFY backgroundColorChanged)
@@ -48,7 +49,7 @@ class Theme : public QObject
     Q_PROPERTY(float shadowSpread READ shadowSpread NOTIFY shadowSpreadChanged)
     Q_PROPERTY(float insetShadowSpread READ insetShadowSpread NOTIFY insetShadowSpreadChanged)
     Q_PROPERTY(int shadowOffSet READ shadowOffSet NOTIFY shadowOffSetChanged)
-    QML_ELEMENT
+
 
 protected:
     QString _name;

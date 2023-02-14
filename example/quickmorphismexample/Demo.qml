@@ -14,10 +14,9 @@ ApplicationWindow {
 
     SnackBar {
         id: snackBar
-
     }
 
-    Theme {
+    QuickMorphismTheme {
      id: customTheme
      style: QuickMorphismStyle.LIGHT
      backgroundColor: "#E0E5EC"
@@ -47,7 +46,7 @@ ApplicationWindow {
 
     QuickMorphismUI {
         id: quickMorphismUI
-        theme: customTheme
+        theme: lightTheme
     }
 
     MainForm {
@@ -56,7 +55,7 @@ ApplicationWindow {
 
         themeSwitch {
             onCheckedChanged: themeSwitch.checked ? quickMorphismUI.theme
-                                                    = customTheme : quickMorphismUI.theme = customTheme
+                                                    = lightTheme : quickMorphismUI.theme = lightTheme
         }
 
         snackbarButton {

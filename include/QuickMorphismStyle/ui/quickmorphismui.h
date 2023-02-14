@@ -12,6 +12,7 @@
 class QuickMorphismUI: public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
     Q_PROPERTY(Theme* theme READ theme WRITE setTheme NOTIFY themeChanged)
     Q_PROPERTY(Dpi dpi READ dpi WRITE setDpi NOTIFY dpiChanged)
     Q_PROPERTY(qreal dpScale READ dpScale WRITE setDpScale NOTIFY dpScaleChanged)

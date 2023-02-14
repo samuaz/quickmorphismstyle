@@ -26,6 +26,7 @@
 class DarkTheme: public Theme {
     Q_OBJECT
     Q_INTERFACES(Theme)
+    QML_ELEMENT
     // Theme interface
 public:
 

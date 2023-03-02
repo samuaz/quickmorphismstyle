@@ -89,20 +89,60 @@ set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}" CACHE STRING "Qt Creator Quick
 ##### CREATE LIBRARY
 
 if(ANDROID)
-    add_library(${PROJECT_NAME} SHARED
+    qt_add_library(${PROJECT_NAME} SHARED
         ${PROJECT_SOURCES}
         ${STATUSBAR_COMMON_SOURCES}
         ${STATUSBAR_PLATFORM_SOURCES}
         ${RESOURCES}
     )
+qt_add_qml_module(${PROJECT_NAME}
+    URI ${PROJECT_NAME}
+    VERSION 1.0
+    QML_FILES
+        ${QML_SOURCES}
+    SOURCES
+        ${PROJECT_SOURCES}
+        ${STATUSBAR_COMMON_SOURCES}
+        ${STATUSBAR_PLATFORM_SOURCES}
+    RESOURCES
+        ${RESOURCES}
+)
 else()
-    add_library(${PROJECT_NAME}
+    qt_add_library(${PROJECT_NAME} STATIC
       ${PROJECT_SOURCES}
       ${STATUSBAR_COMMON_SOURCES}
       ${STATUSBAR_PLATFORM_SOURCES}
       ${RESOURCES}
     )
+qt_add_qml_module(${PROJECT_NAME}
+    URI ${PROJECT_NAME}
+    VERSION 1.0
+    QML_FILES
+        ${QML_SOURCES}
+    SOURCES
+        ${PROJECT_SOURCES}
+        ${STATUSBAR_COMMON_SOURCES}
+        ${STATUSBAR_PLATFORM_SOURCES}
+    RESOURCES
+        ${RESOURCES}
+)
 endif()
+
+#if(ANDROID)
+#    add_library(${PROJECT_NAME} SHARED
+#        ${PROJECT_SOURCES}
+#        ${STATUSBAR_COMMON_SOURCES}
+#        ${STATUSBAR_PLATFORM_SOURCES}
+#        ${RESOURCES}
+#    )
+#else()
+#    add_library(${PROJECT_NAME}
+#      ${PROJECT_SOURCES}
+#      ${STATUSBAR_COMMON_SOURCES}
+#      ${STATUSBAR_PLATFORM_SOURCES}
+#      ${RESOURCES}
+#    )
+#endif()
 
 #####
 

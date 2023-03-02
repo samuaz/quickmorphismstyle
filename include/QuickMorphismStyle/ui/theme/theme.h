@@ -21,7 +21,7 @@ namespace StyleNamespace
 class Theme : public QObject
 {
     Q_OBJECT
-    QML_NAMED_ELEMENT("QuickTheme")
+    QML_NAMED_ELEMENT("QuickMorphismTheme")
     Q_PROPERTY(QString name MEMBER _name NOTIFY nameChanged)
     Q_PROPERTY(StyleNamespace::Style style MEMBER _style NOTIFY styleChanged)
     Q_PROPERTY(QColor backgroundColor MEMBER _backgroundColor NOTIFY backgroundColorChanged)

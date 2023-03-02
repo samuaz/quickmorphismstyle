@@ -5,8 +5,8 @@ import QuickMorphism 1.0
 
 Page {
     id: page
-    property alias themeSwitch: themeSwitch
     property alias snackbarButton: snackBarButton
+    property alias themeSwitch: themeSwitch
 
     Switch {
         id: themeSwitch
@@ -43,6 +43,15 @@ Page {
             Layout.fillWidth: true
             placeholderText: qsTr("Required Text Field")
             isRequired: true
+            errorMessage: qsTr("This field is Mandatory")
+        }
+
+        TextField {
+            id: textFieldPassword
+            Layout.fillWidth: true
+            placeholderText: qsTr("Required Text Field")
+            isRequired: true
+            isPassword: true
             errorMessage: qsTr("This field is Mandatory")
         }
 

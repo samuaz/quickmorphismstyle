@@ -52,41 +52,9 @@ endif()
 file(GLOB_RECURSE QML_SOURCES LIST_DIRECTORIES false QuickMorphism/*.qml)
 file(GLOB_RECURSE QML_RESOURCES LIST_DIRECTORIES false QuickMorphism/*.ttf)
 
-qt_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)
-set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}" CACHE STRING "Qt Creator QuickMorphism paths")
+#qt_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)
+set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism" CACHE STRING "Qt Creator QuickMorphism paths")
 
-#qt_add_library(${PROJECT_NAME} STATIC ${PROJECT_SOURCES} ${STATUSBAR_COMMON_SOURCES} ${STATUSBAR_PLATFORM_SOURCES})
-#qt_add_qml_module(QuickMorphismStyle
-#    URI QuickMorphismStyle
-#    VERSION 1.0
-#    QML_FILES ${QML_SOURCES}
-#    RESOURCES ${QML_RESOURCES}
-#    SOURCES ${PROJECT_SOURCES} ${STATUSBAR_COMMON_SOURCES} ${STATUSBAR_PLATFORM_SOURCES}
-#)
-
-#qt_add_qml_module(Statusbar
-#    VERSION 1.0
-#    URI Statusbar
-#    SOURCES ${STATUSBAR_COMMON_SOURCES} ${STATUSBAR_PLATFORM_SOURCES}
-#)
-
-
-#qt_add_qml_module(QuickMorphism
-#    URI QuickMorphism
-#    VERSION 1.0
-#    STATIC
-#    QML_FILES
-#        ${QML_SOURCES}
-#    SOURCES
-#        ${PROJECT_SOURCES}
-#        ${STATUSBAR_COMMON_SOURCES}
-#        ${STATUSBAR_PLATFORM_SOURCES}
-#    RESOURCES
-#        ${RESOURCES}
-#)
-
-
-##### CREATE LIBRARY
 
 if(ANDROID)
     qt_add_library(${PROJECT_NAME} SHARED
@@ -106,6 +74,7 @@ qt_add_qml_module(${PROJECT_NAME}
         ${STATUSBAR_PLATFORM_SOURCES}
     RESOURCES
         ${RESOURCES}
+        ${QML_RESOURCES}
 )
 else()
     qt_add_library(${PROJECT_NAME} STATIC
@@ -114,6 +83,7 @@ else()
       ${STATUSBAR_PLATFORM_SOURCES}
       ${RESOURCES}
     )
+
 qt_add_qml_module(${PROJECT_NAME}
     URI ${PROJECT_NAME}
     VERSION 1.0
@@ -125,26 +95,9 @@ qt_add_qml_module(${PROJECT_NAME}
         ${STATUSBAR_PLATFORM_SOURCES}
     RESOURCES
         ${RESOURCES}
+        ${QML_RESOURCES}
 )
 endif()
-
-#if(ANDROID)
-#    add_library(${PROJECT_NAME} SHARED
-#        ${PROJECT_SOURCES}
-#        ${STATUSBAR_COMMON_SOURCES}
-#        ${STATUSBAR_PLATFORM_SOURCES}
-#        ${RESOURCES}
-#    )
-#else()
-#    add_library(${PROJECT_NAME}
-#      ${PROJECT_SOURCES}
-#      ${STATUSBAR_COMMON_SOURCES}
-#      ${STATUSBAR_PLATFORM_SOURCES}
-#      ${RESOURCES}
-#    )
-#endif()
-
-#####
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER dev.theopencompany.${PROJECT_NAME}
@@ -181,28 +134,7 @@ if(QT_VERSION_MAJOR EQUAL 6)
 endif()
 
 
-# Example Project
-#qt_add_executable(ExampleProject example/example.cpp)
-#qt_add_qml_module(ExampleProject
-#    URI ExampleProjectApp
-#    VERSION 1.0
-#    QML_FILES example/example.qml
-#)
-#target_link_libraries(ExampleProject PRIVATE Qt6::Quick QuickMorphismStyleplugin)
-#target_compile_definitions(ExampleProject PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
-
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 include(GenerateExportHeader)
 generate_export_header(${PROJECT_NAME})
-
-#install(TARGETS ${PROJECT_NAME}
-#    RUNTIME DESTINATION "${INSTALL_EXAMPLEDIR}"
-#    BUNDLE DESTINATION "${INSTALL_EXAMPLEDIR}"
-#    LIBRARY DESTINATION "${INSTALL_EXAMPLEDIR}"
-#)
-
-#install(FILES ${CMAKE_CURRENT_BINARY_DIR}/qmldir
-#    DESTINATION "${INSTALL_EXAMPLEDIR}"
-#)
-

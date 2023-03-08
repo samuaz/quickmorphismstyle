@@ -6,7 +6,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(QT_QML_OUTPUT_DIRECTORY  ${CMAKE_BINARY_DIR})
-find_package(Qt6 COMPONENTS COMPONENTS Core Quick Gui Qml REQUIRED)
+find_package(Qt6 COMPONENTS Core Quick Gui Qml REQUIRED)
 
 if(ANDROID)
     find_package(QT NAMES Qt6 COMPONENTS AndroidExtras REQUIRED)
@@ -128,12 +128,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/QuickMorphismStyle)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/QuickMorphismStyle/statusbar/)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/QuickMorphismStyle/ui)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/QuickMorphismStyle/ui/theme)
-
-if(QT_VERSION_MAJOR EQUAL 6)
-    qt_import_qml_plugins(${PROJECT_NAME})
-    qt_finalize_executable(${PROJECT_NAME})
-endif()
-
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 

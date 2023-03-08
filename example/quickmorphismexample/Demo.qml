@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QuickMorphism 1.0
+import QuickMorphism
 
 ApplicationWindow {
     id: window
@@ -16,7 +16,7 @@ ApplicationWindow {
         id: snackBar
     }
 
-    QuickMorphismTheme {
+    Theme {
      id: customTheme
      style: QuickMorphismStyle.LIGHT
      backgroundColor: "#E0E5EC"
@@ -36,17 +36,9 @@ ApplicationWindow {
      navBarColor: "#E0E5EC"
     }
 
-    QuickMorphismLightTheme {
-    id: lightTheme
-    }
-
-    QuickMorphismDarkTheme {
-    id: darkTheme
-    }
-
     QuickMorphismUI {
         id: quickMorphismUI
-        theme: lightTheme
+        theme: customTheme
     }
 
     MainForm {

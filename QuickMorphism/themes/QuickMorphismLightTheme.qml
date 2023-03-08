@@ -1,10 +1,10 @@
 pragma Singleton
 
 import QtQuick
-import QuickMorphism 1.0
+import QuickMorphism
 
 
-QuickMorphismTheme {
+Theme {
  style: QuickMorphismStyle.LIGHT
  backgroundColor: "#E0E5EC"
  foregroundColor: "#E0E5EC"

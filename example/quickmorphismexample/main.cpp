@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     // QuickMorphism Init
-    QuickMorphism::init(engine);
+    //QuickMorphism::init(engine);
 
     const QUrl url(u"qrc:/quickmorphismexample/demo.qml"_qs);
     //const QUrl url(QStringLiteral("qrc:/Demo.qml"));

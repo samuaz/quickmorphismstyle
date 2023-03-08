@@ -8,7 +8,7 @@ QuickMorphism::QuickMorphism(QQmlApplicationEngine & engine, QuickMorphismUI *qu
 
 void QuickMorphism::init(QQmlApplicationEngine &engine)
 {
-    Q_INIT_RESOURCE(quickmorphism);
+    //Q_INIT_RESOURCE(quickmorphism);
 
     engine.addImportPath("qrc:///");
 

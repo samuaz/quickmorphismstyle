@@ -26,8 +26,6 @@ include(FetchContent)
 set(FETCHCONTENT_QUIET OFF)
 set(THIRD_PARTY_DIR ${CMAKE_SOURCE_DIR}/third_party)
 
-
-
 FetchContent_Declare(
         QuickMorphismStyle
         GIT_REPOSITORY git@github.com:samuaz/quickmorphismstyle.git
@@ -56,7 +54,7 @@ set_target_properties(appquickmorphismexample PROPERTIES
 )
 
 target_link_libraries(appquickmorphismexample
-    PRIVATE Qt6::Quick QuickMorphismplugin)
+    PRIVATE Qt6::Quick QuickMorphism QuickMorphismplugin)
 
 install(TARGETS appquickmorphismexample
     BUNDLE DESTINATION .

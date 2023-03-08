@@ -50,7 +50,7 @@ endif()
 #####
 
 file(GLOB_RECURSE QML_SOURCES LIST_DIRECTORIES false QuickMorphism/*.qml)
-file(GLOB_RECURSE QML_RESOURCES LIST_DIRECTORIES false QuickMorphism/*.ttf)
+file(GLOB_RECURSE QML_RESOURCES LIST_DIRECTORIES false QuickMorphism/*.ttf qmldir)
 
 #qt_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)
 set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism" CACHE STRING "Qt Creator QuickMorphism paths")
@@ -100,7 +100,7 @@ qt_add_qml_module(${PROJECT_NAME}
 endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER dev.theopencompany.${PROJECT_NAME}
+    MACOSX_BUNDLE_GUI_IDENTIFIER dev.theopencompany
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE

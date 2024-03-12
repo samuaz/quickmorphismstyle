@@ -45,8 +45,8 @@ void QuickMorphism::init(QQmlApplicationEngine &engine)
 static void registerTypes() {
     qRegisterMetaType<Theme *>();
     qmlRegisterType<StatusBar>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "StatusBar");
-    qmlRegisterType<LightTheme>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "QuickMorphismLightTheme");
-    qmlRegisterType<DarkTheme>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "QuickMorphismDarkTheme");
+    //qmlRegisterType<LightTheme>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "QuickMorphismLightTheme");
+    //qmlRegisterType<DarkTheme>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "QuickMorphismDarkTheme");
     qmlRegisterType<Theme>(QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "QuickMorphismTheme");
     qmlRegisterUncreatableMetaObject(StyleNamespace::staticMetaObject, QuickMorphism::package_name, QuickMorphism::package_version_major, QuickMorphism::package_version_minor, "QuickMorphismStyle", "Not creatable as it is an enum type");
 }

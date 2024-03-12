@@ -29,7 +29,7 @@ set(THIRD_PARTY_DIR ${CMAKE_SOURCE_DIR}/third_party)
 FetchContent_Declare(
         QuickMorphismStyle
         GIT_REPOSITORY git@github.com:samuaz/quickmorphismstyle.git
-        GIT_TAG        QT6-PLUGIN-2
+        GIT_TAG        QT6-PLUGIN-FIX-EDITOR
         GIT_PROGRESS   TRUE
         SOURCE_DIR ${THIRD_PARTY_DIR}/QuickMorphismStyle
 )

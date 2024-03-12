@@ -52,24 +52,24 @@ endif()
 
 # Define el directorio base relativo desde el cual quieres obtener las rutas
 set(BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/qt/qml/QuickMorphism")
-set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/qt/qml/QuickMorphism" CACHE STRING "Qt Creator QuickMorphism paths")
+set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}" CACHE STRING "Qt Creator QuickMorphism paths")
 
 # Busca los archivos .qml y los recursos en el directorio QuickMorphism y subdirectorios
 # Primero, obtén las rutas absolutas como antes.
 file(GLOB_RECURSE QML_SOURCES_ABSOLUTE LIST_DIRECTORIES false qt/qml/QuickMorphism/*.qml)
-file(GLOB_RECURSE QML_RESOURCES_ABSOLUTE LIST_DIRECTORIES false qt/qml/QuickMorphism/*.ttf QuickMorphism/qmldir)
+file(GLOB_RECURSE QML_RESOURCES_ABSOLUTE LIST_DIRECTORIES false qt/qml/QuickMorphism/*.ttf qt/qml/QuickMorphism/qmldir)
 
 # Luego, convierte cada ruta absoluta en una ruta relativa manualmente.
 set(QML_SOURCES "")
 foreach(source ${QML_SOURCES_ABSOLUTE})
-  file(RELATIVE_PATH source_relative "${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism" "${source}")
-  list(APPEND QML_SOURCES "QuickMorphism/${source_relative}")
+  file(RELATIVE_PATH source_relative "${CMAKE_CURRENT_SOURCE_DIR}/qt/qml/QuickMorphism" "${source}")
+  list(APPEND QML_SOURCES "qt/qml/QuickMorphism/${source_relative}")
 endforeach()
 
 set(QML_RESOURCES "")
 foreach(resource ${QML_RESOURCES_ABSOLUTE})
-  file(RELATIVE_PATH resource_relative "${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism" "${resource}")
-  list(APPEND QML_RESOURCES "QuickMorphism/${resource_relative}")
+  file(RELATIVE_PATH resource_relative "${CMAKE_CURRENT_SOURCE_DIR}/qt/qml/QuickMorphism" "${resource}")
+  list(APPEND QML_RESOURCES "qt/qml/QuickMorphism/${resource_relative}")
 endforeach()
 
 #qt_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)

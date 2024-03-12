@@ -49,12 +49,33 @@ endif()
 
 #####
 
-file(GLOB_RECURSE QML_SOURCES LIST_DIRECTORIES false QuickMorphism/*.qml)
-file(GLOB_RECURSE QML_RESOURCES LIST_DIRECTORIES false QuickMorphism/*.ttf qmldir)
-
-#qt_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)
+# Define el directorio base relativo desde el cual quieres obtener las rutas
+set(BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism")
 set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism" CACHE STRING "Qt Creator QuickMorphism paths")
 
+# Busca los archivos .qml y los recursos en el directorio QuickMorphism y subdirectorios
+# Primero, obtén las rutas absolutas como antes.
+file(GLOB_RECURSE QML_SOURCES_ABSOLUTE LIST_DIRECTORIES false QuickMorphism/*.qml)
+file(GLOB_RECURSE QML_RESOURCES_ABSOLUTE LIST_DIRECTORIES false QuickMorphism/*.ttf QuickMorphism/qmldir)
+
+# Luego, convierte cada ruta absoluta en una ruta relativa manualmente.
+set(QML_SOURCES "")
+foreach(source ${QML_SOURCES_ABSOLUTE})
+  file(RELATIVE_PATH source_relative "${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism" "${source}")
+  list(APPEND QML_SOURCES "QuickMorphism/${source_relative}")
+endforeach()
+
+set(QML_RESOURCES "")
+foreach(resource ${QML_RESOURCES_ABSOLUTE})
+  file(RELATIVE_PATH resource_relative "${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism" "${resource}")
+  list(APPEND QML_RESOURCES "QuickMorphism/${resource_relative}")
+endforeach()
+
+#qt_add_resources(RESOURCES QuickMorphism/quickmorphism.qrc)
+
+# Imprime las listas para verificar (opcional)
+message(STATUS "QML Sources: ${QML_SOURCES}")
+message(STATUS "QML Resources: ${QML_RESOURCES}")
 
 if(ANDROID)
     qt_add_library(${PROJECT_NAME} SHARED
@@ -73,8 +94,8 @@ qt_add_qml_module(${PROJECT_NAME}
         ${STATUSBAR_COMMON_SOURCES}
         ${STATUSBAR_PLATFORM_SOURCES}
     RESOURCES
-        ${RESOURCES}
-        ${QML_RESOURCES}
+       ${RESOURCES}
+       ${QML_RESOURCES}
 )
 else()
     qt_add_library(${PROJECT_NAME} STATIC

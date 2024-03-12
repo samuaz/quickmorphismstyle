@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(QT_QML_OUTPUT_DIRECTORY  ${CMAKE_BINARY_DIR})
 find_package(Qt6 COMPONENTS Core Quick Gui Qml REQUIRED)
 
+
 if(ANDROID)
     find_package(QT NAMES Qt6 COMPONENTS AndroidExtras REQUIRED)
     find_package(Qt${QT_VERSION_MAJOR} AndroidExtras REQUIRED)
@@ -50,13 +51,13 @@ endif()
 #####
 
 # Define el directorio base relativo desde el cual quieres obtener las rutas
-set(BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism")
-set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism" CACHE STRING "Qt Creator QuickMorphism paths")
+set(BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/qt/qml/QuickMorphism")
+set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/qt/qml/QuickMorphism" CACHE STRING "Qt Creator QuickMorphism paths")
 
 # Busca los archivos .qml y los recursos en el directorio QuickMorphism y subdirectorios
 # Primero, obtén las rutas absolutas como antes.
-file(GLOB_RECURSE QML_SOURCES_ABSOLUTE LIST_DIRECTORIES false QuickMorphism/*.qml)
-file(GLOB_RECURSE QML_RESOURCES_ABSOLUTE LIST_DIRECTORIES false QuickMorphism/*.ttf QuickMorphism/qmldir)
+file(GLOB_RECURSE QML_SOURCES_ABSOLUTE LIST_DIRECTORIES false qt/qml/QuickMorphism/*.qml)
+file(GLOB_RECURSE QML_RESOURCES_ABSOLUTE LIST_DIRECTORIES false qt/qml/QuickMorphism/*.ttf QuickMorphism/qmldir)
 
 # Luego, convierte cada ruta absoluta en una ruta relativa manualmente.
 set(QML_SOURCES "")
@@ -76,6 +77,8 @@ endforeach()
 # Imprime las listas para verificar (opcional)
 message(STATUS "QML Sources: ${QML_SOURCES}")
 message(STATUS "QML Resources: ${QML_RESOURCES}")
+
+qt_policy(SET QTP0001 NEW)
 
 if(ANDROID)
     qt_add_library(${PROJECT_NAME} SHARED

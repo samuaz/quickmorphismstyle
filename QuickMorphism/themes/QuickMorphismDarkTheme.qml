@@ -5,9 +5,8 @@ import QtQuick
 import QuickMorphism
 
 QtObject {
-    // Propiedades del tema
-    property string name: "QuickMorphismDark"
-    property string style: "Dark"
+    property string name: "QuickMorphismDarkTheme"
+    property string style: "DARK"
     property color backgroundColor: "#243441"
     property color foregroundColor: "#243441"
     property color primaryTextColor: "#ebebeb"
@@ -24,7 +23,6 @@ QtObject {
     property color statusBarColor: "#243441"
     property color navBarColor: "#243441"
 
-    // Multipliers y propiedades de sombra
     property double titleSizeMultiplier: 2.0
     property double subTitleSizeMultiplier: 1.5
     property double shadowOpacity: 1.0

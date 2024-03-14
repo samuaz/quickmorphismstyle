@@ -43,7 +43,10 @@ endif()
 
 FetchContent_MakeAvailable(QuickMorphismStyle)
 
-set(QML_IMPORT_PATH /Users/samuaz/Projects/toc/build-quickmorphismstyle-Qt_6_6_2_for_macOS-Debug/QuickMorphism ${CMAKE_BINARY_DIR}/imports CACHE STRING "" FORCE)
+set(QML_IMPORT_PATH /Users/samuaz/Projects/toc/build-quickmorphismstyle-Qt_6_6_2_for_macOS-Debug/  /Users/samuaz/Projects/toc/build-quickmorphismstyle-Qt_6_6_2_for_macOS-Debug/QuickMorphism ${CMAKE_BINARY_DIR}/imports CACHE STRING "" FORCE)
+
+#set(QML_IMPORT_PATH ${QuickMorphism_BINARY_DIR} ${CMAKE_BINARY_DIR}/imports CACHE STRING "" FORCE)
+
 
 set_target_properties(appquickmorphismexample PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER theopencompany.dev
@@ -54,7 +57,7 @@ set_target_properties(appquickmorphismexample PROPERTIES
 )
 
 target_link_libraries(appquickmorphismexample
-    PRIVATE Qt6::Quick QuickMorphism QuickMorphismplugin)
+    PRIVATE Qt6::Quick QuickMorphism)
 
 install(TARGETS appquickmorphismexample
     BUNDLE DESTINATION .

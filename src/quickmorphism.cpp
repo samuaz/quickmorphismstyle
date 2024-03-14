@@ -10,7 +10,7 @@ void QuickMorphism::init(QQmlApplicationEngine &engine)
 {
     //Q_INIT_RESOURCE(quickmorphism);
 
-    engine.addImportPath("qrc:///");
+    engine.addImportPath("qrc://qt/qml");
 
     QFontDatabase::addApplicationFont(
         QStringLiteral(":QuickMorphism/assets/font/fa-brands-400.ttf"));

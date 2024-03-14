@@ -43,7 +43,8 @@ endif()
 
 #FetchContent_MakeAvailable(QuickMorphismStyle)
 
-set(QML_IMPORT_PATH ${THIRD_PARTY_DIR}/QuickMorphismStyle/QuickMorphism ${CMAKE_BINARY_DIR}/imports CACHE STRING "" FORCE)
+set(QML_IMPORT_PATH ${THIRD_PARTY_DIR}/QuickMorphismStyle/qt/qml/QuickMorphism ${CMAKE_BINARY_DIR}/imports CACHE STRING "" FORCE)
+
 
 set_target_properties(appquickmorphismexample PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER theopencompany.dev

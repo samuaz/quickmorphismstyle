@@ -46,8 +46,8 @@ ApplicationWindow {
         anchors.fill: parent
 
         themeSwitch {
-            onCheckedChanged: themeSwitch.checked ? quickMorphismUI.theme
-                                                    = lightTheme : quickMorphismUI.theme = lightTheme
+            onCheckedChanged: themeSwitch.checked ? QuickMorphism.theme
+                                                    = DefaultQuickMorphismDarkTheme : QuickMorphism.theme = DefaultQuickMorphismLightTheme
         }
 
         snackbarButton {

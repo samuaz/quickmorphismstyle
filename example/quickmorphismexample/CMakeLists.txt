@@ -8,9 +8,9 @@ set(QT_QML_OUTPUT_DIRECTORY  ${CMAKE_BINARY_DIR})
 set(Qt6_DIR ${Qt6_DIR})
 set(QT_DIR ${Qt6_DIR})
 
-message("qt dir is ${QT_DIR}" )
 
-find_package(Qt6 6.2 COMPONENTS COMPONENTS Core Quick Gui Qml REQUIRED)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml QuickControls2)
+
 
 qt_add_executable(appquickmorphismexample
     main.cpp
@@ -41,9 +41,9 @@ endif()
 
 #include(${THIRD_PARTY_DIR}/QuickMorphismStyle/CMakeLists.txt)
 
-#FetchContent_MakeAvailable(QuickMorphismStyle)
+FetchContent_MakeAvailable(QuickMorphismStyle)
 
-set(QML_IMPORT_PATH ${THIRD_PARTY_DIR}/QuickMorphismStyle/QuickMorphism ${CMAKE_BINARY_DIR}/imports CACHE STRING "" FORCE)
+set(QML_IMPORT_PATH /Users/samuaz/Projects/toc/build-quickmorphismstyle-Qt_6_6_2_for_macOS-Debug/QuickMorphism ${CMAKE_BINARY_DIR}/imports CACHE STRING "" FORCE)
 
 set_target_properties(appquickmorphismexample PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER theopencompany.dev
@@ -59,3 +59,5 @@ target_link_libraries(appquickmorphismexample
 install(TARGETS appquickmorphismexample
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+

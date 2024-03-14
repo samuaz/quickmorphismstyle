@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+gcmake_minimum_required(VERSION 3.16)
 
 project(QuickMorphism VERSION 0.1 LANGUAGES CXX)
 
@@ -51,7 +51,7 @@ endif()
 
 # Define el directorio base relativo desde el cual quieres obtener las rutas
 set(BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism")
-set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism" CACHE STRING "Qt Creator QuickMorphism paths")
+set(QML_IMPORT_PATH "${CMAKE_BINARY_DIR}/QuickMorphism" CACHE STRING "Qt Creator QuickMorphism paths")
 
 # Busca los archivos .qml y los recursos en el directorio QuickMorphism y subdirectorios
 # Primero, obtén las rutas absolutas como antes.

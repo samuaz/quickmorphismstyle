@@ -1,4 +1,4 @@
-gcmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.16)
 
 project(QuickMorphism VERSION 0.1 LANGUAGES CXX)
 

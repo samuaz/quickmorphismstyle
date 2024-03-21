@@ -211,3 +211,4 @@ compile_commands.json
 .vscode
 **/third_party
 .DS_Store
+**/.DS_Store

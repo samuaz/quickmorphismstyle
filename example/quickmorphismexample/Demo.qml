@@ -39,7 +39,7 @@ ApplicationWindow {
 
     QuickMorphismUI {
         id: quickMorphismUI
-        theme: customTheme
+        theme: DefaultQuickMorphismDarkTheme
     }
 
     MainForm {
@@ -61,9 +61,5 @@ ApplicationWindow {
 
 }
 
-/*##^##
-Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
-##^##*/
+
 

@@ -31,21 +31,21 @@ T.Button {
     property int radius: Math.min(width, height) / 2
     font.capitalization: Font.MixedCase
 
-    Elevation {
-        id: elevation
-        width: control.width
-        height: control.height
-        radius: control.radius
-        pressed: false
-        opacity: control.shadowOpacity
-        visible: !control.flatß
-    }
-
     background: Rectangle {
         color: QuickMorphismConfig.theme.foregroundColor
         radius: control.radius
         implicitWidth: 100 * QuickMorphismConfig.dpScale
         implicitHeight: 38 * QuickMorphismConfig.dpScale
+
+        Elevation {
+            id: elevation
+            width: control.width
+            height: control.height
+            radius: control.radius
+            pressed: false
+            opacity: control.shadowOpacity
+            visible: !control.flatß
+        }
     }
 
     contentItem: IconLabel {

@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
-import QuickMorphism 1.0
+import QuickMorphism
 
 Page {
     id: page
@@ -18,6 +18,7 @@ Page {
     }
 
     ColumnLayout {
+        id: content
         anchors.right: parent.right
         anchors.rightMargin: 40
         anchors.left: parent.left

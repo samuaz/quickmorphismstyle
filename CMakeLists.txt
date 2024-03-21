@@ -100,9 +100,14 @@ qt_add_qml_module(${PROJECT_NAME}
        ${QML_RESOURCES}
 )
 else()
+    qt_add_library(${PROJECT_NAME} STATIC
+      ${PROJECT_SOURCES}
+      ${STATUSBAR_COMMON_SOURCES}
+      ${STATUSBAR_PLATFORM_SOURCES}
+      ${RESOURCES}
+    )
 
-    qt_add_library(${PROJECT_NAME} STATIC)
-    qt_add_qml_module(${PROJECT_NAME}
+qt_add_qml_module(${PROJECT_NAME}
     URI ${PROJECT_NAME}
     VERSION 1.0
     QML_FILES

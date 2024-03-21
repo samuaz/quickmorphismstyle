@@ -57,7 +57,7 @@ set_target_properties(appquickmorphismexample PROPERTIES
 )
 
 target_link_libraries(appquickmorphismexample
-    PRIVATE Qt6::Quick QuickMorphism)
+    PRIVATE Qt6::Quick QuickMorphism QuickMorphismplugin)
 
 install(TARGETS appquickmorphismexample
     BUNDLE DESTINATION .

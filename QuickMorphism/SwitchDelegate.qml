@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Timeline
-import QtQuick.Controls
 import QtQuick.Controls.impl
 
 T.SwitchDelegate {
@@ -71,18 +70,18 @@ T.SwitchDelegate {
             color: QuickMorphismConfig.theme.foregroundColor
             border.color: QuickMorphismConfig.theme.accentColor
 
-            Ripple {
-                x: parent.x
-                y: parent.y
-                width: parent.width - 5
-                height: parent.height - 5
-                pressed: control.pressed
-                active: control.down || control.visualFocus || control.hovered
-                color: control.checked ? QuickMorphismConfig.theme.accentColor : QuickMorphismConfig.theme.bottonShadowColor
-                opacity: 0.2
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
+            // Ripple {
+            //     x: parent.x
+            //     y: parent.y
+            //     width: parent.width - 5
+            //     height: parent.height - 5
+            //     pressed: control.pressed
+            //     active: control.down || control.visualFocus || control.hovered
+            //     color: control.checked ? QuickMorphismConfig.theme.accentColor : QuickMorphismConfig.theme.bottonShadowColor
+            //     opacity: 0.2
+            //     anchors.verticalCenter: parent.verticalCenter
+            //     anchors.horizontalCenter: parent.horizontalCenter
+            // }
         }
     }
 

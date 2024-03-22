@@ -1,10 +1,7 @@
 import QtQuick
 import QtQuick.Templates as T
-import QtQuick.Controls
 import QtQuick.Controls.impl
 import QtQuick.Timeline
-import QtQuick.Controls.Material
-import QtQuick.Controls.Material.impl
 
 T.Switch {
     id: control

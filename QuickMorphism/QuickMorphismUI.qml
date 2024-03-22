@@ -1,5 +1,5 @@
 import QtQuick
-import QuickMorphism 1.0
+import QuickMorphism
 
 Item {
     id: root

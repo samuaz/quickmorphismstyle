@@ -1,4 +1,5 @@
 module QuickMorphism
+plugin QuickMorphismPlugin
 designersupported
 typeinfo QuickMorphism.qmltypes
 QuickMorphismUI 1.0 QuickMorphismUI.qml

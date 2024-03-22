@@ -86,23 +86,20 @@ T.SwitchDelegate {
         }
     }
 
-    contentItem: Item {
-        visible: control.text || control.icon
-        IconLabel {
-            leftPadding: control.indicator
-                         && !control.mirrored ? control.indicator.width + control.spacing : 0
-            rightPadding: control.indicator
-                          && control.mirrored ? control.indicator.width + control.spacing : 0
-            spacing: control.spacing
-            mirrored: control.mirrored
-            display: control.display
-            alignment: control.display === IconLabel.IconOnly
-                       || control.display === IconLabel.TextUnderIcon ? Qt.AlignCenter : Qt.AlignLeft
-            icon: control.icon
-            text: control.text
-            font: control.font
-            color: !control.enabled ? QuickMorphismConfig.theme.hintTextColor : QuickMorphismConfig.theme.primaryTextColor
-        }
+    contentItem: IconLabel {
+        leftPadding: control.indicator
+                     && !control.mirrored ? control.indicator.width + control.spacing : 0
+        rightPadding: control.indicator
+                      && control.mirrored ? control.indicator.width + control.spacing : 0
+        spacing: control.spacing
+        mirrored: control.mirrored
+        display: control.display
+        alignment: control.display === IconLabel.IconOnly
+                   || control.display === IconLabel.TextUnderIcon ? Qt.AlignCenter : Qt.AlignLeft
+        icon: control.icon
+        text: control.text
+        font: control.font
+        color: !control.enabled ? QuickMorphismConfig.theme.hintTextColor : QuickMorphismConfig.theme.primaryTextColor
     }
 
 

@@ -20,14 +20,17 @@ Item {
 
     onDpScaleChanged: {
         QuickMorphism.dpScale = root.dpScale
+        QuickMorphismConfig.dpScale = QuickMorphism.dpScale
     }
 
     onDpiChanged: {
         QuickMorphism.dpi = root.dpi
+        QuickMorphismConfig.theme = QuickMorphism.dpi
     }
 
     function changeTheme() {
         QuickMorphism.theme = root.theme;
+        QuickMorphismConfig.theme = QuickMorphism.theme
         statusBar.theme = root.theme.style;
         statusBar.statusBarColor = root.theme.statusBarColor;
         statusBar.navBarColor = root.theme.navBarColor;

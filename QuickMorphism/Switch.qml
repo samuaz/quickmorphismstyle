@@ -37,7 +37,7 @@ T.Switch {
         opacity: control.shadowOpacity
     }
 
-    indicator: PaddedRectangle {
+    indicator: Rectangle {
         id: switchHandle
         implicitWidth: indicatorWidth * QuickMorphismConfig.dpScale
         implicitHeight: indicatorheight * QuickMorphismConfig.dpScale
@@ -73,14 +73,13 @@ T.Switch {
             border.color: QuickMorphismConfig.theme.bottonShadowColor
             border.width: 0
 
-            Ripple {
+            Rectangle {
                 x: parent.x
                 y: parent.y
                 width: parent.width - 10
                 height: parent.height - 10
-                pressed: control.pressed
-                active: control.down || control.visualFocus || control.hovered
-                color: control.checked ? QuickMorphismConfig.theme.bottonShadowColor : QuickMorphismConfig.theme.bottonShadowColor
+                visible: control.pressed
+                color: control.checked ? QuickMorphismConfig.theme.accentColor : QuickMorphismConfig.theme.bottonShadowColor
                 opacity: 0.2
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter

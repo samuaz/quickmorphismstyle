@@ -102,7 +102,8 @@ void StatusBarPrivate::setTheme_sys(StatusBar::Theme)
     }, Qt::UniqueConnection);
 
     QScreen *screen = qApp->primaryScreen();
-    screen->setOrientationUpdateMask(Qt::PortraitOrientation | Qt::LandscapeOrientation | Qt::InvertedPortraitOrientation | Qt::InvertedLandscapeOrientation);
+    // TODO: FIX THIS FOR QT6
+    //screen->setOrientationUpdateMask(Qt::PortraitOrientation | Qt::LandscapeOrientation | Qt::InvertedPortraitOrientation | Qt::InvertedLandscapeOrientation);
     QObject::connect(screen, &QScreen::orientationChanged, qApp, [](Qt::ScreenOrientation) {
         togglePreferredStatusBarStyle();
     }, Qt::UniqueConnection);

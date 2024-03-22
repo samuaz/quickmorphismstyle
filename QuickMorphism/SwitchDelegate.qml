@@ -70,14 +70,12 @@ T.SwitchDelegate {
             color: QuickMorphismConfig.theme.foregroundColor
             border.color: QuickMorphismConfig.theme.accentColor
 
-            Rectangle {
+            Ripple {
                 x: parent.x
                 y: parent.y
                 width: parent.width - 10
                 height: parent.height - 10
                 visible: control.pressed
-                color: control.checked ? QuickMorphismConfig.theme.accentColor : QuickMorphismConfig.theme.bottonShadowColor
-                opacity: 0.2
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
             }

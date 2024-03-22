@@ -2,6 +2,8 @@ import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls.impl
 import QtQuick.Timeline
+import QtQuick.Controls.Material.impl as Mat
+
 
 T.Switch {
     id: control
@@ -73,33 +75,38 @@ T.Switch {
             border.color: QuickMorphismConfig.theme.bottonShadowColor
             border.width: 0
 
-            Ripple {
+            Mat.Ripple {
                 x: parent.x
                 y: parent.y
                 width: parent.width - 10
                 height: parent.height - 10
-                visible: control.pressed
+                pressed: control.pressed
+                active: control.down || control.visualFocus || control.hovered
+                color: control.checked ? QuickMorphismConfig.theme.bottonShadowColor : QuickMorphismConfig.theme.bottonShadowColor
+                opacity: 0.2
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
             }
         }
     }
 
-    contentItem: IconLabel {
-        leftPadding: control.indicator
-                     && !control.mirrored ? control.indicator.width + control.spacing : 0
-        rightPadding: control.indicator
-                      && control.mirrored ? control.indicator.width + control.spacing : 0
-        spacing: control.spacing
-        mirrored: control.mirrored
-        display: control.display
-        alignment: control.display === IconLabel.IconOnly
-                   || control.display === IconLabel.TextUnderIcon ? Qt.AlignCenter : Qt.AlignLeft
-        icon: control.icon
-        text: control.text
-        font: control.font
-        color: !control.enabled ? QuickMorphismConfig.theme.hintTextColor : QuickMorphismConfig.theme.primaryTextColor
+    contentItem: Item {
         visible: control.text || control.icon
+        IconLabel {
+            leftPadding: control.indicator
+                         && !control.mirrored ? control.indicator.width + control.spacing : 0
+            rightPadding: control.indicator
+                          && control.mirrored ? control.indicator.width + control.spacing : 0
+            spacing: control.spacing
+            mirrored: control.mirrored
+            display: control.display
+            alignment: control.display === IconLabel.IconOnly
+                       || control.display === IconLabel.TextUnderIcon ? Qt.AlignCenter : Qt.AlignLeft
+            icon: control.icon
+            text: control.text
+            font: control.font
+            color: !control.enabled ? QuickMorphismConfig.theme.hintTextColor : QuickMorphismConfig.theme.primaryTextColor
+        }
     }
 
     Timeline {

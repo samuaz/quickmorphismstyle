@@ -43,7 +43,7 @@ you can also create customs themes
 
     QuickMorphismUI {
         id: quickMorphismUI
-        theme: DefaultQuickMorphismLightTheme
+        theme: DefaultQuickMorphismDarkTheme
     }
 
     MainForm {

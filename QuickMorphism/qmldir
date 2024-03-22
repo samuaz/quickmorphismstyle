@@ -1,5 +1,4 @@
 module QuickMorphism
-plugin QuickMorphismPlugin
 designersupported
 typeinfo QuickMorphism.qmltypes
 QuickMorphismUI 1.0 QuickMorphismUI.qml
@@ -26,7 +25,6 @@ Required 1.0 Required.qml
 Title 1.0 Title.qml
 singleton Icons 1.0 Icons.qml
 singleton Fonts 1.0 Fonts.qml
-singleton Constants 1.0 def/Constants.qml
 singleton LightTheme 1.0 themes/QuickMorphismLightTheme.qml
 singleton DarkTheme 1.0 themes/QuickMorphismDarkTheme.qml
 singleton QuickMorphismConfig 1.0 Config.qml

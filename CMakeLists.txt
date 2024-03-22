@@ -21,6 +21,7 @@ endif()
 
 set(PROJECT_SOURCES
     src/quickmorphism.cpp
+    src/quickmorphismstyleplugin.cpp
     src/ui/quickmorphismui.cpp
     src/ui/snackbar.cpp
     include/QuickMorphismStyle/quickmorphism.h

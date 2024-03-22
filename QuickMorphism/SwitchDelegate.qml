@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Timeline
 import QtQuick.Controls.impl
+import QtQuick.Controls
 
 T.SwitchDelegate {
     id: control

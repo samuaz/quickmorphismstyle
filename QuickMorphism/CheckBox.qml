@@ -87,7 +87,6 @@ T.CheckBox {
         text: control.text
         font: control.font
         color: !control.enabled ? QuickMorphismConfig.theme.hintTextColor : QuickMorphismConfig.theme.primaryTextColor
-        visible: control.text || control.icon
     }
 
     Timeline {

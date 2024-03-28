@@ -5,12 +5,12 @@ project(QuickMorphism VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(QT_QML_OUTPUT_DIRECTORY  ${CMAKE_BINARY_DIR})
+set(QT_QML_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 find_package(Qt6 COMPONENTS Core Quick Gui Qml REQUIRED)
 
 if(ANDROID)
-    find_package(QT NAMES Qt6 COMPONENTS AndroidExtras REQUIRED)
-    find_package(Qt${QT_VERSION_MAJOR} AndroidExtras REQUIRED)
+    find_package(QT NAMES Qt6 COMPONENTS REQUIRED)
+    find_package(Qt${QT_VERSION_MAJOR} REQUIRED)
 endif()
 
 # prevent error "You must build your code with position independent code if Qt was built with..
@@ -136,7 +136,7 @@ target_compile_definitions(${PROJECT_NAME}
 
   if(ANDROID)
     target_link_libraries(${PROJECT_NAME}
-                            PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Qml Qt${QT_VERSION_MAJOR}::AndroidExtras ${STATUSBAR_PLATFORM_LIBS})
+                            PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Qml ${STATUSBAR_PLATFORM_LIBS})
 
     else()
     target_link_libraries(${PROJECT_NAME}

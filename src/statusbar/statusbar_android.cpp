@@ -25,34 +25,6 @@ static QJniObject getAndroidWindow() {
 }
 
 
-static void hadlerColor(const QColor &color){
-    QNativeInterface::QAndroidApplication::runOnAndroidMainThread([=]() {
-        QJniObject window = getAndroidWindow();
-        window.callMethod<void>("addFlags", "(I)V",
-                                FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        if (color.rgba() == QColor(Qt::transparent).rgba()) {
-            //  window.callMethod<void>("addFlags", "(I)V", FLAG_TRANSLUCENT_STATUS);
-            // window.callMethod<void>("addFlags", "(I)V",
-            // FLAG_TRANSLUCENT_NAVIGATION);
-            QJniObject view =
-                window.callObjectMethod("getDecorView", "()Landroid/view/View;");
-            view.callMethod<void>("setSystemUiVisibility", "(I)V",
-                                  SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            view.callMethod<void>("setSystemUiVisibility", "(I)V",
-                                  SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-            view.callMethod<void>("setSystemUiVisibility", "(I)V",
-                                  SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-        } else {
-            window.callMethod<void>("clearFlags", "(I)V", FLAG_TRANSLUCENT_STATUS);
-            window.callMethod<void>("clearFlags", "(I)V",
-                                    FLAG_TRANSLUCENT_NAVIGATION);
-            window.callMethod<void>("clearFlags", "(I)V", FLAG_LAYOUT_NO_LIMITS);
-            window.callMethod<void>("addFlags", "(I)V",
-                                    FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        }
-    });
-};
-
 static void handlerColor(const QColor &color){
     QNativeInterface::QAndroidApplication::runOnAndroidMainThread([=]() {
         QJniObject window = getAndroidWindow();
@@ -102,7 +74,7 @@ void StatusBarPrivate::setStatusBarColor_sys(const QColor &color) {
       statusColor = color;
   }
 
-  hadlerColor(color);
+  handlerColor(color);
   QNativeInterface::QAndroidApplication::runOnAndroidMainThread([=]() {
     QJniObject window = getAndroidWindow();
     window.callMethod<void>("setStatusBarColor", "(I)V", statusColor.rgba());
@@ -111,7 +83,7 @@ void StatusBarPrivate::setStatusBarColor_sys(const QColor &color) {
 
 void StatusBarPrivate::setNavBarColor_sys(const QColor &color) {
     if (QNativeInterface::QAndroidApplication::sdkVersion() < 26) return;
-    hadlerColor(color);
+    handlerColor(color);
     QNativeInterface::QAndroidApplication::runOnAndroidMainThread([=]() {
         QJniObject window = getAndroidWindow();
         window.callMethod<void>("setNavigationBarColor", "(I)V", color.rgba());

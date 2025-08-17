@@ -1,0 +1,192 @@
+MetaInfo {
+    Type {
+        name: "QuickMorphism.ApplicationWindow"
+        icon: ":/qtquickplugin/images/item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "QuickMorphism Application Window"
+            category: "QuickMorphism"
+            libraryIcon: ":/qtquickplugin/images/item-icon.png"
+            version: "1.0"
+            requiredImport: "QuickMorphism"
+        }
+    }
+
+    Type {
+        name: "QuickMorphism.Button"
+        icon: ":/qtquickplugin/images/item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "QuickMorphism Button"
+            category: "QuickMorphism"
+            libraryIcon: ":/qtquickplugin/images/item-icon.png"
+            version: "1.0"
+            requiredImport: "QuickMorphism"
+
+            Property { name: "text"; type: "string"; value: "Button" }
+            Property { name: "width"; type: "int"; value: 100 }
+            Property { name: "height"; type: "int"; value: 40 }
+        }
+    }
+
+    Type {
+        name: "QuickMorphism.TextField"
+        icon: ":/qtquickplugin/images/item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "QuickMorphism TextField"
+            category: "QuickMorphism"
+            libraryIcon: ":/qtquickplugin/images/item-icon.png"
+            version: "1.0"
+            requiredImport: "QuickMorphism"
+
+            Property { name: "placeholderText"; type: "string"; value: "Enter text..." }
+            Property { name: "width"; type: "int"; value: 200 }
+            Property { name: "height"; type: "int"; value: 40 }
+        }
+    }
+
+    Type {
+        name: "QuickMorphism.CheckBox"
+        icon: ":/qtquickplugin/images/item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "QuickMorphism CheckBox"
+            category: "QuickMorphism"
+            libraryIcon: ":/qtquickplugin/images/item-icon.png"
+            version: "1.0"
+            requiredImport: "QuickMorphism"
+
+            Property { name: "text"; type: "string"; value: "CheckBox" }
+        }
+    }
+
+    Type {
+        name: "QuickMorphism.Switch"
+        icon: ":/qtquickplugin/images/item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "QuickMorphism Switch"
+            category: "QuickMorphism"
+            libraryIcon: ":/qtquickplugin/images/item-icon.png"
+            version: "1.0"
+            requiredImport: "QuickMorphism"
+        }
+    }
+
+    Type {
+        name: "QuickMorphism.Page"
+        icon: ":/qtquickplugin/images/item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "QuickMorphism Page"
+            category: "QuickMorphism"
+            libraryIcon: ":/qtquickplugin/images/item-icon.png"
+            version: "1.0"
+            requiredImport: "QuickMorphism"
+        }
+    }
+
+    Type {
+        name: "QuickMorphism.ToolBar"
+        icon: ":/qtquickplugin/images/item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "QuickMorphism ToolBar"
+            category: "QuickMorphism"
+            libraryIcon: ":/qtquickplugin/images/item-icon.png"
+            version: "1.0"
+            requiredImport: "QuickMorphism"
+        }
+    }
+
+    Type {
+        name: "QuickMorphism.ToolButton"
+        icon: ":/qtquickplugin/images/item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "QuickMorphism ToolButton"
+            category: "QuickMorphism"
+            libraryIcon: ":/qtquickplugin/images/item-icon.png"
+            version: "1.0"
+            requiredImport: "QuickMorphism"
+
+            Property { name: "text"; type: "string"; value: "Tool" }
+        }
+    }
+
+    Type {
+        name: "QuickMorphism.Label"
+        icon: ":/qtquickplugin/images/item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "QuickMorphism Label"
+            category: "QuickMorphism"
+            libraryIcon: ":/qtquickplugin/images/item-icon.png"
+            version: "1.0"
+            requiredImport: "QuickMorphism"
+
+            Property { name: "text"; type: "string"; value: "Label" }
+        }
+    }
+
+    Type {
+        name: "QuickMorphism.SnackBar"
+        icon: ":/qtquickplugin/images/item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "QuickMorphism SnackBar"
+            category: "QuickMorphism"
+            libraryIcon: ":/qtquickplugin/images/item-icon.png"
+            version: "1.0"
+            requiredImport: "QuickMorphism"
+
+            Property { name: "text"; type: "string"; value: "Notification message" }
+        }
+    }
+
+    Type {
+        name: "QuickMorphism.RoundImage"
+        icon: ":/qtquickplugin/images/item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "QuickMorphism RoundImage"
+            category: "QuickMorphism"
+            libraryIcon: ":/qtquickplugin/images/item-icon.png"
+            version: "1.0"
+            requiredImport: "QuickMorphism"
+
+            Property { name: "width"; type: "int"; value: 64 }
+            Property { name: "height"; type: "int"; value: 64 }
+        }
+    }
+
+    Type {
+        name: "QuickMorphism.ScrollableContainer"
+        icon: ":/qtquickplugin/images/item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "QuickMorphism ScrollableContainer"
+            category: "QuickMorphism"
+            libraryIcon: ":/qtquickplugin/images/item-icon.png"
+            version: "1.0"
+            requiredImport: "QuickMorphism"
+
+            Property { name: "width"; type: "int"; value: 300 }
+            Property { name: "height"; type: "int"; value: 200 }
+        }
+    }
+
+    Type {
+        name: "QuickMorphism.StatusBar"
+        icon: ":/qtquickplugin/images/item-icon16.png"
+
+        ItemLibraryEntry {
+            name: "QuickMorphism StatusBar"
+            category: "QuickMorphism"
+            libraryIcon: ":/qtquickplugin/images/item-icon.png"
+            version: "1.0"
+            requiredImport: "QuickMorphism"
+        }
+    }
+}

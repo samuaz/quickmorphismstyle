@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.21)
 project(quickmorphismexample 
     VERSION 1.0.0 
     LANGUAGES CXX
-    DESCRIPTION "QuickMorphism Style Example Application"
+    DESCRIPTION "QuickMorphism Style Example Application with FetchContent"
 )
 
 # Set C++ standard
@@ -28,10 +28,18 @@ find_package(Qt6 6.2 REQUIRED COMPONENTS
 # Qt6 setup
 qt_standard_project_setup()
 
-# Add the QuickMorphismStyle as a subdirectory
-# This uses the local version in the parent directory
-set(QUICKMORPHISM_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../)
-add_subdirectory(${QUICKMORPHISM_SOURCE_DIR} quickmorphism_build)
+# FetchContent to get QuickMorphismStyle from repository
+include(FetchContent)
+
+FetchContent_Declare(
+    QuickMorphism
+    GIT_REPOSITORY https://github.com/samuaz/quickmorphismstyle.git
+    GIT_TAG qt6.9-migration  # Use the Qt6.9 migration branch
+    GIT_PROGRESS TRUE
+)
+
+# Make QuickMorphism available
+FetchContent_MakeAvailable(QuickMorphism)
 
 # Create executable
 qt_add_executable(appquickmorphismexample
@@ -66,18 +74,6 @@ target_link_libraries(appquickmorphismexample PRIVATE
     QuickMorphism
 )
 
-# Include directories for headers
-target_include_directories(appquickmorphismexample PRIVATE
-    ${QUICKMORPHISM_SOURCE_DIR}/include
-)
-
-# Set QML import path for Qt Creator
-set(QML_IMPORT_PATH 
-    "${CMAKE_BINARY_DIR}/quickmorphism_build"
-    "${CMAKE_BINARY_DIR}"
-    CACHE STRING "Qt Creator import paths" FORCE
-)
-
 # Compile definitions
 target_compile_definitions(appquickmorphismexample PRIVATE
     $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
@@ -93,9 +89,17 @@ install(TARGETS appquickmorphismexample
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
+# Set QML import path for Qt Creator
+get_target_property(QuickMorphism_BINARY_DIR QuickMorphism BINARY_DIR)
+set(QML_IMPORT_PATH 
+    "${QuickMorphism_BINARY_DIR}"
+    "${CMAKE_BINARY_DIR}"
+    CACHE STRING "Qt Creator import paths" FORCE
+)
+
 # Debug output
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    message(STATUS "QuickMorphism source directory: ${QUICKMORPHISM_SOURCE_DIR}")
     message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
     message(STATUS "QML import paths: ${QML_IMPORT_PATH}")
+    message(STATUS "QuickMorphism binary dir: ${QuickMorphism_BINARY_DIR}")
 endif()

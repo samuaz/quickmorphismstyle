@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
     engine.addImportPath(":/");
 
     // Load the main QML file
-    const QUrl url(u"qrc:/quickmorphismexample/demo.qml"_s);
+    const QUrl url(u"qrc:/quickmorphismexample/Demo.qml"_s);
     
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
                      &app, []() { 

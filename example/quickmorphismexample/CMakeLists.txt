@@ -42,8 +42,9 @@ qt_add_executable(appquickmorphismexample
 qt_add_qml_module(appquickmorphismexample
     URI quickmorphismexample
     VERSION ${PROJECT_VERSION}
+    NO_GENERATE_PLUGIN_SOURCE
     QML_FILES 
-        demo.qml 
+        Demo.qml 
         MainForm.ui.qml
 )
 

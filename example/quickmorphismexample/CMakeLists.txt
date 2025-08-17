@@ -28,10 +28,22 @@ find_package(Qt6 6.2 REQUIRED COMPONENTS
 # Qt6 setup
 qt_standard_project_setup()
 
-# Add the QuickMorphismStyle as a subdirectory
-# This uses the local version in the parent directory
-set(QUICKMORPHISM_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../)
-add_subdirectory(${QUICKMORPHISM_SOURCE_DIR} quickmorphism_build)
+# ===================================
+# FetchContent for QuickMorphism
+# ===================================
+include(FetchContent)
+
+FetchContent_Declare(
+    QuickMorphism
+    GIT_REPOSITORY https://github.com/samuaz/quickmorphismstyle.git
+    GIT_TAG qt6.9-migration  # Development branch with Qt6.9 support
+)
+
+message(STATUS "Fetching QuickMorphism from GitHub (qt6.9-migration branch)...")
+FetchContent_MakeAvailable(QuickMorphism)
+
+# Get properties for configuration
+FetchContent_GetProperties(QuickMorphism)
 
 # Create executable
 qt_add_executable(appquickmorphismexample
@@ -69,18 +81,23 @@ target_link_libraries(appquickmorphismexample PRIVATE
 
 # Include directories for headers
 target_include_directories(appquickmorphismexample PRIVATE
-    ${QUICKMORPHISM_SOURCE_DIR}/include
+    ${quickmorphism_SOURCE_DIR}/include
 )
 
-# Set QML import paths for Qt Creator and Qt Design Studio
-set(QUICKMORPHISM_QML_SOURCE "${QUICKMORPHISM_SOURCE_DIR}/QuickMorphism")
-set(QUICKMORPHISM_BUILD_OUTPUT "${CMAKE_BINARY_DIR}/quickmorphism_build")
+# ===================================
+# QML Import Path Configuration for Qt Design Studio
+# ===================================
 
+# Configure paths for FetchContent
+set(QUICKMORPHISM_QML_SOURCE "${quickmorphism_SOURCE_DIR}/QuickMorphism")
+set(QUICKMORPHISM_BUILD_OUTPUT "${quickmorphism_BINARY_DIR}")
+
+# Set QML import paths for Qt Creator and Qt Design Studio
 set(QML_IMPORT_PATH 
-    "${QUICKMORPHISM_QML_SOURCE}"          # Source QML files
-    "${QUICKMORPHISM_BUILD_OUTPUT}"        # Build output  
-    "${CMAKE_BINARY_DIR}"                  # Current build
-    "${CMAKE_CURRENT_SOURCE_DIR}"          # Current source
+    "${QUICKMORPHISM_QML_SOURCE}"          # Source QML files from FetchContent
+    "${QUICKMORPHISM_BUILD_OUTPUT}"        # Build output from FetchContent
+    "${CMAKE_CURRENT_BINARY_DIR}"          # Current build directory
+    "${CMAKE_CURRENT_SOURCE_DIR}"          # Current source directory
     CACHE STRING "Qt Creator import paths" FORCE
 )
 
@@ -90,9 +107,9 @@ set(QML_IMPORT_PATH "${QML_IMPORT_PATH}" CACHE STRING "QML Import Paths" FORCE)
 # Copy QuickMorphism QML files to build directory for Qt Design Studio
 add_custom_command(TARGET appquickmorphismexample POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${QUICKMORPHISM_SOURCE_DIR}/QuickMorphism"
+        "${quickmorphism_SOURCE_DIR}/QuickMorphism"
         "${CMAKE_CURRENT_BINARY_DIR}/QuickMorphism"
-    COMMENT "Copying QuickMorphism QML files for Qt Design Studio"
+    COMMENT "Copying QuickMorphism QML files from FetchContent for Qt Design Studio"
 )
 
 # Compile definitions
@@ -112,7 +129,11 @@ install(TARGETS appquickmorphismexample
 
 # Debug output
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    message(STATUS "QuickMorphism source directory: ${QUICKMORPHISM_SOURCE_DIR}")
-    message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+    message(STATUS "=== QuickMorphism FetchContent Configuration ===")
+    message(STATUS "QuickMorphism source directory: ${quickmorphism_SOURCE_DIR}")
+    message(STATUS "QuickMorphism binary directory: ${quickmorphism_BINARY_DIR}")
+    message(STATUS "QML source path: ${QUICKMORPHISM_QML_SOURCE}")
     message(STATUS "QML import paths: ${QML_IMPORT_PATH}")
+    message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+    message(STATUS "============================================")
 endif()

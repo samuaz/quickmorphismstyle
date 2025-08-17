@@ -8,7 +8,6 @@
 class StatusBar : public QObject
 {
     Q_OBJECT
-    QML_ELEMENT
     Q_PROPERTY(bool available READ isAvailable CONSTANT)
     Q_PROPERTY(QColor statusBarColor READ statusBarColor WRITE setStatusBarColor)
     Q_PROPERTY(QColor navBarColor READ navBarColor WRITE setNavBarColor)

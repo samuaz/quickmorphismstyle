@@ -6,7 +6,6 @@
 
 class Snackbar: public QObject {
     Q_OBJECT
-    QML_ELEMENT
     Q_PROPERTY(bool show READ show WRITE setShow NOTIFY showChanged)
     Q_PROPERTY(
         QString message READ message WRITE setMessage NOTIFY messageChanged)

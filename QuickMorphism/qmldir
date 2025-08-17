@@ -1,5 +1,5 @@
 module QuickMorphism
-plugin QuickMorphismPlugin
+# plugin QuickMorphismPlugin  # Disabled - using static library instead
 designersupported
 typeinfo QuickMorphism.qmltypes
 QuickMorphismUI 1.0 QuickMorphismUI.qml
@@ -30,5 +30,4 @@ singleton Fonts 1.0 Fonts.qml
 singleton LightTheme 1.0 themes/QuickMorphismLightTheme.qml
 singleton DarkTheme 1.0 themes/QuickMorphismDarkTheme.qml
 singleton QuickMorphismConfig 1.0 Config.qml
-import QtQuick.Controls.Basic auto
 

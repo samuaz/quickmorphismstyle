@@ -1,10 +1,11 @@
 pragma Singleton
 
 import QtQuick
+import QuickMorphism
 
 QtObject {
     property string name: "QuickMorphismLightTheme"
-    property string style: QuickMorphismStyle.DARK
+    property int style: QuickMorphismStyle.LIGHT
     property color backgroundColor: "#E0E5EC"
     property color foregroundColor: "#E0E5EC"
     property color primaryTextColor: "#666666"

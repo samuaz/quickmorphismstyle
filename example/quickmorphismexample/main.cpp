@@ -6,6 +6,8 @@
 #include <QDebug>
 #include <QuickMorphismStyle/quickmorphism.h>
 
+using namespace Qt::StringLiterals;
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -32,9 +34,12 @@ int main(int argc, char *argv[])
 
     // Initialize QuickMorphism
     QuickMorphism::init(engine);
+    
+    // Add the QuickMorphism QML import path
+    engine.addImportPath(":/");
 
     // Load the main QML file
-    const QUrl url(u"qrc:/quickmorphismexample/demo.qml"_qs);
+    const QUrl url(u"qrc:/quickmorphismexample/demo.qml"_s);
     
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
                      &app, []() { 

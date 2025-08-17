@@ -1,0 +1,56 @@
+# ===================================
+# Example Directory .gitignore
+# ===================================
+
+# Build directories
+build/
+build-*/
+*build/
+*build-*/
+
+# Generated files
+Generated/
+**/Generated/
+
+# Qt Creator files
+*.user
+*.user.*
+CMakeLists.txt.user*
+
+# Qt Design Studio files
+*.qtds
+*.qmlproject.qtds
+*qmlproject.qtds
+
+# FetchContent downloads
+_deps/
+**/_deps/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+
+# Qt generated files
+*_autogen/
+meta_types/
+qmlcache/
+*.qmlc
+*.jsc
+
+# Platform builds
+*.app/
+*.exe
+*.dSYM/
+
+# Backup files
+CMakeLists_backup.txt
+CMakeLists_old*.txt
+*.backup
+*.bak
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store

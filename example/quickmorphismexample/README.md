@@ -130,14 +130,25 @@ ApplicationWindow {
 2. **Verifica que existe** `build/QuickMorphism/qmldir`
 3. **Recompila desde cero** si es necesario
 
-### FetchContent muy lento
-- **Primera vez**: Descarga completa (puede ser lenta)
-- **Siguientes veces**: Usa caché (más rápido)
-- **Para limpiar caché**: `rm -rf build/_deps`
+### FetchContent lento la primera vez
+- **Primera compilación**: Descarga ~5-10MB de GitHub (puede tomar tiempo)
+- **Compilaciones siguientes**: Usa caché local (rápido)
+- **Para acelerar**: Usa conexión estable de internet
+- **Para limpiar caché**: `rm -rf build/_deps/quickmorphism-*`
 
-### Cambios no aparecen
-- QuickMorphism se descarga de GitHub, no cambios locales
-- Para desarrollo: consulta el proyecto principal en el directorio padre
+### Actualizar QuickMorphism
+```bash
+# Limpiar caché y forzar nueva descarga
+rm -rf build/_deps/quickmorphism-*
+cmake .. && make
+```
+
+### Para desarrollo local (sin FetchContent)
+Si tienes el repositorio completo clonado, puedes usar:
+```bash
+# Usar la versión local (más rápido para desarrollo)
+cp CMakeLists_old_local.txt CMakeLists.txt
+```
 
 ## 📋 Ventajas de este Enfoque
 

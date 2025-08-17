@@ -1,0 +1,54 @@
+import QmlProject 1.3
+
+Project {
+    mainFile: "quickmorphismexample/Demo.qml"
+    
+    QmlFiles {
+        directory: "."
+    }
+    
+    QmlFiles {
+        directory: "quickmorphismexample"
+    }
+    
+    QmlFiles {
+        directory: "../QuickMorphism"
+    }
+    
+    JavaScriptFiles {
+        directory: "."
+    }
+    
+    JavaScriptFiles {
+        directory: "quickmorphismexample" 
+    }
+    
+    Files {
+        filter: "qmldir"
+        directory: "../QuickMorphism"
+    }
+    
+    Files {
+        filter: "*.conf"
+        files: ["quickmorphismexample/qtquickcontrols2.conf"]
+    }
+    
+    Files {
+        filter: "*.ttf;*.otf"
+        directory: "../QuickMorphism/assets"
+    }
+    
+    importPaths: [
+        "../QuickMorphism",
+        "quickmorphismexample",
+        "quickmorphismexample/build/QuickMorphism",
+        "quickmorphismexample/build"
+    ]
+    
+    Environment {
+        QT_QUICK_CONTROLS_CONF: "quickmorphismexample/qtquickcontrols2.conf"
+    }
+    
+    qt6Project: true
+    qdsVersion: "4.6"
+}

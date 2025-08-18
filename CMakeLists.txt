@@ -184,11 +184,43 @@ install(DIRECTORY include/
     FILES_MATCHING PATTERN "*.h"
 )
 
+# Create the QuickMorphism style plugin
+qt_add_qml_module(QuickMorphismStylePlugin
+    URI QtQuick.Controls.QuickMorphism
+    VERSION 1.0
+    PLUGIN_TARGET QuickMorphismStylePlugin
+    OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/qml/QtQuick/Controls/QuickMorphism"
+    NO_GENERATE_PLUGIN_SOURCE
+    SOURCES
+        styles/QuickMorphism/quickmorphismstyleplugin.h
+        styles/QuickMorphism/quickmorphismstyleplugin.cpp
+    QML_FILES
+        styles/QuickMorphism/ApplicationWindow.qml
+        styles/QuickMorphism/Button.qml
+        styles/QuickMorphism/CheckBox.qml
+        styles/QuickMorphism/Page.qml
+        styles/QuickMorphism/Switch.qml
+        styles/QuickMorphism/TextField.qml
+)
+
+# Link the style plugin to required Qt modules
+target_link_libraries(QuickMorphismStylePlugin PRIVATE
+    Qt6::Core
+    Qt6::Qml
+    Qt6::Quick
+    Qt6::QuickControls2
+)
+
+# Copy style resources
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism/assets 
+     DESTINATION ${CMAKE_BINARY_DIR}/qml/QtQuick/Controls/QuickMorphism/)
+
 # Qt Creator support
-set(QML_IMPORT_PATH "${CMAKE_BINARY_DIR}" CACHE STRING "Qt Creator import paths" FORCE)
+set(QML_IMPORT_PATH "${CMAKE_BINARY_DIR}/qml" CACHE STRING "Qt Creator import paths" FORCE)
 
 # Debug output
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     message(STATUS "Project version: ${PROJECT_VERSION}")
     message(STATUS "Install prefix: ${CMAKE_INSTALL_PREFIX}")
+    message(STATUS "QML Import Path: ${QML_IMPORT_PATH}")
 endif()

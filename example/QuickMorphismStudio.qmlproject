@@ -12,7 +12,7 @@ Project {
     }
     
     QmlFiles {
-        directory: "../QuickMorphism"
+        directory: "quickmorphismexample/build/_deps/quickmorphism-src/QuickMorphism"
     }
     
     JavaScriptFiles {
@@ -25,7 +25,7 @@ Project {
     
     Files {
         filter: "qmldir"
-        directory: "../QuickMorphism"
+        directory: "quickmorphismexample/build/_deps/quickmorphism-src/QuickMorphism"
     }
     
     Files {
@@ -35,13 +35,13 @@ Project {
     
     Files {
         filter: "*.ttf;*.otf"
-        directory: "../QuickMorphism/assets"
+        directory: "quickmorphismexample/build/_deps/quickmorphism-src/QuickMorphism/assets"
     }
     
     importPaths: [
-        "../QuickMorphism",
-        "quickmorphismexample",
+        "quickmorphismexample/build/_deps/quickmorphism-src/QuickMorphism",
         "quickmorphismexample/build/QuickMorphism",
+        "quickmorphismexample",
         "quickmorphismexample/build"
     ]
     

@@ -36,15 +36,18 @@ include(FetchContent)
 FetchContent_Declare(
     QuickMorphism
     GIT_REPOSITORY https://github.com/samuaz/quickmorphismstyle.git
-    GIT_TAG  qt6.9-migration  # Specific commit from qt6.9-migration
+    GIT_TAG  1b3eeec65661f304dff751b10167a849d8398e5f # Specific commit from qt6.9-migration
     # Para usar la rama completa: GIT_TAG qt6.9-migration
 )
 
-message(STATUS "Fetching QuickMorphism from GitHub (qt6.9-migration branch)...")
+message(STATUS "Fetching QuickMorphism from GitHub...")
 FetchContent_MakeAvailable(QuickMorphism)
 
 # Get properties for configuration
 FetchContent_GetProperties(QuickMorphism)
+
+message(STATUS "Finish QuickMorphism from GitHub")
+
 
 # Create executable
 qt_add_executable(appquickmorphismexample
@@ -105,6 +108,19 @@ set(QML_IMPORT_PATH
 # Export to CMakeCache.txt for Qt Design Studio
 set(QML_IMPORT_PATH "${QML_IMPORT_PATH}" CACHE STRING "QML Import Paths" FORCE)
 
+# Force CMake to write QML_IMPORT_PATH to qtcsettings.cmake for Qt Creator
+file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/qtcsettings.cmake" 
+"# Qt Creator settings file
+set(QML_IMPORT_PATH \"${QML_IMPORT_PATH}\")
+set(QML_DESIGNER_IMPORT_PATH \"${QML_IMPORT_PATH}\")
+")
+
+# Also set it as a target property for Qt Creator's QML analyzer
+set_target_properties(appquickmorphismexample PROPERTIES
+    QT_QML_MODULE_INSTALL_QMLTYPES TRUE
+    QT_QML_IMPORT_PATH "${QML_IMPORT_PATH}"
+)
+
 # Copy QuickMorphism QML files to build directory for Qt Design Studio
 add_custom_command(TARGET appquickmorphismexample POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
@@ -112,6 +128,14 @@ add_custom_command(TARGET appquickmorphismexample POST_BUILD
         "${CMAKE_CURRENT_BINARY_DIR}/QuickMorphism"
     COMMENT "Copying QuickMorphism QML files from FetchContent for Qt Design Studio"
 )
+
+# Create .qmllint.ini for Qt Creator QML analyzer
+file(WRITE "${CMAKE_CURRENT_SOURCE_DIR}/.qmllint.ini"
+"[General]
+AdditionalQmlPath=${quickmorphism_SOURCE_DIR}/QuickMorphism
+AdditionalQmlPath=${CMAKE_CURRENT_BINARY_DIR}/QuickMorphism
+AdditionalQmlPath=${CMAKE_CURRENT_BINARY_DIR}
+")
 
 # Compile definitions
 target_compile_definitions(appquickmorphismexample PRIVATE

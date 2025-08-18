@@ -1,0 +1,4 @@
+module QtQuick.Controls.QuickMorphism
+plugin QuickMorphismStylePlugin
+classname QuickMorphismStylePlugin
+depends QtQuick.Controls.Basic 6.0

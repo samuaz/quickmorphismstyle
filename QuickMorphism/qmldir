@@ -1,5 +1,4 @@
 module QuickMorphism
-# plugin QuickMorphismPlugin  # Disabled - using static library instead
 designersupported
 typeinfo QuickMorphism.qmltypes
 QuickMorphismUI 1.0 QuickMorphismUI.qml

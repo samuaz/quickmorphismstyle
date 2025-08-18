@@ -36,7 +36,7 @@ include(FetchContent)
 FetchContent_Declare(
     QuickMorphism
     GIT_REPOSITORY https://github.com/samuaz/quickmorphismstyle.git
-    GIT_TAG  1b3eeec65661f304dff751b10167a849d8398e5f # Specific commit from qt6.9-migration
+    GIT_TAG  qt6.9-migration-style # Specific commit from qt6.9-migration
     # Para usar la rama completa: GIT_TAG qt6.9-migration
 )
 

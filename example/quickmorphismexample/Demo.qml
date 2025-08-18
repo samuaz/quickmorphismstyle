@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Controls
-import QuickMorphism
 
 ApplicationWindow {
     id: window
@@ -9,62 +8,32 @@ ApplicationWindow {
     width: 360
     height: 640
 
-    title: qsTr("Cutemorphism Style")
-
-
-    SnackBar {
-        id: snackBar
-    }
-
-    /*
-you can also create customs themes
-*/
-    QuickMorphismTheme {
-     id: customTheme
-     /*You need to always specify if you theme is light or dark*/
-     style: QuickMorphismStyle.LIGHT
-     backgroundColor: "#E0E5EC"
-     foregroundColor: "#E0E5EC"
-     primaryTextColor: "#666666"
-     secondaryTextColor: "#666666"
-     hintTextColor: "#A2A2A2"
-     topShadowColor: "#FFFFFF"
-     bottonShadowColor: "#A3B1C6"
-     primaryColor: "#E0E5EC"
-     secondaryColor: "#E0E5EC"
-     accentColor: "#7CB342"
-     errorColor: "#FF0000"
-     highlightedColor: "#f4f4f4"
-     hoverColor: "#7CB342"
-     statusBarColor: "#E0E5EC"
-     navBarColor: "#E0E5EC"
-    }
-
-
-    QuickMorphismUI {
-        id: quickMorphismUI
-        theme: DefaultQuickMorphismDarkTheme
-    }
+    title: qsTr("QuickMorphism Style Demo")
 
     MainForm {
         id: form
         anchors.fill: parent
 
         themeSwitch {
-            onCheckedChanged: themeSwitch.checked ? quickMorphismUI.theme
-                                                    = DefaultQuickMorphismDarkTheme : quickMorphismUI.theme = DefaultQuickMorphismLightTheme
-        checked: quickMorphismUI.theme.style == QuickMorphismStyle.DARK
-
+            onCheckedChanged: {
+                // Toggle between light and dark mode
+                if (themeSwitch.checked) {
+                    window.palette.window = "#2b2b2b"  // Dark background
+                    window.palette.windowText = "#ffffff"  // Light text
+                } else {
+                    window.palette.window = "#E0E5EC"  // Light background  
+                    window.palette.windowText = "#333333"  // Dark text
+                }
+            }
         }
 
         snackbarButton {
             onClicked: function (){
-                QuickMorphismSnackBar.message = "I'm snackbar"
-                QuickMorphismSnackBar.show = true
+                // Simple message instead of custom SnackBar
+                console.log("Button clicked - SnackBar functionality would go here")
             }
         }
     }
-
 }
 
 

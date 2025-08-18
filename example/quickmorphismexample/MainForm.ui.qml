@@ -1,7 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
-import QuickMorphism
 
 Page {
     id: page
@@ -27,10 +26,24 @@ Page {
         anchors.topMargin: 100
         spacing: 40
 
-        Title {
-            id: title
-            pageTitle: qsTr("QuickMorphism UI Demo")
-            subTitle: qsTr("by Samuaz")
+        // Replace Title with standard Label
+        Column {
+            Layout.alignment: Qt.AlignHCenter
+            spacing: 10
+            
+            Label {
+                text: qsTr("QuickMorphism UI Demo")
+                font.pixelSize: 24
+                font.bold: true
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+            
+            Label {
+                text: qsTr("by Samuaz")
+                font.pixelSize: 16
+                opacity: 0.7
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
         }
 
         TextField {
@@ -43,17 +56,15 @@ Page {
             id: textFieldRequired
             Layout.fillWidth: true
             placeholderText: qsTr("Required Text Field")
-            isRequired: true
-            errorMessage: qsTr("This field is Mandatory")
+            // Remove custom properties not available in standard TextField
         }
 
         TextField {
             id: textFieldPassword
             Layout.fillWidth: true
-            placeholderText: qsTr("Required Text Field")
-            isRequired: true
-            isPassword: true
-            errorMessage: qsTr("This field is Mandatory")
+            placeholderText: qsTr("Password Field")
+            echoMode: TextInput.Password
+            // Remove custom properties not available in standard TextField
         }
 
         Button {

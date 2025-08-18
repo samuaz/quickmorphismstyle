@@ -1,10 +1,11 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQuickStyle>
 #include <QLocale>
 #include <QTranslator>
 #include <QScreen>
 #include <QDebug>
-#include <QuickMorphismStyle/quickmorphism.h>
+#include <QDir>
 
 using namespace Qt::StringLiterals;
 
@@ -18,6 +19,9 @@ int main(int argc, char *argv[])
     app.setOrganizationName("The Open Company");
     app.setOrganizationDomain("theopencompany.dev");
 
+    // Set the QuickMorphism style
+    QQuickStyle::setStyle("QuickMorphism");
+    
     // Setup translation
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
@@ -31,12 +35,11 @@ int main(int argc, char *argv[])
 
     // Initialize QML engine
     QQmlApplicationEngine engine;
-
-    // Initialize QuickMorphism
-    QuickMorphism::init(engine);
     
-    // Add the QuickMorphism QML import path
-    engine.addImportPath(":/");
+    // Add the QuickMorphism style plugin import path
+    QString pluginPath = QDir::currentPath() + "/qml";
+    engine.addImportPath(pluginPath);
+    qDebug() << "Added import path:" << pluginPath;
 
     // Load the main QML file
     const QUrl url(u"qrc:/quickmorphismexample/Demo.qml"_s);

@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     qDebug() << "Added import path:" << pluginPath;
 
     // Load the main QML file
-    const QUrl url(u"qrc:/quickmorphismexample/Demo.qml"_s);
+    const QUrl url(u"qrc:/quickmorphismexample/AdvancedDemo.qml"_s);
     
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
                      &app, []() { 

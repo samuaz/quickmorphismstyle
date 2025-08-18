@@ -1,4 +1,21 @@
 module QtQuick.Controls.QuickMorphism
+linktarget QuickMorphismStylePlugin
 plugin QuickMorphismStylePlugin
-classname QuickMorphismStylePlugin
-depends QtQuick.Controls.Basic 6.0
+classname QtQuick_Controls_QuickMorphismPlugin
+typeinfo QuickMorphismStylePlugin.qmltypes
+depends QtQuick auto
+depends QtQuick.Templates auto
+depends QtQuick
+prefer :/QtQuick/Controls/QuickMorphism/
+ApplicationWindow 6.0 ApplicationWindow.qml
+ApplicationWindow 2.0 ApplicationWindow.qml
+Button 6.0 Button.qml
+Button 2.0 Button.qml
+CheckBox 6.0 CheckBox.qml
+CheckBox 2.0 CheckBox.qml
+Page 6.0 Page.qml
+Page 2.0 Page.qml
+Switch 6.0 Switch.qml
+Switch 2.0 Switch.qml
+TextField 6.0 TextField.qml
+TextField 2.0 TextField.qml

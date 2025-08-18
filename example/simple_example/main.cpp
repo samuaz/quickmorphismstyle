@@ -10,20 +10,15 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     
-    // Set the QuickMorphism style
+    // Set the QuickMorphism style (now installed in Qt)
     QQuickStyle::setStyle("QuickMorphism");
     qDebug() << "Style set to:" << QQuickStyle::name();
 
     // Initialize QML engine
     QQmlApplicationEngine engine;
-    
-    // Add import path for the style plugin  
-    QString pluginPath = QDir::currentPath() + "/qml";
-    engine.addImportPath(pluginPath);
-    qDebug() << "Added import path:" << pluginPath;
 
     // Load the main QML file
-    const QUrl url(u"qrc:/Main.qml"_s);
+    const QUrl url(u"qrc:/TestBasic.qml"_s);
     
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
                      &app, []() { 

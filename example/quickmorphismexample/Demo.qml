@@ -10,20 +10,27 @@ ApplicationWindow {
 
     title: qsTr("QuickMorphism Style Demo")
 
+    // QuickMorphism Light theme background by default
+    // The controls will automatically use QuickMorphism style with proper neumorphic colors
+    color: "#E0E5EC"
+
     MainForm {
         id: form
         anchors.fill: parent
 
         themeSwitch {
             onCheckedChanged: {
-                // Toggle between light and dark mode
+                // Theme switching: changes the global theme that affects all controls
                 if (themeSwitch.checked) {
-                    window.palette.window = "#2b2b2b"  // Dark background
-                    window.palette.windowText = "#ffffff"  // Light text
+                    // Dark mode
+                    window.color = "#2b2b2b"
+                    // Note: The style components will automatically adapt to dark theme
+                    // when the global theme system is properly connected
                 } else {
-                    window.palette.window = "#E0E5EC"  // Light background  
-                    window.palette.windowText = "#333333"  // Dark text
+                    // Light mode
+                    window.color = "#E0E5EC"
                 }
+                console.log("Theme switch toggled:", themeSwitch.checked ? "Dark" : "Light")
             }
         }
 

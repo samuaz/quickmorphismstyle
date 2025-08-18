@@ -60,6 +60,7 @@ qt_add_qml_module(appquickmorphismexample
     VERSION ${PROJECT_VERSION}
     NO_GENERATE_PLUGIN_SOURCE
     QML_FILES 
+        AdvancedDemo.qml
         Demo.qml 
         MainForm.ui.qml
 )

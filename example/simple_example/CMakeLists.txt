@@ -16,7 +16,7 @@ qt_add_executable(QuickMorphismStyleTest
 qt_add_resources(QuickMorphismStyleTest "qml"
     PREFIX "/"
     FILES
-        Main.qml
+        TestBasic.qml
         qtquickcontrols2.conf
 )
 

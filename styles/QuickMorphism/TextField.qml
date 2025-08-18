@@ -6,6 +6,11 @@ import QuickMorphism
 T.TextField {
     id: control
 
+    // QuickMorphism custom properties
+    property string errorMessage
+    property bool isRequired: false
+    property bool isPassword: false
+
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
                             contentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
@@ -15,6 +20,9 @@ T.TextField {
     bottomPadding: 12
     leftPadding: 16
     rightPadding: 16
+
+    // Configure password mode
+    echoMode: isPassword ? TextInput.Password : TextInput.Normal
 
     // Use QuickMorphismConfig.theme for colors
     readonly property QtObject currentTheme: QuickMorphismConfig ? QuickMorphismConfig.theme : LightTheme
@@ -78,5 +86,27 @@ T.TextField {
             border.width: control.activeFocus ? 2 : 0
             opacity: 0.6
         }
+
+        // Required indicator
+        Text {
+            visible: control.isRequired
+            text: "*"
+            color: "#FF0000"
+            font.bold: true
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.margins: 4
+        }
+    }
+
+    // Error message
+    Text {
+        visible: control.isRequired && control.errorMessage && !control.text
+        text: control.errorMessage
+        color: "#FF0000"
+        font.pixelSize: 12
+        anchors.top: control.bottom
+        anchors.topMargin: 4
+        anchors.left: control.left
     }
 }

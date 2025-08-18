@@ -2,6 +2,7 @@
 #define QUICKMORPHISMSTYLEPLUGIN_H
 
 #include <QtQuickControls2/private/qquickstyleplugin_p.h>
+#include <QtQml/QQmlExtensionInterface>
 
 QT_BEGIN_NAMESPACE
 

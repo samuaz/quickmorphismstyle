@@ -144,7 +144,9 @@ qt_add_resources(QuickMorphismStylePlugin "quickmorphism_style"
         styles/QuickMorphism/Page.qml
         styles/QuickMorphism/Switch.qml
         styles/QuickMorphism/TextField.qml
+        styles/QuickMorphism/Title.qml
         styles/QuickMorphism/qmldir
+        QuickMorphism.json
 )
 
 # Link style plugin with main library

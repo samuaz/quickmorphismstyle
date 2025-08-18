@@ -128,6 +128,43 @@ install(TARGETS appquickmorphismexample
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
+# ===================================
+# QQuickStyle Test Application
+# ===================================
+
+# Create QQuickStyle test executable
+qt_add_executable(appquickmorphism_quickstyle
+    main_quickstyle.cpp
+)
+
+# Add QML module for quickstyle test
+qt_add_qml_module(appquickmorphism_quickstyle
+    URI quickmorphismexample_quickstyle
+    VERSION 1.0
+    QML_FILES 
+        Demo_quickstyle.qml
+    RESOURCES 
+        ${QT_QML_SOURCE_RESOURCES}
+)
+
+# Bundle properties for quickstyle test
+set_target_properties(appquickmorphism_quickstyle PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER com.theopencompany.quickmorphism.quickstyle
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+    MACOSX_BUNDLE TRUE
+    WIN32_EXECUTABLE TRUE
+)
+
+# Link libraries for quickstyle test (no QuickMorphism library needed!)
+target_link_libraries(appquickmorphism_quickstyle PRIVATE
+    Qt6::Core
+    Qt6::Quick
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::QuickControls2
+)
+
 # Debug output
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     message(STATUS "=== QuickMorphism FetchContent Configuration ===")

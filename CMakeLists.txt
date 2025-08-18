@@ -47,6 +47,7 @@ set(PROJECT_SOURCES
     include/QuickMorphismStyle/quickmorphism.h
     include/QuickMorphismStyle/ui/quickmorphismui.h
     include/QuickMorphismStyle/ui/snackbar.h
+    include/QuickMorphismStyle/quickmorphismstyleplugin.h
 )
 
 # Theme headers (if they exist)
@@ -125,6 +126,39 @@ qt_add_resources(${PROJECT_NAME} "quickmorphism_qml"
         QuickMorphism/assets/font/NunitoSans-Light.ttf
         QuickMorphism/assets/font/OpenSans-Regular.ttf
         QuickMorphism/assets/font/OpenSans-Bold.ttf
+)
+
+# QuickMorphism Style Plugin for Qt Quick Controls
+add_library(QuickMorphismStylePlugin SHARED
+    src/quickmorphismstyleplugin.cpp
+    include/QuickMorphismStyle/quickmorphismstyleplugin.h
+)
+
+# Add style resources
+qt_add_resources(QuickMorphismStylePlugin "quickmorphism_style"
+    PREFIX "/"
+    FILES
+        styles/QuickMorphism/ApplicationWindow.qml
+        styles/QuickMorphism/Button.qml
+        styles/QuickMorphism/CheckBox.qml
+        styles/QuickMorphism/Page.qml
+        styles/QuickMorphism/Switch.qml
+        styles/QuickMorphism/TextField.qml
+        styles/QuickMorphism/qmldir
+)
+
+# Link style plugin with main library
+target_link_libraries(QuickMorphismStylePlugin PRIVATE
+    ${PROJECT_NAME}
+    Qt6::Core
+    Qt6::Quick
+    Qt6::Qml
+    Qt6::QuickControls2
+)
+
+# Style plugin properties
+set_target_properties(QuickMorphismStylePlugin PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/qml/QtQuick/Controls/QuickMorphism"
 )
 
 # Link libraries

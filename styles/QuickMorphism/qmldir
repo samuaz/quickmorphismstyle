@@ -1,0 +1,9 @@
+module QtQuick.Controls.QuickMorphism
+plugin QuickMorphismStylePlugin
+classname QuickMorphismStylePlugin
+ApplicationWindow 1.0 ApplicationWindow.qml
+Button 1.0 Button.qml
+CheckBox 1.0 CheckBox.qml
+Page 1.0 Page.qml
+Switch 1.0 Switch.qml
+TextField 1.0 TextField.qml

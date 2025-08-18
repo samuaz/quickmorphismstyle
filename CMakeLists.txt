@@ -140,13 +140,15 @@ qt_add_resources(QuickMorphismStylePlugin "quickmorphism_style"
     FILES
         styles/QuickMorphism/ApplicationWindow.qml
         styles/QuickMorphism/Button.qml
+        styles/QuickMorphism/CalendarPicker.qml
         styles/QuickMorphism/CheckBox.qml
+        styles/QuickMorphism/Elevation.qml
+        styles/QuickMorphism/Label.qml
         styles/QuickMorphism/Page.qml
         styles/QuickMorphism/Switch.qml
         styles/QuickMorphism/TextField.qml
         styles/QuickMorphism/Title.qml
         styles/QuickMorphism/qmldir
-        QuickMorphism.json
 )
 
 # Link style plugin with main library

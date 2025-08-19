@@ -1,12 +1,12 @@
 #ifndef QUICKMORPHISMSTYLEPLUGIN_H
 #define QUICKMORPHISMSTYLEPLUGIN_H
 
-#include <QtQuickControls2/private/qquickstyleplugin_p.h>
-#include <QtQml/QQmlExtensionInterface>
+#include <QQmlExtensionPlugin>
+#include <QQmlEngine>
 
 QT_BEGIN_NAMESPACE
 
-class QuickMorphismStylePlugin : public QQuickStylePlugin
+class QuickMorphismStylePlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
@@ -14,7 +14,7 @@ class QuickMorphismStylePlugin : public QQuickStylePlugin
 public:
     QuickMorphismStylePlugin(QObject *parent = nullptr);
 
-    QString name() const override;
+    void registerTypes(const char *uri) override;
     void initializeEngine(QQmlEngine *engine, const char *uri) override;
 };
 

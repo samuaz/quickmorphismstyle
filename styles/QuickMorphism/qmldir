@@ -1,6 +1,6 @@
-module QtQuick.Controls.QuickMorphism
-plugin QuickMorphismStylePlugin
-classname QuickMorphismStylePlugin
+module QuickMorphismStyle
+depends QtQuick 2.15
+depends QtQuick.Controls 2.15
 
 # Qt Quick Controls estándar con estilo neumórfico
 ApplicationWindow 1.0 ApplicationWindow.qml

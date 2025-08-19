@@ -1,15 +1,19 @@
-module QuickMorphismStyle
-depends QtQuick 2.15
-depends QtQuick.Controls 2.15
+module QtQuick.Controls.QuickMorphism
+plugin QuickMorphismStylePlugin
+classname QuickMorphismStylePlugin
+depends QtQuick auto
+depends QtQuick.Templates auto
+depends QtQuick auto
+prefer :/QtQuick/Controls/QuickMorphism/
 
 # Qt Quick Controls estándar con estilo neumórfico
-ApplicationWindow 1.0 ApplicationWindow.qml
-Button 1.0 Button.qml
-CheckBox 1.0 CheckBox.qml
-Label 1.0 Label.qml
-Page 1.0 Page.qml
-Switch 1.0 Switch.qml
-TextField 1.0 TextField.qml
+ApplicationWindow 2.0 ApplicationWindow.qml
+Button 2.0 Button.qml
+CheckBox 2.0 CheckBox.qml
+Label 2.0 Label.qml
+Page 2.0 Page.qml
+Switch 2.0 Switch.qml
+TextField 2.0 TextField.qml
 
 # Componentes únicos de QuickMorphism
 CalendarPicker 1.0 CalendarPicker.qml

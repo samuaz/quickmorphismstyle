@@ -127,11 +127,15 @@ qt_add_resources(${PROJECT_NAME} "quickmorphism_qml"
         QuickMorphism/assets/font/OpenSans-Bold.ttf
 )
 
-# QuickMorphismStyle QML Module (Alternative to original QuickMorphism)
-qt_add_qml_module(QuickMorphismStyleModule
-    URI QuickMorphismStyle
-    VERSION 1.0
-    OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/qml/QuickMorphismStyle"
+# QuickMorphism Style Plugin for Qt Quick Controls
+qt_add_qml_module(QuickMorphismStylePlugin
+    URI QtQuick.Controls.QuickMorphism
+    VERSION 2.0
+    OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/qml/QtQuick/Controls/QuickMorphism"
+    PLUGIN_TARGET QuickMorphismStylePluginTarget
+    SOURCES
+        src/quickmorphismstyleplugin.cpp
+        include/QuickMorphismStyle/quickmorphismstyleplugin.h
     QML_FILES
         styles/QuickMorphism/ApplicationWindow.qml
         styles/QuickMorphism/Button.qml
@@ -146,6 +150,11 @@ qt_add_qml_module(QuickMorphismStyleModule
     DEPENDENCIES
         Qt6::Quick
         Qt6::QuickControls2
+)
+
+# Link the plugin with the main library
+target_link_libraries(QuickMorphismStylePluginTarget PRIVATE
+    ${PROJECT_NAME}
 )
 
 # Link libraries

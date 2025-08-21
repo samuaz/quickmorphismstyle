@@ -1,0 +1,55 @@
+cmake_minimum_required(VERSION 3.21)
+
+project(quickmorphismexample VERSION 1.0.0 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+find_package(Qt6 6.2 REQUIRED COMPONENTS Core Quick QuickControls2)
+qt_standard_project_setup()
+
+# Include QuickMorphism helpers
+set(QUICKMORPHISM_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../..")
+include(${QUICKMORPHISM_SOURCE_DIR}/cmake/QuickMorphismStyleHelpers.cmake)
+
+# Create the main executable
+qt_add_executable(quickmorphismexample_with_helpers
+    main_with_helpers.cpp
+)
+
+qt_add_qml_module(quickmorphismexample_with_helpers
+    URI QuickMorphismExample
+    VERSION 1.0
+    QML_FILES
+        Demo_quickstyle.qml
+)
+
+# Add QuickMorphism dependency and configure style paths automatically
+add_quickmorphism_dependency(quickmorphismexample_with_helpers 
+    QUICKMORPHISM_DIR ${QUICKMORPHISM_SOURCE_DIR}
+    LINK_LIBRARY
+)
+
+target_link_libraries(quickmorphismexample_with_helpers PRIVATE
+    Qt6::Core
+    Qt6::Quick
+    Qt6::QuickControls2
+)
+
+set_target_properties(quickmorphismexample_with_helpers PROPERTIES
+    MACOSX_BUNDLE TRUE
+    WIN32_EXECUTABLE TRUE
+)
+
+# Alternative configuration examples:
+
+# Example 1: Use custom style directory
+# configure_quickmorphism_style(quickmorphismexample_with_helpers 
+#     CUSTOM_STYLE_DIR "/path/to/custom/style/location")
+
+# Example 2: Install in Qt's directory (requires admin rights)
+# configure_quickmorphism_style(quickmorphismexample_with_helpers 
+#     INSTALL_IN_QT_DIR)
+
+# Example 3: Just configure without linking library
+# configure_quickmorphism_style(quickmorphismexample_with_helpers)

@@ -27,6 +27,7 @@ Title 1.0 Title.qml
 Ripple 1.0 Ripple.qml
 singleton Icons 1.0 Icons.qml
 singleton Fonts 1.0 Fonts.qml
+singleton QuickMorphismStyle 1.0 StyleEnums.qml
 singleton LightTheme 1.0 themes/QuickMorphismLightTheme.qml
 singleton DarkTheme 1.0 themes/QuickMorphismDarkTheme.qml
 singleton QuickMorphismConfig 1.0 Config.qml

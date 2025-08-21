@@ -18,6 +18,9 @@
 - ✅ Create multiple integration methods for developers
 - ✅ Prepare for Qt Designer/Studio integration
 - ✅ Update example project
+- ✅ **NEW**: Flexible installation system - no need to install in Qt directory
+- ✅ **NEW**: Automatic style path detection and configuration
+- ✅ **NEW**: CMake helpers for seamless integration
 
 ## 🏗 Project Structure
 
@@ -48,7 +51,10 @@ quickmorphismstyle/
 │   ├── README.md                    # Integration guide
 │   └── quickmorphismexample/        # Demo application
 ├── designer/                        # Qt Designer integration
-└── cmake/                          # CMake configuration files
+├── cmake/                          # CMake configuration files
+│   └── QuickMorphismStyleHelpers.cmake # NEW: Flexible installation helpers
+├── FLEXIBLE_INSTALLATION.md       # NEW: Complete installation guide
+└── styles/QuickMorphism/           # NEW: QQuickStyle::setStyle() components
 ```
 
 ## 🔧 Technical Changes Made
@@ -282,6 +288,51 @@ QuickMorphismTheme {
 - `QuickMorphism/themes/QuickMorphismDarkTheme.qml` - Uses QuickMorphismStyle.DARK
 - `ENUM_USAGE.md` - Complete documentation for enum usage
 - `example/ENUM_USAGE_EXAMPLE.qml` - Practical examples
+
+## 🚀 Flexible Installation System (NEW)
+
+**Problem Solved**: Previously, using `QQuickStyle::setStyle("QuickMorphism")` required installing the style in Qt's directory (`/Users/usuario/Qt/...`), which was impractical for developers.
+
+**Solution Implemented**: Complete flexible installation system that allows specifying style paths from CMake without requiring Qt directory installation.
+
+### Key Features Added:
+
+1. **Automatic Style Detection**: Smart path discovery that checks multiple standard locations
+2. **CMake Helper Functions**: One-line configuration for projects using QuickMorphism
+3. **Environment Variable Support**: `QUICKMORPHISM_STYLE_PATH` for easy configuration
+4. **Multiple Installation Options**: Build directory, custom paths, or Qt directory
+
+### Files Added:
+- `cmake/QuickMorphismStyleHelpers.cmake` - CMake helper functions
+- `FLEXIBLE_INSTALLATION.md` - Complete usage guide
+- `example/quickmorphismexample/main_with_helpers.cpp` - Helper usage example
+- `example/quickmorphismexample/CMakeLists_with_helpers.txt` - CMake example
+- Updated `test_quickstyle_app/main.cpp` - Automatic path detection
+
+### Usage Example:
+
+```cmake
+# CMakeLists.txt
+include(path/to/QuickMorphismStyleHelpers.cmake)
+add_quickmorphism_dependency(MyApp 
+    QUICKMORPHISM_DIR "/path/to/quickmorphism"
+    LINK_LIBRARY
+)
+```
+
+```cpp
+// main.cpp
+#include "quickmorphism_config.h" // Auto-generated
+QuickMorphism::setupStyle(engine); // One line setup!
+```
+
+### Benefits:
+- ✅ No need to install in Qt directory
+- ✅ Works with Qt Creator/Studio out of the box
+- ✅ Portable applications can include the style
+- ✅ Configurable from environment variables
+- ✅ Automatic path detection in development
+- ✅ Custom installation directories supported
 
 ## 🔮 Future Improvements
 

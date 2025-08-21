@@ -9,9 +9,10 @@ QtObject {
     property double dpScale: 1.0
     property int dpi: 2
 
-    Component.onCompleted: {
-        control.theme = QuickMorphism.theme
-        control.dpScale = QuickMorphism.dpScale
-        control.dpi = QuickMorphism.dpi
-    }
+    // Default configuration - can be overridden by applications
+    // Component.onCompleted: {
+    //     control.theme = QuickMorphism.theme
+    //     control.dpScale = QuickMorphism.dpScale
+    //     control.dpi = QuickMorphism.dpi
+    // }
 }

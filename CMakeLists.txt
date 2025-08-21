@@ -205,8 +205,56 @@ install(DIRECTORY include/
     FILES_MATCHING PATTERN "*.h"
 )
 
+# Install QuickMorphism original module
+install(DIRECTORY QuickMorphism/
+    DESTINATION "${QUICKMORPHISM_MODULE_INSTALL_DIR}"
+    FILES_MATCHING 
+        PATTERN "*.qml"
+        PATTERN "qmldir"
+        PATTERN "*.ttf"
+        PATTERN "*.qrc"
+)
+
+# Install QuickMorphism style files (proxies)
+install(DIRECTORY styles/QuickMorphism/
+    DESTINATION "${QUICKMORPHISM_FINAL_INSTALL_DIR}"
+    FILES_MATCHING 
+        PATTERN "*.qml"
+        PATTERN "qmldir"
+)
+
+# Install CMake helpers
+install(FILES cmake/QuickMorphismStyleHelpers.cmake
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/QuickMorphism
+)
+
 # Qt Creator support
 set(QML_IMPORT_PATH "${CMAKE_BINARY_DIR}" CACHE STRING "Qt Creator import paths" FORCE)
+
+# QuickMorphism Style Installation Configuration
+option(QUICKMORPHISM_INSTALL_IN_QT_DIR "Install QuickMorphism style in Qt's standard location" OFF)
+set(QUICKMORPHISM_STYLE_INSTALL_DIR "" CACHE PATH "Custom installation directory for QuickMorphism style (leave empty for build directory)")
+
+# Configure style installation paths
+if(QUICKMORPHISM_INSTALL_IN_QT_DIR)
+    # Install in Qt's standard style directory
+    get_target_property(QT_QMAKE_EXECUTABLE Qt6::qmake IMPORTED_LOCATION)
+    execute_process(COMMAND ${QT_QMAKE_EXECUTABLE} -query QT_INSTALL_QML 
+                    OUTPUT_VARIABLE QT_QML_DIR 
+                    OUTPUT_STRIP_TRAILING_WHITESPACE)
+    set(QUICKMORPHISM_FINAL_INSTALL_DIR "${QT_QML_DIR}/QtQuick/Controls/QuickMorphism")
+    set(QUICKMORPHISM_MODULE_INSTALL_DIR "${QT_QML_DIR}/QuickMorphism")
+elseif(QUICKMORPHISM_STYLE_INSTALL_DIR)
+    # Use custom directory
+    set(QUICKMORPHISM_FINAL_INSTALL_DIR "${QUICKMORPHISM_STYLE_INSTALL_DIR}/QtQuick/Controls/QuickMorphism")
+    set(QUICKMORPHISM_MODULE_INSTALL_DIR "${QUICKMORPHISM_STYLE_INSTALL_DIR}/QuickMorphism")
+else()
+    # Default: use build directory (development mode)
+    set(QUICKMORPHISM_FINAL_INSTALL_DIR "${CMAKE_BINARY_DIR}/qml/QtQuick/Controls/QuickMorphism")
+    set(QUICKMORPHISM_MODULE_INSTALL_DIR "${CMAKE_BINARY_DIR}/qml/QuickMorphism")
+endif()
+
+message(STATUS "QuickMorphism style will be available at: ${QUICKMORPHISM_FINAL_INSTALL_DIR}")
 
 # Debug output
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")

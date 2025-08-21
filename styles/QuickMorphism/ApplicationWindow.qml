@@ -1,21 +1,7 @@
 import QtQuick
-import QtQuick.Templates as T
-import QuickMorphism
+import QuickMorphism 1.0
 
-T.ApplicationWindow {
-    id: window
-
-    // Use QuickMorphismConfig.theme for colors
-    readonly property QtObject currentTheme: QuickMorphismConfig ? QuickMorphismConfig.theme : LightTheme
-    readonly property color backgroundColor: currentTheme ? currentTheme.backgroundColor : "#E0E5EC"
-
-    color: backgroundColor
-
-    overlay.modal: Rectangle {
-        color: Qt.rgba(0, 0, 0, 0.5)
-    }
-
-    overlay.modeless: Rectangle {
-        color: "transparent"
-    }
+// Proxy component that inherits from the original QuickMorphism ApplicationWindow
+QuickMorphism.ApplicationWindow {
+    // All neumorphic styling and theme configuration inherited from original
 }

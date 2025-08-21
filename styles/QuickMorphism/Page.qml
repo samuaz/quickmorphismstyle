@@ -1,24 +1,7 @@
 import QtQuick
-import QtQuick.Templates as T
-import QuickMorphism
+import QuickMorphism 1.0
 
-T.Page {
-    id: control
-
-    implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
-                            contentWidth + leftPadding + rightPadding,
-                            implicitHeaderWidth,
-                            implicitFooterWidth)
-    implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
-                             contentHeight + topPadding + bottomPadding
-                             + (implicitHeaderHeight > 0 ? implicitHeaderHeight + spacing : 0)
-                             + (implicitFooterHeight > 0 ? implicitFooterHeight + spacing : 0))
-
-    // Use QuickMorphismConfig.theme for colors
-    readonly property QtObject currentTheme: QuickMorphismConfig ? QuickMorphismConfig.theme : LightTheme
-    readonly property color backgroundColor: currentTheme ? currentTheme.backgroundColor : "#E0E5EC"
-
-    background: Rectangle {
-        color: control.backgroundColor
-    }
+// Proxy component that inherits from the original QuickMorphism Page
+QuickMorphism.Page {
+    // All neumorphic styling and theme configuration inherited from original
 }

@@ -1,13 +1,7 @@
 import QtQuick
-import QtQuick.Templates as T
-import QuickMorphism
+import QuickMorphism 1.0
 
-T.Label {
-    id: control
-
-    // Use QuickMorphismConfig.theme for colors
-    readonly property QtObject currentTheme: QuickMorphismConfig ? QuickMorphismConfig.theme : LightTheme
-    
-    color: enabled ? (currentTheme ? currentTheme.primaryTextColor : "#666666") : (currentTheme ? currentTheme.hintTextColor : "#A2A2A2")
-    linkColor: currentTheme ? currentTheme.accentColor : "#7CB342"
+// Proxy component that inherits from the original QuickMorphism Label
+QuickMorphism.Label {
+    // All neumorphic styling and theme configuration inherited from original
 }

@@ -5,6 +5,7 @@
 #include <QTranslator>
 #include <QScreen>
 #include <QDebug>
+#include <QuickMorphismStyle/quickmorphism.h>
 
 using namespace Qt::StringLiterals;
 
@@ -18,9 +19,6 @@ int main(int argc, char *argv[])
     app.setOrganizationName("The Open Company");
     app.setOrganizationDomain("theopencompany.dev");
 
-    // Use QuickMorphism as Qt Quick Controls style (automatic initialization)
-    QQuickStyle::setStyle("QuickMorphism");
-
     // Setup translation
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
@@ -32,12 +30,27 @@ int main(int argc, char *argv[])
         }
     }
 
+    // Set QuickMorphism as the style for Qt Quick Controls
+    QQuickStyle::setStyle("QuickMorphism");
+
     // Initialize QML engine
     QQmlApplicationEngine engine;
 
-    // Add import paths
+    // Initialize QuickMorphism types (register QML components)
+    QuickMorphism::init(engine);
+    
+    // Add the QuickMorphism QML import path
     engine.addImportPath(":/");
-    engine.addImportPath("/Users/samuaz/Projects/toc/quickmorphismstyle/build/qml");
+    
+    // Add the build directory where QuickMorphism files are copied (same as working example)
+    QString buildDir = QGuiApplication::applicationDirPath() + "/../../..";
+    engine.addImportPath(buildDir);
+    qDebug() << "Added build directory path:" << buildDir;
+    
+    // Add the styles directory for QQuickStyle::setStyle to find QuickMorphism
+    QString stylesPath = buildDir + "/_deps/quickmorphism-src/styles";
+    engine.addImportPath(stylesPath);
+    qDebug() << "Added styles path:" << stylesPath;
 
     // Load the QQuickStyle test QML file
     const QUrl url(u"qrc:/quickmorphismexample_quickstyle/Demo_quickstyle.qml"_s);

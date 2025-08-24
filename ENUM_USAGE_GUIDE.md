@@ -2,19 +2,24 @@
 
 ## 🎨 Using Style Enums
 
-QuickMorphism provides convenient enums for easy theme configuration. Here's how to use them:
+QuickMorphism provides convenient enums for easy theme configuration. The enums are backed by the C++ StyleNamespace but exposed through a user-friendly QML singleton.
 
 ### Available Style Constants
 
 ```qml
 import QuickMorphism 1.0
 
-// Available style constants:
-QuickMorphismStyle.light        // 0 - Light theme
-QuickMorphismStyle.dark         // 1 - Dark theme  
-QuickMorphismStyle.styleFilled  // 2 - Filled style variant
-QuickMorphismStyle.auto         // -1 - Auto-detect from system
+// Available style constants (backed by C++ StyleNamespace::Style):
+QuickMorphismStyle.light        // 0 - Light theme (LIGHT)
+QuickMorphismStyle.dark         // 1 - Dark theme (DARK)
+QuickMorphismStyle.styleFilled  // 2 - Filled style variant (STYLE_FILLED)
 ```
+
+### Why These Names?
+
+- **QML Convention**: Property names must start with lowercase in QML
+- **C++ Mapping**: Maps directly to `StyleNamespace::Style::LIGHT`, `DARK`, `STYLE_FILLED`
+- **User Friendly**: More readable than hard-coded numbers
 
 ### Basic Usage Examples
 
@@ -29,11 +34,11 @@ ApplicationWindow {
     visible: true
     
     Component.onCompleted: {
-        // Set theme using enum
-        QuickMorphismConfig.theme = QuickMorphismStyle.dark === 1 ? DarkTheme : LightTheme
+        // Set theme using enum comparison
+        QuickMorphismConfig.theme = QuickMorphismStyle.dark === QuickMorphismConfig.theme.style ? DarkTheme : LightTheme
         
         // Or use helper functions
-        if (QuickMorphismStyle.isDarkStyle(1)) {
+        if (QuickMorphismStyle.isDarkStyle(QuickMorphismConfig.theme.style)) {
             QuickMorphismConfig.theme = DarkTheme
         }
     }

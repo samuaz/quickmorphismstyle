@@ -156,13 +156,27 @@ set_target_properties(appquickmorphism_quickstyle PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-# Link libraries for quickstyle test (no QuickMorphism library needed!)
+# Include directories for headers
+target_include_directories(appquickmorphism_quickstyle PRIVATE
+    ${quickmorphism_SOURCE_DIR}/include
+)
+
+# Link libraries for quickstyle test (QuickMorphism library IS needed!)
 target_link_libraries(appquickmorphism_quickstyle PRIVATE
     Qt6::Core
     Qt6::Quick
     Qt6::Gui
     Qt6::Qml
     Qt6::QuickControls2
+    QuickMorphism
+)
+
+# Copy QuickMorphism QML files to build directory (same as working example)
+add_custom_command(TARGET appquickmorphism_quickstyle POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${quickmorphism_SOURCE_DIR}/QuickMorphism"
+        "${CMAKE_CURRENT_BINARY_DIR}/QuickMorphism"
+    COMMENT "Copying QuickMorphism QML files for quickstyle test"
 )
 
 # Debug output

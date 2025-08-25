@@ -9,17 +9,25 @@ ApplicationWindow {
     width: 360
     height: 640
 
-    title: qsTr("QuickMorphism Style - QQuickStyle Test")
+    title: qsTr("QuickMorphism Style - Direct Components Test")
 
     Column {
         anchors.centerIn: parent
         spacing: 20
 
         Text {
-            text: "QuickMorphism via QQuickStyle::setStyle()"
+            text: "QuickMorphism Components (Direct Import)"
             font.bold: true
             font.pixelSize: 18
             anchors.horizontalCenter: parent.horizontalCenter
+            color: "#666666"
+        }
+
+        Text {
+            text: "Using direct component names: Button, TextField, etc."
+            font.pixelSize: 12
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: "#999999"
         }
 
         Button {
@@ -44,7 +52,7 @@ ApplicationWindow {
         }
 
         Text {
-            text: "✅ Si los controles se ven con efectos neumórficos,\n¡el plugin funciona correctamente!"
+            text: "✅ Si los controles se ven con efectos neumórficos,\n¡QuickMorphism funciona correctamente!"
             color: "#7CB342"
             wrapMode: Text.WordWrap
             width: 300

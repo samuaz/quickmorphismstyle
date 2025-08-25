@@ -30,8 +30,8 @@ int main(int argc, char *argv[])
         }
     }
 
-    // Set QuickMorphism as the style for Qt Quick Controls
-    QQuickStyle::setStyle("QuickMorphism");
+    // NOTE: Not using QQuickStyle::setStyle() because we're using direct QuickMorphism components
+    // QQuickStyle::setStyle("QuickMorphism");
 
     // Initialize QML engine
     QQmlApplicationEngine engine;
@@ -39,18 +39,24 @@ int main(int argc, char *argv[])
     // Initialize QuickMorphism types (register QML components)
     QuickMorphism::init(engine);
     
-    // Add the QuickMorphism QML import path
+    // Add the resource path for embedded QML files
     engine.addImportPath(":/");
     
-    // Add the build directory where QuickMorphism files are copied (same as working example)
+    // Add the build directory for FetchContent-downloaded QuickMorphism
     QString buildDir = QGuiApplication::applicationDirPath() + "/../../..";
-    engine.addImportPath(buildDir);
-    qDebug() << "Added build directory path:" << buildDir;
+    QString quickMorphismPath = buildDir + "/_deps/quickmorphism-src";
     
-    // Add the styles directory for QQuickStyle::setStyle to find QuickMorphism
-    QString stylesPath = buildDir + "/_deps/quickmorphism-src/styles";
-    engine.addImportPath(stylesPath);
-    qDebug() << "Added styles path:" << stylesPath;
+    engine.addImportPath(quickMorphismPath);
+    qDebug() << "Added QuickMorphism path:" << quickMorphismPath;
+    
+    // Verify the QuickMorphism module files exist
+    QDir qmDir(quickMorphismPath + "/QuickMorphism");
+    if (qmDir.exists()) {
+        qDebug() << "QuickMorphism module directory exists";
+        qDebug() << "qmldir exists:" << QFile::exists(quickMorphismPath + "/QuickMorphism/qmldir");
+    } else {
+        qDebug() << "ERROR: QuickMorphism module directory NOT found!";
+    }
 
     // Load the QQuickStyle test QML file
     const QUrl url(u"qrc:/quickmorphismexample_quickstyle/Demo_quickstyle.qml"_s);

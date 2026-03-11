@@ -1,7 +1,6 @@
 pragma Singleton
 
 import QtQuick
-import QuickMorphism 1.0
 
 QtObject {
     property string name: "QuickMorphismDarkTheme"

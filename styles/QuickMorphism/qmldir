@@ -1,4 +1,5 @@
 module QuickMorphismStyle
+designersupported
 depends QtQuick 2.15
 depends QtQuick.Controls 2.15
 

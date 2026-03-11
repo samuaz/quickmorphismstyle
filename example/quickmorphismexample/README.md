@@ -1,166 +1,78 @@
 # QuickMorphism Example Application
 
-Este ejemplo demuestra cómo usar QuickMorphism en tu proyecto con CMake FetchContent.
+Demonstrates how to integrate QuickMorphismStyle into a Qt6 application.
 
-## 🚀 Cómo Compilar
+## Build
 
-### Prerequisitos
-- Qt 6.2 o superior
-- CMake 3.21 o superior
-- Conexión a internet (para descargar QuickMorphism)
+### Desktop (macOS/Linux/Windows)
 
-### Compilación
 ```bash
+cd example/quickmorphismexample
 mkdir build && cd build
-cmake .. -DCMAKE_PREFIX_PATH="/ruta/a/qt/6.9.x"
-make -j$(nproc)
+cmake .. -DCMAKE_PREFIX_PATH="/path/to/Qt/6.x.x/platform"
+cmake --build . -j$(nproc)
 ```
 
-### Ejecutar
-```bash
-# macOS
-./appquickmorphismexample.app/Contents/MacOS/appquickmorphismexample
+### Android
 
-# Linux
-./appquickmorphismexample
+Open the example project in Qt Creator with an Android kit configured, then build and deploy. The CMakeLists.txt automatically sets:
 
-# Windows
-appquickmorphismexample.exe
-```
+- `compileSdkVersion` to android-35
+- `targetSdkVersion` to 35
+- `buildToolsRevision` to 35.0.0
 
-## 🎯 Lo que hace este ejemplo
+A custom `android/gradle.properties` is included to override Qt's default compileSdkVersion (android-33), which is too low for modern AndroidX dependencies.
 
-Este proyecto:
-1. **Descarga automáticamente QuickMorphism** desde GitHub usando FetchContent
-2. **Usa la rama qt6.9-migration** que tiene soporte completo para Qt6.9
-3. **Configura las rutas QML** para Qt Creator y Qt Design Studio
-4. **Copia los archivos QML** para que estén disponibles en el editor
-5. **Demuestra el uso básico** de componentes neumórficos
+**Requirements:**
+- **NDK r27+** — Qt 6.10.2 requires NDK r27 or newer. NDK r25 causes `std::pmr` symbol errors at runtime. Configure in Qt Creator: **Preferences > Kits > Android NDK**.
+- **arm64-v8a kit** — Use `Qt 6.10.2 for Android arm64-v8a` for modern devices and ARM64 emulators. The `armeabi-v7a` kit will fail with `INSTALL_FAILED_NO_MATCHING_ABIS` on x86_64/ARM64 emulators.
+- **Android 14+ emulator** — Recommended API level 34 or higher for the AVD.
 
-## 📁 Estructura del Proyecto
+**Note:** If you get Gradle errors about compileSdkVersion, clean the build directory completely and reconfigure.
 
-```
-quickmorphismexample/
-├── CMakeLists.txt          # Configuración FetchContent
-├── main.cpp                # Punto de entrada
-├── Demo.qml                # Ejemplo de uso de QuickMorphism
-├── MainForm.ui.qml         # Formulario UI
-├── qtquickcontrols2.conf   # Configuración Qt Controls
-└── build/                  # Generado por CMake
-    ├── QuickMorphism/      # Componentes copiados para Qt Design Studio
-    └── _deps/              # FetchContent cache
-        └── quickmorphism-src/
-```
+## Applications
 
-## 🎨 Para Qt Design Studio
+This example builds two apps demonstrating different integration approaches:
 
-Después de compilar el proyecto:
+### appquickmorphismexample
 
-1. **Los archivos QML** están disponibles en `build/QuickMorphism/`
-2. **Las rutas están configuradas** automáticamente
-3. **Los componentes aparecen** en el editor de Qt Design Studio
+Direct usage of QuickMorphism components with full theme switching:
 
-### Crear proyecto .qmlproject
-```qml
-import QmlProject 1.3
+- `Demo.qml` / `MainForm.ui.qml` - Full UI with theme switch, custom theme, snackbar
+- Uses `QuickMorphismUI` component for theme management
+- Shows how to create a custom theme via `QuickMorphismTheme { }`
 
-Project {
-    mainFile: "Demo.qml"
-    
-    QmlFiles {
-        directory: "."
-    }
-    
-    QmlFiles {
-        directory: "build/QuickMorphism"
-    }
-    
-    importPaths: [
-        "build/QuickMorphism",
-        "build"
-    ]
-    
-    qt6Project: true
-    qdsVersion: "4.6"
-}
-```
+### appquickmorphism_quickstyle
 
-## 💡 Usar en tu Proyecto
+Minimal example using direct component imports:
 
-### 1. Copia este CMakeLists.txt
+- `Demo_quickstyle.qml` - Simple layout with Button, TextField, Switch, CheckBox
+- Shows the simplest way to use QuickMorphism components
+
+## How It Works
+
+The example uses `add_subdirectory()` to include the QuickMorphism library from the parent directory. This means:
+
+- Changes to the library source are reflected immediately on rebuild
+- No network download needed (unlike FetchContent)
+- QML import paths are configured automatically for Qt Creator
+- Android SDK versions are configured per-target via CMake properties
+
+## Using FetchContent Instead
+
+For external projects that aren't part of this repository:
+
 ```cmake
-# Copia la sección FetchContent de este CMakeLists.txt
 include(FetchContent)
 FetchContent_Declare(
     QuickMorphism
     GIT_REPOSITORY https://github.com/samuaz/quickmorphismstyle.git
-    GIT_TAG qt6.9-migration
+    GIT_TAG main
 )
 FetchContent_MakeAvailable(QuickMorphism)
-
-# Enlaza la librería
-target_link_libraries(tu_app PRIVATE QuickMorphism)
+target_link_libraries(your_app PRIVATE QuickMorphism)
 ```
 
-### 2. Usa en QML
-```qml
-import QtQuick
-import QtQuick.Controls
-import QuickMorphism
+## Qt Creator Design Mode
 
-ApplicationWindow {
-    color: LightTheme.backgroundColor
-    
-    QuickMorphism.Button {
-        text: "Mi Botón Neumórfico"
-        anchors.centerIn: parent
-    }
-    
-    StatusBar {
-        statusBarColor: LightTheme.statusBarColor
-        theme: StatusBar.Light
-    }
-}
-```
-
-## 🔧 Troubleshooting
-
-### "QML module not found (QuickMorphism)"
-1. **Compila el proyecto** (para que descargue QuickMorphism)
-2. **Verifica que existe** `build/QuickMorphism/qmldir`
-3. **Recompila desde cero** si es necesario
-
-### FetchContent lento la primera vez
-- **Primera compilación**: Descarga ~5-10MB de GitHub (puede tomar tiempo)
-- **Compilaciones siguientes**: Usa caché local (rápido)
-- **Para acelerar**: Usa conexión estable de internet
-- **Para limpiar caché**: `rm -rf build/_deps/quickmorphism-*`
-
-### Actualizar QuickMorphism
-```bash
-# Limpiar caché y forzar nueva descarga
-rm -rf build/_deps/quickmorphism-*
-cmake .. && make
-```
-
-### Para desarrollo local (sin FetchContent)
-Si tienes el repositorio completo clonado, puedes usar:
-```bash
-# Usar la versión local (más rápido para desarrollo)
-cp CMakeLists_old_local.txt CMakeLists.txt
-```
-
-## 📋 Ventajas de este Enfoque
-
-✅ **Consistente**: Siempre usa la versión de GitHub  
-✅ **Realista**: Como lo usarían otros desarrolladores  
-✅ **Automático**: Sin configuración manual de rutas  
-✅ **Portable**: Funciona en cualquier máquina  
-✅ **Compatible**: Qt Creator y Qt Design Studio  
-
-## 🔗 Enlaces
-
-- **Proyecto principal**: `../..` (directorio padre)
-- **Documentación**: `../README.md`
-- **Guía FetchContent**: `../README_FETCHCONTENT.md`
-- **Repositorio**: https://github.com/samuaz/quickmorphismstyle
+After building, open `MainForm.ui.qml` in Qt Creator's Design mode to see the neumorphic components rendered in the visual editor.

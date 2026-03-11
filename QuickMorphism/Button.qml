@@ -42,7 +42,7 @@ T.Button {
             radius: control.radius
             pressed: false
             opacity: control.shadowOpacity
-            visible: !control.flatß
+            visible: !control.flat
         }
     }
 

@@ -6,7 +6,7 @@ QuickMorphismUI 1.0 QuickMorphismUI.qml
 ApplicationWindow 1.0 ApplicationWindow.qml
 Button 1.0 Button.qml
 CheckBox 1.0 CheckBox.qml
-DirectoryFontLoader 1.0 DirectoryFontLoader.qml
+DirectoryFontLoader 1.0 def/DirectoryFontLoader.qml
 Elevation 1.0 Elevation.qml
 Image 1.0 Image.qml
 RoundImage 1.0 RoundImage.qml

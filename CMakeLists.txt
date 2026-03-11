@@ -127,7 +127,59 @@ qt_add_resources(${PROJECT_NAME} "quickmorphism_qml"
         QuickMorphism/assets/font/OpenSans-Bold.ttf
 )
 
-# QuickMorphism Style Components (QML-only module for now)
+# =============================================================================
+# Copy QuickMorphism QML module to build directory for Designer/Creator access
+# =============================================================================
+# Qt Creator's QML Designer needs QML files ON DISK (not in qrc://) to render
+# components in design mode. We copy the entire QuickMorphism module to the
+# build directory so both the base module and the style module are discoverable.
+
+# Copy base QuickMorphism QML module to build/qml/QuickMorphism/
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism/"
+    DESTINATION "${CMAKE_BINARY_DIR}/qml/QuickMorphism"
+    FILES_MATCHING
+        PATTERN "*.qml"
+        PATTERN "qmldir"
+        PATTERN "*.ttf"
+        PATTERN "*.qmltypes"
+)
+
+# Copy designer metainfo for Qt Creator component palette
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/designer")
+    file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/designer/"
+        DESTINATION "${CMAKE_BINARY_DIR}/qml/QuickMorphism/designer"
+        FILES_MATCHING PATTERN "*.metainfo"
+    )
+endif()
+
+# Also keep a copy under the build dir root for legacy discovery
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism/"
+    DESTINATION "${CMAKE_BINARY_DIR}/QuickMorphism"
+    FILES_MATCHING
+        PATTERN "*.qml"
+        PATTERN "qmldir"
+        PATTERN "*.ttf"
+        PATTERN "*.qmltypes"
+)
+
+# =============================================================================
+# QuickMorphism Style for Qt Quick Controls (QQuickStyle system)
+# =============================================================================
+# For Qt Quick Controls custom styles, the QML files must be in:
+#   <import-path>/QtQuick/Controls/QuickMorphism/
+# This allows QQuickStyle::setStyle("QuickMorphism") to discover the style.
+
+# Copy style proxy components to the Qt Quick Controls style directory
+set(QM_STYLE_OUTPUT_DIR "${CMAKE_BINARY_DIR}/qml/QtQuick/Controls/QuickMorphism")
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/styles/QuickMorphism/"
+    DESTINATION "${QM_STYLE_OUTPUT_DIR}"
+    FILES_MATCHING
+        PATTERN "*.qml"
+        PATTERN "qmldir"
+)
+
+# Also create a qt_add_qml_module for QuickMorphismStyle URI
+# (this generates proper type info for Qt Creator)
 qt_add_qml_module(QuickMorphismStyleModule
     URI QuickMorphismStyle
     VERSION 1.0
@@ -146,6 +198,32 @@ qt_add_qml_module(QuickMorphismStyleModule
     DEPENDENCIES
         Qt6::Quick
         Qt6::QuickControls2
+)
+
+# Prevent QuickMorphismStyleModule from being treated as a deployable Android target.
+# Without this, Qt Creator may try to deploy the style library instead of the actual app.
+set_target_properties(QuickMorphismStyleModule PROPERTIES
+    QT_ANDROID_DEPLOYMENT_DEPENDENCIES ""
+    _qt_is_android_executable FALSE
+)
+if(TARGET QuickMorphismStyleModuleplugin)
+    set_target_properties(QuickMorphismStyleModuleplugin PROPERTIES
+        QT_ANDROID_DEPLOYMENT_DEPENDENCIES ""
+        _qt_is_android_executable FALSE
+    )
+endif()
+
+# =============================================================================
+# Auto-refresh QML files on rebuild (for iterative design workflow)
+# =============================================================================
+add_custom_target(quickmorphism_copy_qml ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_CURRENT_SOURCE_DIR}/QuickMorphism"
+        "${CMAKE_BINARY_DIR}/qml/QuickMorphism"
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_CURRENT_SOURCE_DIR}/styles/QuickMorphism"
+        "${QM_STYLE_OUTPUT_DIR}"
+    COMMENT "Copying QuickMorphism QML files to build directory for Designer access"
 )
 
 # Link libraries
@@ -188,8 +266,57 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     SOVERSION ${PROJECT_VERSION_MAJOR}
 )
 
-# Installation
+# =============================================================================
+# Qt Creator / Qt Design Studio support
+# =============================================================================
+# QML_IMPORT_PATH: Used by Qt Creator to resolve QML modules in the editor
+# QML_DESIGNER_IMPORT_PATH: Used specifically by the QML Designer/Form Editor
+#
+# Both must include paths where qmldir files exist ON DISK.
+# The source dir has QuickMorphism/qmldir, the build/qml dir has generated modules.
+
+set(QML_IMPORT_PATH
+    "${CMAKE_CURRENT_SOURCE_DIR}"
+    "${CMAKE_BINARY_DIR}/qml"
+    "${CMAKE_BINARY_DIR}"
+    CACHE STRING "Qt Creator QML import paths" FORCE
+)
+
+set(QML_DESIGNER_IMPORT_PATH
+    "${CMAKE_CURRENT_SOURCE_DIR}"
+    "${CMAKE_BINARY_DIR}/qml"
+    CACHE STRING "Qt Creator Designer QML import paths" FORCE
+)
+
+# =============================================================================
+# Installation Configuration (must be defined BEFORE install() commands)
+# =============================================================================
 include(GNUInstallDirs)
+
+option(QUICKMORPHISM_INSTALL_IN_QT_DIR "Install QuickMorphism style in Qt's standard location" OFF)
+set(QUICKMORPHISM_STYLE_INSTALL_DIR "" CACHE PATH "Custom installation directory for QuickMorphism style (leave empty for build directory)")
+
+# Configure style installation paths
+if(QUICKMORPHISM_INSTALL_IN_QT_DIR)
+    # Install in Qt's standard style directory
+    get_target_property(QT_QMAKE_EXECUTABLE Qt6::qmake IMPORTED_LOCATION)
+    execute_process(COMMAND ${QT_QMAKE_EXECUTABLE} -query QT_INSTALL_QML
+                    OUTPUT_VARIABLE QT_QML_DIR
+                    OUTPUT_STRIP_TRAILING_WHITESPACE)
+    set(QUICKMORPHISM_FINAL_INSTALL_DIR "${QT_QML_DIR}/QtQuick/Controls/QuickMorphism")
+    set(QUICKMORPHISM_MODULE_INSTALL_DIR "${QT_QML_DIR}/QuickMorphism")
+elseif(QUICKMORPHISM_STYLE_INSTALL_DIR)
+    # Use custom directory
+    set(QUICKMORPHISM_FINAL_INSTALL_DIR "${QUICKMORPHISM_STYLE_INSTALL_DIR}/QtQuick/Controls/QuickMorphism")
+    set(QUICKMORPHISM_MODULE_INSTALL_DIR "${QUICKMORPHISM_STYLE_INSTALL_DIR}/QuickMorphism")
+else()
+    # Default: use build directory (development mode)
+    set(QUICKMORPHISM_FINAL_INSTALL_DIR "${CMAKE_BINARY_DIR}/qml/QtQuick/Controls/QuickMorphism")
+    set(QUICKMORPHISM_MODULE_INSTALL_DIR "${CMAKE_BINARY_DIR}/qml/QuickMorphism")
+endif()
+
+message(STATUS "QuickMorphism style will be available at: ${QUICKMORPHISM_FINAL_INSTALL_DIR}")
+message(STATUS "QuickMorphism module will be available at: ${QUICKMORPHISM_MODULE_INSTALL_DIR}")
 
 # Install the library
 install(TARGETS ${PROJECT_NAME}
@@ -205,56 +332,37 @@ install(DIRECTORY include/
     FILES_MATCHING PATTERN "*.h"
 )
 
-# Install QuickMorphism original module
+# Install QuickMorphism original module (QML files + qmltypes)
 install(DIRECTORY QuickMorphism/
     DESTINATION "${QUICKMORPHISM_MODULE_INSTALL_DIR}"
-    FILES_MATCHING 
+    FILES_MATCHING
         PATTERN "*.qml"
         PATTERN "qmldir"
         PATTERN "*.ttf"
+        PATTERN "*.qmltypes"
         PATTERN "*.qrc"
 )
 
 # Install QuickMorphism style files (proxies)
 install(DIRECTORY styles/QuickMorphism/
     DESTINATION "${QUICKMORPHISM_FINAL_INSTALL_DIR}"
-    FILES_MATCHING 
+    FILES_MATCHING
         PATTERN "*.qml"
         PATTERN "qmldir"
 )
+
+# Install designer metainfo
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/designer")
+    install(DIRECTORY designer/
+        DESTINATION "${QUICKMORPHISM_MODULE_INSTALL_DIR}/designer"
+        FILES_MATCHING PATTERN "*.metainfo"
+    )
+endif()
 
 # Install CMake helpers
 install(FILES cmake/QuickMorphismStyleHelpers.cmake
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/QuickMorphism
 )
-
-# Qt Creator support
-set(QML_IMPORT_PATH "${CMAKE_BINARY_DIR}" CACHE STRING "Qt Creator import paths" FORCE)
-
-# QuickMorphism Style Installation Configuration
-option(QUICKMORPHISM_INSTALL_IN_QT_DIR "Install QuickMorphism style in Qt's standard location" OFF)
-set(QUICKMORPHISM_STYLE_INSTALL_DIR "" CACHE PATH "Custom installation directory for QuickMorphism style (leave empty for build directory)")
-
-# Configure style installation paths
-if(QUICKMORPHISM_INSTALL_IN_QT_DIR)
-    # Install in Qt's standard style directory
-    get_target_property(QT_QMAKE_EXECUTABLE Qt6::qmake IMPORTED_LOCATION)
-    execute_process(COMMAND ${QT_QMAKE_EXECUTABLE} -query QT_INSTALL_QML 
-                    OUTPUT_VARIABLE QT_QML_DIR 
-                    OUTPUT_STRIP_TRAILING_WHITESPACE)
-    set(QUICKMORPHISM_FINAL_INSTALL_DIR "${QT_QML_DIR}/QtQuick/Controls/QuickMorphism")
-    set(QUICKMORPHISM_MODULE_INSTALL_DIR "${QT_QML_DIR}/QuickMorphism")
-elseif(QUICKMORPHISM_STYLE_INSTALL_DIR)
-    # Use custom directory
-    set(QUICKMORPHISM_FINAL_INSTALL_DIR "${QUICKMORPHISM_STYLE_INSTALL_DIR}/QtQuick/Controls/QuickMorphism")
-    set(QUICKMORPHISM_MODULE_INSTALL_DIR "${QUICKMORPHISM_STYLE_INSTALL_DIR}/QuickMorphism")
-else()
-    # Default: use build directory (development mode)
-    set(QUICKMORPHISM_FINAL_INSTALL_DIR "${CMAKE_BINARY_DIR}/qml/QtQuick/Controls/QuickMorphism")
-    set(QUICKMORPHISM_MODULE_INSTALL_DIR "${CMAKE_BINARY_DIR}/qml/QuickMorphism")
-endif()
-
-message(STATUS "QuickMorphism style will be available at: ${QUICKMORPHISM_FINAL_INSTALL_DIR}")
 
 # Debug output
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")

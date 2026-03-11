@@ -2,10 +2,10 @@
 #define SNACKBAR_H
 
 #include <QObject>
+#include <QtQml>
 
 class Snackbar: public QObject {
     Q_OBJECT
-
     Q_PROPERTY(bool show READ show WRITE setShow NOTIFY showChanged)
     Q_PROPERTY(
         QString message READ message WRITE setMessage NOTIFY messageChanged)

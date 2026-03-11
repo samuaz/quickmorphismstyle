@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Window
 import QtQuick.Templates as T
 
 T.ApplicationWindow {

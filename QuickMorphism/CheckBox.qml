@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Controls.impl
 import QtQuick.Timeline
 import QtQuick.Templates as T
@@ -88,7 +87,7 @@ T.CheckBox {
         text: control.text
         font: control.font
         color: !control.enabled ? QuickMorphismConfig.theme.hintTextColor : QuickMorphismConfig.theme.primaryTextColor
-        visible: control.text || control.icon
+        //visible: control.text || control.ico
     }
 
     Timeline {

@@ -13,8 +13,8 @@ void QuickMorphismUI::registerSingleton(QQmlEngine * qmlEngine)
 
     QQmlContext *rootContext = qmlEngine->rootContext();
     rootContext->setContextProperty("QuickMorphism", s_instance);
-    //rootContext->setContextProperty("QuickMorphismDarkTheme", new DarkTheme);
-    //rootContext->setContextProperty("QuickMorphismLightTheme", new LightTheme);
+    rootContext->setContextProperty("DefaultQuickMorphismDarkTheme", new DarkTheme);
+    rootContext->setContextProperty("DefaultQuickMorphismLightTheme", new LightTheme);
     rootContext->setContextProperty("QuickMorphismSnackBar", new Snackbar);
 }
 

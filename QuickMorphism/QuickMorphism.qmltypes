@@ -1,0 +1,108 @@
+import QtQuick.tooling 1.2
+
+// This file describes the plugin-supplied types contained in the library.
+// It is used for QML tooling purposes only (Qt Creator, Qt Design Studio).
+// These types are registered in C++ via Q_COREAPP_STARTUP_FUNCTION in quickmorphism.cpp
+
+Module {
+    dependencies: ["QtQuick 2.15"]
+
+    Component {
+        name: "StatusBar"
+        prototype: "QObject"
+        exports: ["QuickMorphism/StatusBar 1.0"]
+        exportMetaObjectRevisions: [0]
+        Enum {
+            name: "Theme"
+            values: {
+                "Light": 0,
+                "Dark": 1
+            }
+        }
+        Property { name: "available"; type: "bool"; isReadonly: true }
+        Property { name: "statusBarColor"; type: "QColor" }
+        Property { name: "navBarColor"; type: "QColor" }
+        Property { name: "theme"; type: "Theme" }
+    }
+
+    Component {
+        name: "Theme"
+        prototype: "QObject"
+        exports: ["QuickMorphism/QuickMorphismTheme 1.0"]
+        exportMetaObjectRevisions: [0]
+        Property { name: "name"; type: "string" }
+        Property { name: "style"; type: "int" }
+        Property { name: "backgroundColor"; type: "QColor" }
+        Property { name: "foregroundColor"; type: "QColor" }
+        Property { name: "primaryTextColor"; type: "QColor" }
+        Property { name: "secondaryTextColor"; type: "QColor" }
+        Property { name: "hintTextColor"; type: "QColor" }
+        Property { name: "topShadowColor"; type: "QColor" }
+        Property { name: "bottonShadowColor"; type: "QColor" }
+        Property { name: "primaryColor"; type: "QColor" }
+        Property { name: "secondaryColor"; type: "QColor" }
+        Property { name: "accentColor"; type: "QColor" }
+        Property { name: "errorColor"; type: "QColor" }
+        Property { name: "highlightedColor"; type: "QColor" }
+        Property { name: "hoverColor"; type: "QColor" }
+        Property { name: "statusBarColor"; type: "QColor" }
+        Property { name: "navBarColor"; type: "QColor" }
+        Property { name: "titleSizeMultiplier"; type: "double" }
+        Property { name: "subTitleSizeMultiplier"; type: "double" }
+        Property { name: "shadowOpacity"; type: "double" }
+        Property { name: "shadowGlow"; type: "int" }
+        Property { name: "insetShadowGlow"; type: "int" }
+        Property { name: "shadowSpread"; type: "double" }
+        Property { name: "insetShadowSpread"; type: "double" }
+        Property { name: "shadowOffSet"; type: "int" }
+    }
+
+    Component {
+        name: "StyleNamespace"
+        prototype: "QObject"
+        exports: ["QuickMorphism/QuickMorphismStyle 1.0"]
+        isCreatable: false
+        exportMetaObjectRevisions: [0]
+        Enum {
+            name: "Style"
+            values: {
+                "LIGHT": 0,
+                "DARK": 1,
+                "STYLE_FILLED": 2
+            }
+        }
+    }
+
+    Component {
+        name: "QuickMorphismUI"
+        prototype: "QObject"
+        Property { name: "theme"; type: "Theme"; isPointer: true }
+        Property { name: "dpScale"; type: "double" }
+        Property { name: "dpi"; type: "int" }
+        Enum {
+            name: "Dpi"
+            values: {
+                "LDPI": 0,
+                "MDPI": 1,
+                "HDPI": 2,
+                "XHDPI": 3,
+                "XXHDPI": 4
+            }
+        }
+    }
+
+    Component {
+        name: "Snackbar"
+        prototype: "QObject"
+        Property { name: "show"; type: "bool" }
+        Property { name: "message"; type: "string" }
+        Method {
+            name: "setShow"
+            Parameter { name: "show"; type: "bool" }
+        }
+        Method {
+            name: "setMessage"
+            Parameter { name: "message"; type: "string" }
+        }
+    }
+}

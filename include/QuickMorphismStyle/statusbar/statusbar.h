@@ -12,7 +12,6 @@ class StatusBar : public QObject
     Q_PROPERTY(QColor statusBarColor READ statusBarColor WRITE setStatusBarColor)
     Q_PROPERTY(QColor navBarColor READ navBarColor WRITE setNavBarColor)
     Q_PROPERTY(Theme theme READ theme WRITE setTheme)
-
 public:
     explicit StatusBar(QObject *parent = nullptr);
     static bool isAvailable();

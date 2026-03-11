@@ -69,7 +69,7 @@ Project {
     qdsVersion: "3.4"
 
     
-    importPaths: [ "quickmorphismexample", "build-quickmorphismexample-Qt_6_4_0_for_macOS-Debug" ]
+    importPaths: [ "quickmorphismexample", "build-quickmorphismexample-Qt_6_4_0_for_macOS-Debug", "/Users/samuaz/Projects/toc/build-quickmorphismstyle-Qt_6_6_2_for_macOS-Debug/" ]
 
 
     /* If any modules the project imports require widgets (e.g. QtCharts), widgetApp must be true */

@@ -1,0 +1,194 @@
+cmake_minimum_required(VERSION 3.21)
+
+project(QuickMorphism 
+    VERSION 1.0.0 
+    LANGUAGES CXX
+    DESCRIPTION "Neumorphism UI Style Kit for Qt6"
+)
+
+# Set C++ standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Qt6 setup
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
+# Find Qt6 components
+find_package(Qt6 6.2 REQUIRED COMPONENTS 
+    Core 
+    Quick 
+    Gui 
+    Qml 
+    QuickControls2
+)
+
+# Platform specific components
+if(ANDROID)
+    find_package(Qt6 REQUIRED COMPONENTS Core5Compat)
+endif()
+
+if(IOS)
+    find_package(Qt6 REQUIRED COMPONENTS Core5Compat)
+endif()
+
+# Position independent code
+if(Qt6_POSITION_INDEPENDENT_CODE)
+    set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+endif()
+
+# Source files
+set(PROJECT_SOURCES
+    src/quickmorphism.cpp
+    src/ui/quickmorphismui.cpp
+    src/ui/snackbar.cpp
+    include/QuickMorphismStyle/quickmorphism.h
+    include/QuickMorphismStyle/ui/quickmorphismui.h
+    include/QuickMorphismStyle/ui/snackbar.h
+)
+
+# Theme headers (if they exist)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/include/QuickMorphismStyle/ui/theme")
+    list(APPEND PROJECT_SOURCES
+        include/QuickMorphismStyle/ui/theme/dark_theme.h
+        include/QuickMorphismStyle/ui/theme/light_theme.h
+        include/QuickMorphismStyle/ui/theme/theme.h
+    )
+endif()
+
+# StatusBar sources
+set(STATUSBAR_COMMON_SOURCES
+    include/QuickMorphismStyle/statusbar/statusbar.h
+    include/QuickMorphismStyle/statusbar/statusbar_p.h
+    src/statusbar/statusbar.cpp
+)
+
+# Platform-specific StatusBar sources
+if(ANDROID)
+    set(STATUSBAR_PLATFORM_SOURCES src/statusbar/statusbar_android.cpp)
+elseif(IOS)
+    set(STATUSBAR_PLATFORM_SOURCES src/statusbar/statusbar_ios.mm)
+    set(STATUSBAR_PLATFORM_LIBS "-framework UIKit")
+else()
+    set(STATUSBAR_PLATFORM_SOURCES src/statusbar/statusbar_dummy.cpp)
+endif()
+
+# Create the main library
+add_library(${PROJECT_NAME} STATIC
+    ${PROJECT_SOURCES}
+    ${STATUSBAR_COMMON_SOURCES}
+    ${STATUSBAR_PLATFORM_SOURCES}
+)
+
+# Add resources manually using qt_add_resources
+qt_add_resources(${PROJECT_NAME} "quickmorphism_qml"
+    PREFIX "/"
+    FILES
+        QuickMorphism/ApplicationWindow.qml
+        QuickMorphism/Button.qml
+        QuickMorphism/CalendarPicker.qml
+        QuickMorphism/CheckBox.qml
+        QuickMorphism/Config.qml
+        QuickMorphism/DatePicker.qml
+        QuickMorphism/Elevation.qml
+        QuickMorphism/FontAwesomeRegular.qml
+        QuickMorphism/Fonts.qml
+        QuickMorphism/Icons.qml
+        QuickMorphism/Image.qml
+        QuickMorphism/Label.qml
+        QuickMorphism/Page.qml
+        QuickMorphism/QuickMorphismUI.qml
+        QuickMorphism/Required.qml
+        QuickMorphism/Ripple.qml
+        QuickMorphism/RoundImage.qml
+        QuickMorphism/ScrollableContainer.qml
+        QuickMorphism/SnackBar.qml
+        QuickMorphism/Switch.qml
+        QuickMorphism/SwitchDelegate.qml
+        QuickMorphism/TextField.qml
+        QuickMorphism/Title.qml
+        QuickMorphism/ToolBar.qml
+        QuickMorphism/ToolButton.qml
+        QuickMorphism/def/DirectoryFontLoader.qml
+        QuickMorphism/themes/QuickMorphismDarkTheme.qml
+        QuickMorphism/themes/QuickMorphismLightTheme.qml
+        QuickMorphism/qmldir
+        QuickMorphism/def/qmldir
+        QuickMorphism/themes/qmldir
+        QuickMorphism/assets/font/fa-brands-400.ttf
+        QuickMorphism/assets/font/fa-regular-400.ttf
+        QuickMorphism/assets/font/fa-solid-900.ttf
+        QuickMorphism/assets/font/NunitoSans-Regular.ttf
+        QuickMorphism/assets/font/NunitoSans-Bold.ttf
+        QuickMorphism/assets/font/NunitoSans-Light.ttf
+        QuickMorphism/assets/font/OpenSans-Regular.ttf
+        QuickMorphism/assets/font/OpenSans-Bold.ttf
+)
+
+# Link libraries
+target_link_libraries(${PROJECT_NAME} PUBLIC
+    Qt6::Core
+    Qt6::Quick
+    Qt6::Gui
+    Qt6::Qml
+    Qt6::QuickControls2
+    ${STATUSBAR_PLATFORM_LIBS}
+)
+
+# Platform-specific linking
+if(ANDROID)
+    target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Core5Compat)
+endif()
+
+if(IOS)
+    target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Core5Compat)
+endif()
+
+# Include directories
+target_include_directories(${PROJECT_NAME} PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+)
+
+# Compile definitions
+target_compile_definitions(${PROJECT_NAME} PRIVATE
+    $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
+    QT_DEPRECATED_WARNINGS
+)
+
+# Target properties
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    MACOSX_BUNDLE_GUI_IDENTIFIER com.theopencompany.quickmorphism
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION}
+    VERSION ${PROJECT_VERSION}
+    SOVERSION ${PROJECT_VERSION_MAJOR}
+)
+
+# Installation
+include(GNUInstallDirs)
+
+# Install the library
+install(TARGETS ${PROJECT_NAME}
+    EXPORT ${PROJECT_NAME}Targets
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
+
+# Install headers
+install(DIRECTORY include/
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    FILES_MATCHING PATTERN "*.h"
+)
+
+# Qt Creator support
+set(QML_IMPORT_PATH "${CMAKE_BINARY_DIR}" CACHE STRING "Qt Creator import paths" FORCE)
+
+# Debug output
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    message(STATUS "Project version: ${PROJECT_VERSION}")
+    message(STATUS "Install prefix: ${CMAKE_INSTALL_PREFIX}")
+endif()

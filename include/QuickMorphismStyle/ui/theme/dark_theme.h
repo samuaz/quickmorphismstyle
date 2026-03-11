@@ -3,10 +3,10 @@
 
 #include <QString>
 #include <QColor>
-#include "theme.h"
+#include <QuickMorphismStyle/ui/theme/theme.h>
 
 #define DEFAULT_DARK_THEME_NAME "QuickMorphismDark"
-#define DEFAULT_DARK_THEME_STYLE Style::Dark
+#define DEFAULT_DARK_THEME_STYLE StyleNamespace::Style::DARK
 #define DEFAULT_DARK_THEME_BACKGROUNDCOLOR QColor("#243441")
 #define DEFAULT_DARK_THEME_FOREGROUNDCOLOR QColor("#243441")
 #define DEFAULT_DARK_THEME_PRIMARYTEXTCOLOR QColor("#ebebeb")
@@ -26,6 +26,7 @@
 class DarkTheme: public Theme {
     Q_OBJECT
     Q_INTERFACES(Theme)
+    QML_ELEMENT
     // Theme interface
 public:
 

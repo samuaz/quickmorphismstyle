@@ -1,0 +1,2 @@
+singleton LightTheme 1.0 QuickMorphismLightTheme.qml
+singleton DarkTheme 1.0 QuickMorphismDarkTheme.qml

@@ -1,15 +1,15 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
-import QuickMorphism 1.0
+import QuickMorphism
 
 Page {
     id: page
-    property alias themeSwitch: themeSwitch
     property alias snackbarButton: snackBarButton
+    property alias themeSwitch: themeSwitch
 
     Switch {
-          id: themeSwitch
+        id: themeSwitch
         text: qsTr("DarkMode")
         anchors.right: parent.right
         anchors.rightMargin: 40
@@ -18,6 +18,7 @@ Page {
     }
 
     ColumnLayout {
+        id: content
         anchors.right: parent.right
         anchors.rightMargin: 40
         anchors.left: parent.left
@@ -46,6 +47,15 @@ Page {
             errorMessage: qsTr("This field is Mandatory")
         }
 
+        TextField {
+            id: textFieldPassword
+            Layout.fillWidth: true
+            placeholderText: qsTr("Required Text Field")
+            isRequired: true
+            isPassword: true
+            errorMessage: qsTr("This field is Mandatory")
+        }
+
         Button {
             id: snackBarButton
             text: qsTr("Open snackbar!")
@@ -63,9 +73,5 @@ Page {
     }
 }
 
-/*##^##
-Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
-##^##*/
+
 

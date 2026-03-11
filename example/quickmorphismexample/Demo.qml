@@ -1,6 +1,6 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QuickMorphism 1.0
+import QtQuick
+import QtQuick.Controls
+import QuickMorphism
 
 ApplicationWindow {
     id: window
@@ -14,20 +14,36 @@ ApplicationWindow {
 
     SnackBar {
         id: snackBar
-
     }
 
-    QuickMorphismLightTheme {
-    id: lightTheme
+    /*
+you can also create customs themes
+*/
+    QuickMorphismTheme {
+     id: customTheme
+     /*You need to always specify if you theme is light or dark*/
+     style: QuickMorphismStyle.LIGHT
+     backgroundColor: "#E0E5EC"
+     foregroundColor: "#E0E5EC"
+     primaryTextColor: "#666666"
+     secondaryTextColor: "#666666"
+     hintTextColor: "#A2A2A2"
+     topShadowColor: "#FFFFFF"
+     bottonShadowColor: "#A3B1C6"
+     primaryColor: "#E0E5EC"
+     secondaryColor: "#E0E5EC"
+     accentColor: "#7CB342"
+     errorColor: "#FF0000"
+     highlightedColor: "#f4f4f4"
+     hoverColor: "#7CB342"
+     statusBarColor: "#E0E5EC"
+     navBarColor: "#E0E5EC"
     }
 
-    QuickMorphismDarkTheme {
-    id: darkTheme
-    }
 
     QuickMorphismUI {
         id: quickMorphismUI
-        theme: lightTheme
+        theme: DefaultQuickMorphismDarkTheme
     }
 
     MainForm {
@@ -36,7 +52,9 @@ ApplicationWindow {
 
         themeSwitch {
             onCheckedChanged: themeSwitch.checked ? quickMorphismUI.theme
-                                                    = darkTheme : quickMorphismUI.theme = lightTheme
+                                                    = DefaultQuickMorphismDarkTheme : quickMorphismUI.theme = DefaultQuickMorphismLightTheme
+        checked: quickMorphismUI.theme.style == QuickMorphismStyle.DARK
+
         }
 
         snackbarButton {
@@ -49,9 +67,5 @@ ApplicationWindow {
 
 }
 
-/*##^##
-Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
-##^##*/
+
 

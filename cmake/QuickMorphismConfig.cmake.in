@@ -1,0 +1,22 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+# Find required Qt6 components
+find_dependency(Qt6 REQUIRED COMPONENTS Core Quick Gui Qml QuickControls2)
+
+# Platform-specific dependencies
+if(ANDROID OR IOS)
+    find_dependency(Qt6 REQUIRED COMPONENTS Core5Compat)
+endif()
+
+# Include the targets file
+include("${CMAKE_CURRENT_LIST_DIR}/QuickMorphismTargets.cmake")
+
+# Provide legacy variables for backward compatibility
+set(QuickMorphism_FOUND TRUE)
+set(QuickMorphism_VERSION @PROJECT_VERSION@)
+set(QuickMorphism_LIBRARIES QuickMorphism::QuickMorphism)
+set(QuickMorphism_INCLUDE_DIRS "@PACKAGE_CMAKE_INSTALL_INCLUDEDIR@")
+
+check_required_components(QuickMorphism)

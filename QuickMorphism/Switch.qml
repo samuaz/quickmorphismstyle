@@ -1,10 +1,9 @@
 import QtQuick
 import QtQuick.Templates as T
-import QtQuick.Controls
 import QtQuick.Controls.impl
 import QtQuick.Timeline
-import QtQuick.Controls.Material
-import QtQuick.Controls.Material.impl
+import QtQuick.Controls.Material.impl as Mat
+
 
 T.Switch {
     id: control
@@ -40,7 +39,7 @@ T.Switch {
         opacity: control.shadowOpacity
     }
 
-    indicator: PaddedRectangle {
+    indicator: Rectangle {
         id: switchHandle
         implicitWidth: indicatorWidth * QuickMorphismConfig.dpScale
         implicitHeight: indicatorheight * QuickMorphismConfig.dpScale
@@ -76,7 +75,7 @@ T.Switch {
             border.color: QuickMorphismConfig.theme.bottonShadowColor
             border.width: 0
 
-            Ripple {
+            Mat.Ripple {
                 x: parent.x
                 y: parent.y
                 width: parent.width - 10
@@ -105,7 +104,6 @@ T.Switch {
         text: control.text
         font: control.font
         color: !control.enabled ? QuickMorphismConfig.theme.hintTextColor : QuickMorphismConfig.theme.primaryTextColor
-        visible: control.text || control.icon
     }
 
     Timeline {

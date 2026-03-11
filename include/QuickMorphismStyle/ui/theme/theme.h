@@ -1,17 +1,28 @@
 #ifndef THEME_H
 #define THEME_H
+#include <QtQml>
 #include <QObject>
 #include <QString>
 #include <QColor>
 
-enum Style { Light, Dark };
+#include <QObject>
+
+namespace StyleNamespace
+{
+    Q_NAMESPACE         // required for meta object creation
+    enum Style {
+        LIGHT,
+        DARK,
+        STYLE_FILLED
+    };
+    Q_ENUM_NS(Style)  // register the enum in meta object data
+}
 
 class Theme : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString name READ name NOTIFY nameChanged)
-    Q_PROPERTY(Style style READ style NOTIFY styleChanged)
-
+    Q_PROPERTY(QString name MEMBER _name NOTIFY nameChanged)
+    Q_PROPERTY(StyleNamespace::Style style MEMBER _style NOTIFY styleChanged)
     Q_PROPERTY(QColor backgroundColor MEMBER _backgroundColor NOTIFY backgroundColorChanged)
     Q_PROPERTY(QColor foregroundColor MEMBER _foregroundColor NOTIFY foregroundColorChanged)
     Q_PROPERTY(QColor primaryTextColor MEMBER _primaryTextColor NOTIFY primaryTextColorChanged)
@@ -37,10 +48,12 @@ class Theme : public QObject
     Q_PROPERTY(float shadowSpread READ shadowSpread NOTIFY shadowSpreadChanged)
     Q_PROPERTY(float insetShadowSpread READ insetShadowSpread NOTIFY insetShadowSpreadChanged)
     Q_PROPERTY(int shadowOffSet READ shadowOffSet NOTIFY shadowOffSetChanged)
+    QML_ELEMENT
+
 
 protected:
     QString _name;
-    Style _style;
+    StyleNamespace::Style _style;
     QColor _backgroundColor;
     QColor _foregroundColor;
     QColor _primaryTextColor;
@@ -66,7 +79,8 @@ protected:
     const float _subTitleSizeMultiplier = 1.5;
 
 public:
-    Theme(const QString &name, Style style, const QColor &backgroundColor, const QColor &foregroundColor, const QColor &primaryTextColor, const QColor &secondaryTextColor, const QColor &hintTextColor, const QColor &topShadowColor, const QColor &bottonShadowColor, const QColor &primaryColor, const QColor &secondaryColor, const QColor &accentColor, const QColor &errorColor, const QColor &highlightedColor, const QColor &hoverColor, const QColor &statusBarColor, const QColor &navBarColor) : _name(name),
+
+    Theme(const QString &name, StyleNamespace::Style style, const QColor &backgroundColor, const QColor &foregroundColor, const QColor &primaryTextColor, const QColor &secondaryTextColor, const QColor &hintTextColor, const QColor &topShadowColor, const QColor &bottonShadowColor, const QColor &primaryColor, const QColor &secondaryColor, const QColor &accentColor, const QColor &errorColor, const QColor &highlightedColor, const QColor &hoverColor, const QColor &statusBarColor, const QColor &navBarColor) : _name(name),
         _style(style),
         _backgroundColor(backgroundColor),
         _foregroundColor(foregroundColor),
@@ -85,16 +99,13 @@ public:
         _navBarColor(navBarColor)
     {}
 
-    Q_ENUM(Style)
-
-    //Theme(QObject* parent = nullptr) : QObject(parent) {}
-
+    Theme(QObject* parent = nullptr) : QObject(parent) {}
 
     QString name() const {
       return _name;
     };
 
-    Style style() const {
+    StyleNamespace::Style style() const {
         return _style;
     }
 

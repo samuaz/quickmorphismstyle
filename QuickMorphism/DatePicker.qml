@@ -1,9 +1,7 @@
 import QtQuick
-import QtQuick.Controls 1.5
 import QtQuick.Controls
 import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
-import QuickMorphism 1.0
 
 Item {
     id: control

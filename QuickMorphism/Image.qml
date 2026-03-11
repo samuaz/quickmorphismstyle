@@ -1,6 +1,6 @@
-import QtQuick
+import QtQuick as Quick
 
-Image {
+Quick.Image {
     id: root
     width: 120
     height: 120

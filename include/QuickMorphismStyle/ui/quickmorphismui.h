@@ -5,9 +5,9 @@
 #include <QObject>
 #include <QQmlEngine>
 #include <QtQml>
-#include "theme/theme.h"
-#include "theme/dark_theme.h"
-#include "theme/light_theme.h"
+#include <QuickMorphismStyle/ui/theme/theme.h>
+#include <QuickMorphismStyle/ui/theme/dark_theme.h>
+#include <QuickMorphismStyle/ui/theme/light_theme.h>
 
 class QuickMorphismUI: public QObject
 {
@@ -23,7 +23,7 @@ public:
 private:
     float _dpScale = 1.0f;
     Dpi _dpi = Dpi::HDPI;
-    Theme * _theme;
+    Theme * _theme = new LightTheme();
 
 public:
     explicit QuickMorphismUI(QObject* parent = nullptr);

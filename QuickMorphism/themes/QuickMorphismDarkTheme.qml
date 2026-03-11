@@ -3,29 +3,31 @@ pragma Singleton
 import QtQuick
 
 QtObject {
-    readonly property string name: "QuickMorphismDark"
-    readonly property int style: 1
-    readonly property color backgroundColor: "#243441"
-    readonly property color foregroundColor: "#243441"
-    readonly property color primaryTextColor: "#ebebeb"
-    readonly property color secondaryTextColor: "#ebebeb"
-    readonly property color hintTextColor: "#959EA8"
-    readonly property color topShadowColor: "#293a46"
-    readonly property color bottonShadowColor: "#092836"
-    readonly property color primaryColor: "#243441"
-    readonly property color secondaryColor: "#243441"
-    readonly property color accentColor: "#7CB342"
-    readonly property color errorColor: "#FF0000"
-    readonly property color highlightedColor: "#4d5e6c"
-    readonly property color hoverColor: "#7CB342"
-    readonly property color statusBarColor: "#243441"
-    readonly property color navBarColor: "#243441"
-    readonly property double shadowOpacity: 1.0
-    readonly property int shadowGlow: 5
-    readonly property int insetShadowGlow: 10
-    readonly property double shadowSpread: 0.5
-    readonly property double insetShadowSpread: 0.5
-    readonly property int shadowOffSet: 5
-    readonly property double titleSize: Qt.application.font.pixelSize * 2
-    readonly property double subTitleSize: Qt.application.font.pixelSize * 1.1
+    property string name: "QuickMorphismDarkTheme"
+    property int style: QuickMorphismStyle.dark
+    property color backgroundColor: "#243441"
+    property color foregroundColor: "#243441"
+    property color primaryTextColor: "#ebebeb"
+    property color secondaryTextColor: "#ebebeb"
+    property color hintTextColor: "#959EA8"
+    property color topShadowColor: "#293a46"
+    property color bottonShadowColor: "#092836"
+    property color primaryColor: "#243441"
+    property color secondaryColor: "#243441"
+    property color accentColor: "#0affef"
+    property color errorColor: "#FF0000"
+    property color highlightedColor: "#4d5e6c"
+    property color hoverColor: "#7CB342"
+    property color statusBarColor: "#243441"
+    property color navBarColor: "#243441"
+
+    property double titleSizeMultiplier: 2.0
+    property double subTitleSizeMultiplier: 1.5
+    property double shadowOpacity: 1.0
+    property int shadowGlow: 5
+    property int insetShadowGlow: 10
+    property double shadowSpread: 0.5
+    property double insetShadowSpread: 0.5
+    property int shadowOffSet: 5
 }
+

@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Templates as T
 import QtQuick.Controls.impl
 
@@ -83,7 +82,7 @@ T.TextField {
                                          && control.text.length ? QuickMorphismConfig.theme.errorColor : control.acceptableInput && control.text ? QuickMorphismConfig.theme.accentColor : QuickMorphismConfig.theme.primaryTextColor
     }
 
-    Button {
+    T.Button {
         id: showPassword
         visible: isPassword
         flat: true

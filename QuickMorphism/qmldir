@@ -24,6 +24,13 @@ CalendarPicker 1.0 CalendarPicker.qml
 DatePicker 1.0 DatePicker.qml
 Required 1.0 Required.qml
 Title 1.0 Title.qml
+Card 1.0 Card.qml
+Chip 1.0 Chip.qml
+TabBar 1.0 TabBar.qml
+TabButton 1.0 TabButton.qml
+ListItem 1.0 ListItem.qml
+Dialog 1.0 Dialog.qml
+ProgressBar 1.0 ProgressBar.qml
 Ripple 1.0 Ripple.qml
 singleton Icons 1.0 Icons.qml
 singleton Fonts 1.0 Fonts.qml

@@ -89,16 +89,21 @@ qt_add_resources(${PROJECT_NAME} "quickmorphism_qml"
         QuickMorphism/ApplicationWindow.qml
         QuickMorphism/Button.qml
         QuickMorphism/CalendarPicker.qml
+        QuickMorphism/Card.qml
         QuickMorphism/CheckBox.qml
+        QuickMorphism/Chip.qml
         QuickMorphism/Config.qml
         QuickMorphism/DatePicker.qml
+        QuickMorphism/Dialog.qml
         QuickMorphism/Elevation.qml
         QuickMorphism/FontAwesomeRegular.qml
         QuickMorphism/Fonts.qml
         QuickMorphism/Icons.qml
         QuickMorphism/Image.qml
         QuickMorphism/Label.qml
+        QuickMorphism/ListItem.qml
         QuickMorphism/Page.qml
+        QuickMorphism/ProgressBar.qml
         QuickMorphism/QuickMorphismUI.qml
         QuickMorphism/Required.qml
         QuickMorphism/Ripple.qml
@@ -107,6 +112,8 @@ qt_add_resources(${PROJECT_NAME} "quickmorphism_qml"
         QuickMorphism/SnackBar.qml
         QuickMorphism/Switch.qml
         QuickMorphism/SwitchDelegate.qml
+        QuickMorphism/TabBar.qml
+        QuickMorphism/TabButton.qml
         QuickMorphism/TextField.qml
         QuickMorphism/Title.qml
         QuickMorphism/ToolBar.qml

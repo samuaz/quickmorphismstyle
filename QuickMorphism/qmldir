@@ -4,6 +4,7 @@ designersupported
 typeinfo QuickMorphism.qmltypes
 QuickMorphismUI 1.0 QuickMorphismUI.qml
 ApplicationWindow 1.0 ApplicationWindow.qml
+BottomNavBar 1.0 BottomNavBar.qml
 Button 1.0 Button.qml
 CheckBox 1.0 CheckBox.qml
 ComboBox 1.0 ComboBox.qml

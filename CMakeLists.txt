@@ -87,6 +87,7 @@ qt_add_resources(${PROJECT_NAME} "quickmorphism_qml"
     PREFIX "/"
     FILES
         QuickMorphism/ApplicationWindow.qml
+        QuickMorphism/BottomNavBar.qml
         QuickMorphism/Button.qml
         QuickMorphism/CalendarPicker.qml
         QuickMorphism/Card.qml

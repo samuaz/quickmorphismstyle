@@ -19,7 +19,7 @@ T.CheckBox {
     spacing: 10
     padding: 8
     verticalPadding: padding + 7
-    text: qsTr("checkbox")
+    text: qsTr("CheckBox")
     property double shadowOpacity: QuickMorphismConfig.theme.shadowOpacity
     icon.color: !enabled ? QuickMorphismConfig.theme.hintTextColor : QuickMorphismConfig.theme.primaryTextColor
 

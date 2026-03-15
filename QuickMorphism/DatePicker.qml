@@ -1,31 +1,37 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls as Controls
 import QtQuick.Layouts
-import Qt5Compat.GraphicalEffects
+import QtQuick.Templates as T
 
-Item {
+TextField {
     id: control
-    property color color: QuickMorphismConfig.theme.accentColor
-    property color textColor: QuickMorphismConfig.theme.primaryTextColor
-    property alias valid: textDate.acceptableInput
-    property string placeholderText: qsTr("Date")
-    property alias dateString: textDate
-    property alias calendar: cal
+
+    property var date: new Date()
+    property double popupShadowOpacity: QuickMorphismConfig.theme.shadowOpacity
+
     property var days
     property var months
     property var years
-    property var date
-    height: textDate.height
+
+    property string titleText: qsTr("Select Date")
+    property string dayLabel: qsTr("Day")
+    property string monthLabel: qsTr("Month")
+    property string yearLabel: qsTr("Year")
+    property string cancelText: qsTr("Cancel")
+    property string confirmText: qsTr("Confirm")
+
+    readOnly: true
+    placeholderText: qsTr("Date")
 
     Component.onCompleted: {
         var now = new Date()
         date = new Date()
-        days = creteTumbler(1, 31)
-        months = creteTumbler(1, 12)
-        years = creteTumbler(1900, now.getFullYear())
+        days = createTumbler(1, 31)
+        months = createTumbler(1, 12)
+        years = createTumbler(1900, now.getFullYear())
     }
 
-    function creteTumbler(start, end) {
+    function createTumbler(start, end) {
         var y = []
         while (end >= start) {
             y.push(end--)
@@ -33,216 +39,249 @@ Item {
         return y
     }
 
-    function showCalendar() {
-        if (cal.visible) {
-            cal.visible = false
-            Config.dimContainer = false
-        } else {
-            cal.visible = true
-            Config.dimContainer = true
-        }
+    // Calendar icon
+    T.Label {
+        anchors.right: parent.right
+        anchors.rightMargin: 12 * QuickMorphismConfig.dpScale
+        anchors.verticalCenter: parent.verticalCenter
+        text: "\uf133"
+        font.family: Fonts.fontAwesomeRegular.name
+        font.pixelSize: 16 * QuickMorphismConfig.dpScale
+        color: QuickMorphismConfig.theme.hintTextColor
     }
 
-    TextField {
-        id: textDate
-        placeholderText: control.placeholderText
-        width: parent.width
-
-        validator: RegExpValidator {
-            regExp: /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: showCalendar()
-        }
-
-        Button {
-            id: button
-            width: textDate.height - 10
-            height: textDate.height - 10
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.right: textDate.right
-            anchors.rightMargin: 3
-            FontAwesomeRegular {
-                id: indicatorchecker
-                fontSizeMode: "Fit"
-                symbol: Icons.faCalendar
-                font.weight: Font.Bold
-                color: QuickMorphismConfig.theme.primaryTextColor
-                text: "\uf133"
-                anchors.fill: parent
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-            }
-            onClicked: showCalendar()
-            flat: true
-        }
+    MouseArea {
+        anchors.fill: parent
+        onClicked: cal.open()
     }
 
-    Popup {
+    // Tumbler popup
+    T.Popup {
         id: cal
-        parent: Overlay.overlay
-        y: parent.height - cal.height
-        width: parent.width
-        height: 200
-        visible: false
+        parent: Controls.Overlay.overlay
+        x: parent ? Math.round((parent.width - width) / 2) : 0
+        y: parent ? Math.round((parent.height - height) / 2) : 0
+        width: 300 * QuickMorphismConfig.dpScale
+        height: 360 * QuickMorphismConfig.dpScale
+        modal: true
         dim: true
+
+        T.Overlay.modal: Rectangle {
+            color: Qt.rgba(0, 0, 0, 0.5)
+        }
+
         background: Rectangle {
-            id: bg
             color: QuickMorphismConfig.theme.backgroundColor
-            border.width: 0
-            anchors.fill: parent
-            radius: 40
+            radius: 16 * QuickMorphismConfig.dpScale
+            border.color: QuickMorphismConfig.theme.highlightedColor
+            border.width: 1
+        }
 
-            Rectangle {
-                anchors.bottom: parent.bottom
-                anchors.bottomMargin: 0
-                width: parent.width
-                height: parent.radius
-                color: QuickMorphismConfig.theme.backgroundColor
-            }
+        contentItem: ColumnLayout {
+            spacing: 0
 
-            MouseArea {
-                anchors.fill: parent
-                onClicked: showCalendar()
-            }
-
+            // Header
             Item {
-                id: element
-                anchors.fill: parent
+                Layout.fillWidth: true
+                Layout.preferredHeight: 48 * QuickMorphismConfig.dpScale
 
-                Item {
-                    anchors.verticalCenter: parent.verticalCenter
-                    height: parent.height / 2
-                    Button {
-                        id: close
-                        anchors.left: parent.left
-                        anchors.top: parent.top
+                T.Label {
+                    anchors.centerIn: parent
+                    text: control.titleText
+                    font.pixelSize: 18 * QuickMorphismConfig.dpScale
+                    font.bold: true
+                    color: QuickMorphismConfig.theme.primaryTextColor
+                }
+            }
 
-                        FontAwesomeRegular {
-                            font.pixelSize: 15
-                            symbol: Icons.faTimes
-                            font.weight: Font.Bold
-                            color: control.textColor
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            anchors.verticalCenter: parent.verticalCenter
-                        }
+            Separator {
+                Layout.fillWidth: true
+                Layout.leftMargin: 16 * QuickMorphismConfig.dpScale
+                Layout.rightMargin: 16 * QuickMorphismConfig.dpScale
+            }
 
-                        onClicked: {
-                            cal.visible = false
-                        }
-                        flat: true
+            // Column headers
+            RowLayout {
+                Layout.fillWidth: true
+                Layout.topMargin: 8 * QuickMorphismConfig.dpScale
+                Layout.leftMargin: 16 * QuickMorphismConfig.dpScale
+                Layout.rightMargin: 16 * QuickMorphismConfig.dpScale
+                spacing: 8 * QuickMorphismConfig.dpScale
+
+                T.Label {
+                    Layout.fillWidth: true
+                    text: control.dayLabel
+                    horizontalAlignment: Text.AlignHCenter
+                    font.pixelSize: 12 * QuickMorphismConfig.dpScale
+                    color: QuickMorphismConfig.theme.hintTextColor
+                }
+                T.Label {
+                    Layout.fillWidth: true
+                    text: control.monthLabel
+                    horizontalAlignment: Text.AlignHCenter
+                    font.pixelSize: 12 * QuickMorphismConfig.dpScale
+                    color: QuickMorphismConfig.theme.hintTextColor
+                }
+                T.Label {
+                    Layout.fillWidth: true
+                    text: control.yearLabel
+                    horizontalAlignment: Text.AlignHCenter
+                    font.pixelSize: 12 * QuickMorphismConfig.dpScale
+                    color: QuickMorphismConfig.theme.hintTextColor
+                }
+            }
+
+            // Tumblers in inset container
+            Item {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.margins: 16 * QuickMorphismConfig.dpScale
+
+                Rectangle {
+                    anchors.fill: parent
+                    color: QuickMorphismConfig.theme.foregroundColor
+                    radius: 8 * QuickMorphismConfig.dpScale
+
+                    Elevation {
+                        width: parent.width
+                        height: parent.height
+                        radius: parent.radius
+                        pressed: true
+                        opacity: control.popupShadowOpacity
                     }
 
-                    Button {
-                        anchors.left: parent.left
-                        anchors.top: close.bottom
-                        anchors.topMargin: 10
-                        FontAwesomeRegular {
-                            font.pixelSize: 15
-                            symbol: Icons.faCheck
-                            font.weight: Font.Bold
-                            color: QuickMorphismConfig.theme.primaryTextColor
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            anchors.verticalCenter: parent.verticalCenter
-                        }
-                        onClicked: {
-                            date.setDate(days[daysTumbler.currentIndex])
-                            date.setMonth(
-                                        months[monthsTumbler.currentIndex] - 1)
-                            date.setYear(years[yearsTumbler.currentIndex])
+                    // Selection highlight band
+                    Rectangle {
+                        anchors.centerIn: parent
+                        width: parent.width - 8 * QuickMorphismConfig.dpScale
+                        height: 36 * QuickMorphismConfig.dpScale
+                        radius: 6 * QuickMorphismConfig.dpScale
+                        color: QuickMorphismConfig.theme.highlightedColor
+                        opacity: 0.5
+                    }
 
-                            textDate.text = Qt.formatDate(date, "yyyy-MM-dd")
-                            cal.visible = false
+                    RowLayout {
+                        anchors.fill: parent
+                        anchors.margins: 4 * QuickMorphismConfig.dpScale
+                        spacing: 0
+
+                        Controls.Tumbler {
+                            id: daysTumbler
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            model: control.days
+                            visibleItemCount: 5
+                            delegate: T.Label {
+                                text: modelData
+                                horizontalAlignment: Text.AlignHCenter
+                                verticalAlignment: Text.AlignVCenter
+                                font.pixelSize: 16 * QuickMorphismConfig.dpScale
+                                opacity: 1.0 - Math.abs(Controls.Tumbler.displacement) / (Controls.Tumbler.tumbler.visibleItemCount / 2)
+                                color: QuickMorphismConfig.theme.primaryTextColor
+                            }
                         }
-                        flat: true
+
+                        Separator {
+                            vertical: true
+                            Layout.fillHeight: true
+                            Layout.topMargin: 16 * QuickMorphismConfig.dpScale
+                            Layout.bottomMargin: 16 * QuickMorphismConfig.dpScale
+                        }
+
+                        Controls.Tumbler {
+                            id: monthsTumbler
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            model: control.months
+                            visibleItemCount: 5
+                            delegate: T.Label {
+                                text: modelData
+                                horizontalAlignment: Text.AlignHCenter
+                                verticalAlignment: Text.AlignVCenter
+                                font.pixelSize: 16 * QuickMorphismConfig.dpScale
+                                opacity: 1.0 - Math.abs(Controls.Tumbler.displacement) / (Controls.Tumbler.tumbler.visibleItemCount / 2)
+                                color: QuickMorphismConfig.theme.primaryTextColor
+                            }
+                        }
+
+                        Separator {
+                            vertical: true
+                            Layout.fillHeight: true
+                            Layout.topMargin: 16 * QuickMorphismConfig.dpScale
+                            Layout.bottomMargin: 16 * QuickMorphismConfig.dpScale
+                        }
+
+                        Controls.Tumbler {
+                            id: yearsTumbler
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            model: control.years
+                            visibleItemCount: 5
+                            delegate: T.Label {
+                                text: modelData
+                                horizontalAlignment: Text.AlignHCenter
+                                verticalAlignment: Text.AlignVCenter
+                                font.pixelSize: 16 * QuickMorphismConfig.dpScale
+                                opacity: 1.0 - Math.abs(Controls.Tumbler.displacement) / (Controls.Tumbler.tumbler.visibleItemCount / 2)
+                                color: QuickMorphismConfig.theme.primaryTextColor
+                            }
+                        }
+                    }
+                }
+            }
+
+            Separator {
+                Layout.fillWidth: true
+                Layout.leftMargin: 16 * QuickMorphismConfig.dpScale
+                Layout.rightMargin: 16 * QuickMorphismConfig.dpScale
+                Layout.topMargin: 8 * QuickMorphismConfig.dpScale
+            }
+
+            // Action buttons
+            RowLayout {
+                Layout.fillWidth: true
+                Layout.preferredHeight: 56 * QuickMorphismConfig.dpScale
+                Layout.leftMargin: 16 * QuickMorphismConfig.dpScale
+                Layout.rightMargin: 16 * QuickMorphismConfig.dpScale
+                Layout.topMargin: 4 * QuickMorphismConfig.dpScale
+                Layout.bottomMargin: 8 * QuickMorphismConfig.dpScale
+                spacing: 12 * QuickMorphismConfig.dpScale
+
+                Item { Layout.fillWidth: true }
+
+                Button {
+                    text: control.cancelText
+                    flat: true
+                    font.pixelSize: 14 * QuickMorphismConfig.dpScale
+                    onClicked: cal.close()
+                }
+
+                Button {
+                    text: control.confirmText
+                    font.pixelSize: 14 * QuickMorphismConfig.dpScale
+                    font.bold: true
+                    onClicked: {
+                        control.date.setDate(control.days[daysTumbler.currentIndex])
+                        control.date.setMonth(control.months[monthsTumbler.currentIndex] - 1)
+                        control.date.setFullYear(control.years[yearsTumbler.currentIndex])
+                        control.text = Qt.formatDate(control.date, "yyyy-MM-dd")
+                        cal.close()
                     }
                 }
             }
         }
 
-        Row {
-            id: row
-            spacing: 1
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            Tumbler {
-                id: daysTumbler
-                Label {
-                    text: "Day"
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignTop
-                    anchors.fill: parent
-                }
-                model: days
-                delegate: Label {
-                    text: modelData
-                    horizontalAlignment: Text.AlignHCenter
-                    opacity: 1.0 - Math.abs(
-                                 Tumbler.displacement) / (Tumbler.tumbler.visibleItemCount / 3)
-                    color: days[daysTumbler.currentIndex] === modelData ? QuickMorphismConfig.theme.hintTextColor : QuickMorphismConfig.theme.primaryTextColor
-                }
-            }
-
-            Tumbler {
-                Label {
-                    text: "Month"
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignTop
-                    anchors.fill: parent
-                }
-                id: monthsTumbler
-                model: months
-                delegate: Label {
-                    text: modelData
-                    horizontalAlignment: Text.AlignHCenter
-                    opacity: 1.0 - Math.abs(
-                                 Tumbler.displacement) / (Tumbler.tumbler.visibleItemCount / 3)
-                    color: months[monthsTumbler.currentIndex]
-                           === modelData ? QuickMorphismConfig.theme.hintTextColor : QuickMorphismConfig.theme.primaryTextColor
-                }
-            }
-
-            Tumbler {
-                Label {
-                    text: "Year"
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignTop
-                    anchors.fill: parent
-                }
-                id: yearsTumbler
-                model: years
-                delegate: Label {
-                    text: modelData
-                    horizontalAlignment: Text.AlignHCenter
-                    opacity: 1.0 - Math.abs(
-                                 Tumbler.displacement) / (Tumbler.tumbler.visibleItemCount / 3)
-                    color: years[yearsTumbler.currentIndex]
-                           === modelData ? QuickMorphismConfig.theme.hintTextColor : QuickMorphismConfig.theme.primaryTextColor
-                }
-            }
-        }
-
-        onClosed: {
-            Config.dimContainer = false
-        }
         enter: Transition {
-
-            NumberAnimation {
-                property: "y"
-                from: main.height - 200 * -1
-                to: main.height - 200
-                duration: 250
+            ParallelAnimation {
+                NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 200 }
+                NumberAnimation { property: "scale"; from: 0.95; to: 1.0; duration: 200; easing.type: Easing.OutQuad }
             }
         }
 
         exit: Transition {
-            NumberAnimation {
-                property: "y"
-                from: main.height - 200
-                to: main.height - 200 * -1
-                duration: 250
+            ParallelAnimation {
+                NumberAnimation { property: "opacity"; from: 1; to: 0; duration: 150 }
+                NumberAnimation { property: "scale"; from: 1.0; to: 0.95; duration: 150; easing.type: Easing.InQuad }
             }
         }
     }

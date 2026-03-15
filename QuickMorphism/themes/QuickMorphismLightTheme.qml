@@ -4,7 +4,7 @@ import QtQuick
 
 QtObject {
     property string name: "QuickMorphismLightTheme"
-    property int style: QuickMorphismStyle.light
+    property int style: 0 // LIGHT
     property color backgroundColor: "#E0E5EC"
     property color foregroundColor: "#E0E5EC"
     property color primaryTextColor: "#666666"

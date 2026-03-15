@@ -4,23 +4,18 @@ import QtQuick.Layouts
 
 Item {
     id: control
-    property string color: QuickMorphismConfig.theme.accentColor
-    property string textColor: QuickMorphismConfig.theme.primaryTextColor
+    property color color: QuickMorphismConfig.theme.accentColor
+    property color textColor: QuickMorphismConfig.theme.primaryTextColor
     property string placeholder: qsTr("Date")
     property alias calendar: mainForm
 
     function showCalendar() {
-        if (mainForm.visible) {
-            mainForm.visible = false
-        } else {
-            mainForm.visible = true
-        }
+        mainForm.visible = !mainForm.visible
     }
 
     TextField {
         id: textDate
         placeholderText: control.placeholder
-        //text: getDate()
         width: parent.width
         MouseArea {
             anchors.fill: parent
@@ -30,20 +25,21 @@ Item {
 
     Button {
         id: button
-        width: textDate.height - 10
-        height: textDate.height - 10
+        width: textDate.height - 10 * QuickMorphismConfig.dpScale
+        height: textDate.height - 10 * QuickMorphismConfig.dpScale
         anchors.right: textDate.right
         anchors.rightMargin: 0
         FontAwesomeRegular {
             id: indicatorchecker
-            font.pixelSize: parent.width - 15
+            font.pixelSize: parent.width - 15 * QuickMorphismConfig.dpScale
             symbol: Icons.faCalendar
             font.weight: Font.Bold
-            color: QuickMorphismConfig.theme.foregroundColor
+            color: QuickMorphismConfig.theme.primaryTextColor
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
         }
         onClicked: showCalendar()
+        flat: true
     }
 
     Rectangle {
@@ -53,22 +49,12 @@ Item {
         property double mm: Screen.pixelDensity
         property double cellSize: mm * 7
         property int fontSizePx: cellSize * 0.32
-        property var date: new Date(calendar.currentYear,
-                                    calendar.currentMonth, calendar.currentDay)
+        property var date: new Date(calendarView.currentYear,
+                                    calendarView.currentMonth, calendarView.currentDay)
         signal ok
         signal cancel
-
-        QtObject {
-            id: palette
-            property color primary: "#00BCD4"
-            property color primary_dark: "#0097A7"
-            property color primary_light: "#B2EBF2"
-            property color accent: "#FF5722"
-            property color primary_text: "#212121"
-            property color secondary_text: "#757575"
-            property color icons: "#FFFFFF"
-            property color divider: "#BDBDBD"
-        }
+        visible: false
+        color: QuickMorphismConfig.theme.backgroundColor
 
         Rectangle {
             id: titleOfDate
@@ -78,7 +64,7 @@ Item {
             }
             height: 2.5 * mainForm.cellSize
             width: parent.width
-            color: palette.primary_dark
+            color: QuickMorphismConfig.theme.highlightedColor
             z: 2
             Rectangle {
                 id: selectedYear
@@ -89,7 +75,7 @@ Item {
                 }
                 height: mainForm.cellSize * 1
                 color: parent.color
-                Text {
+                Label {
                     id: yearTitle
                     anchors.fill: parent
                     leftPadding: mainForm.cellSize * 0.5
@@ -98,8 +84,8 @@ Item {
                     verticalAlignment: Text.AlignVCenter
                     font.pixelSize: mainForm.fontSizePx * 1.7
                     opacity: yearsList.visible ? 1 : 0.7
-                    color: "white"
-                    text: calendar.currentYear
+                    color: QuickMorphismConfig.theme.primaryTextColor
+                    text: calendarView.currentYear
                 }
                 MouseArea {
                     anchors.fill: parent
@@ -108,7 +94,7 @@ Item {
                     }
                 }
             }
-            Text {
+            Label {
                 id: selectedWeekDayMonth
                 anchors {
                     left: parent.left
@@ -119,10 +105,10 @@ Item {
                 leftPadding: mainForm.cellSize * 0.5
                 verticalAlignment: Text.AlignVCenter
                 font.pixelSize: height * 0.5
-                text: calendar.weekNames[calendar.week].slice(
-                          0, 3) + ", " + calendar.currentDay + " "
-                      + calendar.months[calendar.currentMonth].slice(0, 3)
-                color: "white"
+                text: calendarView.weekNames[calendarView.week].slice(
+                          0, 3) + ", " + calendarView.currentDay + " "
+                      + calendarView.months[calendarView.currentMonth].slice(0, 3)
+                color: QuickMorphismConfig.theme.primaryTextColor
                 opacity: yearsList.visible ? 0.7 : 1
                 MouseArea {
                     anchors.fill: parent
@@ -134,7 +120,7 @@ Item {
         }
 
         ListView {
-            id: calendar
+            id: calendarView
             anchors {
                 top: titleOfDate.bottom
                 left: parent.left
@@ -161,8 +147,8 @@ Item {
                         calendarModel.to = new Date(newYear, 11, 31)
                         calendarModel.from = new Date(newYear, 0, 1)
                     }
-                    calendar.currentYear = newYear
-                    calendar.goToLastPickedDate()
+                    calendarView.currentYear = newYear
+                    calendarView.goToLastPickedDate()
                     mainForm.setCurrentDate()
                 }
             }
@@ -175,8 +161,10 @@ Item {
             property var weekNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
             delegate: Rectangle {
-                height: mainForm.cellSize * 8.5 //6 - на строки, 1 на дни недели и 1.5 на подпись
+                height: mainForm.cellSize * 8.5
                 width: mainForm.cellSize * 7
+                color: QuickMorphismConfig.theme.backgroundColor
+
                 Rectangle {
                     id: monthYearTitle
                     anchors {
@@ -184,11 +172,13 @@ Item {
                     }
                     height: mainForm.cellSize * 1.3
                     width: parent.width
+                    color: QuickMorphismConfig.theme.backgroundColor
 
-                    Text {
+                    Label {
                         anchors.centerIn: parent
                         font.pixelSize: mainForm.fontSizePx * 1.2
-                        text: calendar.months[model.month] + " " + model.year
+                        text: calendarView.months[model.month] + " " + model.year
+                        color: QuickMorphismConfig.theme.primaryTextColor
                     }
                 }
 
@@ -201,11 +191,12 @@ Item {
                     }
                     height: mainForm.cellSize
                     width: parent.width
-                    delegate: Text {
+                    delegate: Label {
                         text: model.shortName
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         font.pixelSize: mainForm.fontSizePx
+                        color: QuickMorphismConfig.theme.hintTextColor
                     }
                 }
 
@@ -226,14 +217,13 @@ Item {
                         width: mainForm.cellSize
                         radius: height * 0.5
                         property bool highlighted: enabled
-                                                   && model.day === calendar.currentDay
-                                                   && model.month === calendar.currentMonth
+                                                   && model.day === calendarView.currentDay
+                                                   && model.month === calendarView.currentMonth
 
                         enabled: model.month === monthGrid.month
-                        color: enabled
-                               && highlighted ? palette.primary_dark : "white"
+                        color: enabled && highlighted ? QuickMorphismConfig.theme.accentColor : QuickMorphismConfig.theme.backgroundColor
 
-                        Text {
+                        Label {
                             anchors.centerIn: parent
                             text: model.day
                             font.pixelSize: mainForm.fontSizePx
@@ -244,15 +234,15 @@ Item {
                                 }
                             }
                             visible: parent.enabled
-                            color: parent.highlighted ? "white" : "black"
+                            color: parent.highlighted ? QuickMorphismConfig.theme.backgroundColor : QuickMorphismConfig.theme.primaryTextColor
                         }
                         MouseArea {
                             anchors.fill: parent
                             onClicked: {
-                                calendar.currentDay = model.date.getDate()
-                                calendar.currentMonth = model.date.getMonth()
-                                calendar.week = model.date.getDay()
-                                calendar.currentYear = model.date.getFullYear()
+                                calendarView.currentDay = model.date.getDate()
+                                calendarView.currentMonth = model.date.getMonth()
+                                calendarView.week = model.date.getDay()
+                                calendarView.currentYear = model.date.getFullYear()
                                 mainForm.setCurrentDate()
                             }
                         }
@@ -262,16 +252,16 @@ Item {
 
             Component.onCompleted: goToLastPickedDate()
             function goToLastPickedDate() {
-                positionViewAtIndex(calendar.currentMonth, ListView.SnapToItem)
+                positionViewAtIndex(calendarView.currentMonth, ListView.SnapToItem)
             }
         }
 
         ListView {
             id: yearsList
-            anchors.fill: calendar
+            anchors.fill: calendarView
             orientation: ListView.Vertical
             visible: false
-            z: calendar.z
+            z: calendarView.z
 
             property int currentYear
             property int startYear: 1940
@@ -281,14 +271,15 @@ Item {
             }
 
             delegate: Rectangle {
-                width: parent.width
+                width: yearsList.width
                 height: mainForm.cellSize * 1.5
-                Text {
+                color: QuickMorphismConfig.theme.backgroundColor
+                Label {
                     anchors.centerIn: parent
                     font.pixelSize: mainForm.fontSizePx * 1.5
                     text: name
                     scale: index === yearsList.currentYear - yearsList.startYear ? 1.5 : 1
-                    color: palette.primary_dark
+                    color: QuickMorphismConfig.theme.accentColor
                 }
                 MouseArea {
                     anchors.fill: parent
@@ -307,26 +298,26 @@ Item {
             }
             function show() {
                 visible = true
-                calendar.visible = false
-                currentYear = calendar.currentYear
+                calendarView.visible = false
+                currentYear = calendarView.currentYear
                 yearsList.positionViewAtIndex(currentYear - startYear,
                                               ListView.SnapToItem)
             }
             function hide() {
                 visible = false
-                calendar.visible = true
+                calendarView.visible = true
             }
         }
 
         Rectangle {
             height: mainForm.cellSize * 1.5
             anchors {
-                top: calendar.bottom
+                top: calendarView.bottom
                 right: parent.right
                 rightMargin: mainForm.cellSize * 0.5
             }
             z: titleOfDate.z
-            color: "black"
+            color: QuickMorphismConfig.theme.backgroundColor
             Row {
                 layoutDirection: "RightToLeft"
                 anchors {
@@ -338,11 +329,12 @@ Item {
                     id: okBtn
                     height: parent.height
                     width: okBtnText.contentWidth + mainForm.cellSize
-                    Text {
+                    color: QuickMorphismConfig.theme.backgroundColor
+                    Label {
                         id: okBtnText
                         anchors.centerIn: parent
                         font.pixelSize: mainForm.fontSizePx * 1.8
-                        color: palette.primary_dark
+                        color: QuickMorphismConfig.theme.accentColor
                         text: "OK"
                     }
                     MouseArea {
@@ -356,11 +348,12 @@ Item {
                     id: cancelBtn
                     height: parent.height
                     width: cancelBtnText.contentWidth + mainForm.cellSize
-                    Text {
+                    color: QuickMorphismConfig.theme.backgroundColor
+                    Label {
                         id: cancelBtnText
                         anchors.centerIn: parent
                         font.pixelSize: mainForm.fontSizePx * 1.8
-                        color: palette.primary_dark
+                        color: QuickMorphismConfig.theme.accentColor
                         text: "CANCEL"
                     }
                     MouseArea {
@@ -374,14 +367,8 @@ Item {
         }
 
         function setCurrentDate() {
-            mainForm.date = new Date(calendar.currentYear,
-                                     calendar.currentMonth, calendar.currentDay)
+            mainForm.date = new Date(calendarView.currentYear,
+                                     calendarView.currentMonth, calendarView.currentDay)
         }
     }
 }
-
-/*##^## Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
- ##^##*/
-

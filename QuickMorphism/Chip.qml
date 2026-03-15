@@ -5,11 +5,10 @@ import QtQuick.Templates as T
 T.AbstractButton {
     id: control
 
-    property bool checkable: true
+    checkable: true
     property bool closable: false
     property string icon_
 
-    signal toggled(bool checked)
     signal closed()
 
     property double shadowOpacity: QuickMorphismConfig.theme.shadowOpacity
@@ -21,14 +20,6 @@ T.AbstractButton {
     leftPadding: 16 * QuickMorphismConfig.dpScale
     rightPadding: (closable ? 8 : 16) * QuickMorphismConfig.dpScale
 
-    checkable: control.checkable
-
-    onClicked: {
-        if (control.checkable) {
-            control.checked = !control.checked
-            control.toggled(control.checked)
-        }
-    }
 
     background: Rectangle {
         color: QuickMorphismConfig.theme.foregroundColor

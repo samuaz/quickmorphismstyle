@@ -6,6 +6,7 @@ QuickMorphismUI 1.0 QuickMorphismUI.qml
 ApplicationWindow 1.0 ApplicationWindow.qml
 Button 1.0 Button.qml
 CheckBox 1.0 CheckBox.qml
+ComboBox 1.0 ComboBox.qml
 DirectoryFontLoader 1.0 def/DirectoryFontLoader.qml
 Elevation 1.0 Elevation.qml
 Image 1.0 Image.qml
@@ -32,6 +33,7 @@ ListItem 1.0 ListItem.qml
 Dialog 1.0 Dialog.qml
 ProgressBar 1.0 ProgressBar.qml
 Ripple 1.0 Ripple.qml
+Separator 1.0 Separator.qml
 singleton Icons 1.0 Icons.qml
 singleton Fonts 1.0 Fonts.qml
 singleton QuickMorphismStyle 1.0 StyleEnums.qml

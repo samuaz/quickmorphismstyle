@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls.impl
 import QtQuick.Timeline
-import QtQuick.Controls.Material.impl as Mat
 
 
 T.Switch {
@@ -11,7 +10,7 @@ T.Switch {
     property int radius: Math.max(width, height) / 2
     property double shadowOpacity: QuickMorphismConfig.theme.shadowOpacity
     property int indicatorWidth: 50
-    property int indicatorheight: 20
+    property int indicatorHeight: 20
 
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
                             implicitContentWidth + leftPadding + rightPadding)
@@ -42,7 +41,7 @@ T.Switch {
     indicator: Rectangle {
         id: switchHandle
         implicitWidth: indicatorWidth * QuickMorphismConfig.dpScale
-        implicitHeight: indicatorheight * QuickMorphismConfig.dpScale
+        implicitHeight: indicatorHeight * QuickMorphismConfig.dpScale
         x: text ? (control.mirrored ? control.width - width - control.rightPadding : control.leftPadding) : control.leftPadding
                   + (control.availableWidth - width) / 2
         y: control.topPadding + (control.availableHeight - height) / 2
@@ -75,17 +74,13 @@ T.Switch {
             border.color: QuickMorphismConfig.theme.bottonShadowColor
             border.width: 0
 
-            Mat.Ripple {
-                x: parent.x
-                y: parent.y
-                width: parent.width - 10
-                height: parent.height - 10
-                pressed: control.pressed
-                active: control.down || control.visualFocus || control.hovered
-                color: control.checked ? QuickMorphismConfig.theme.bottonShadowColor : QuickMorphismConfig.theme.bottonShadowColor
-                opacity: 0.2
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
+            Ripple {
+                anchors.centerIn: parent
+                width: parent.width
+                height: parent.height
+                control: control
+                colored: control.checked
+                opacity: control.down ? 0.2 : 0
             }
         }
     }

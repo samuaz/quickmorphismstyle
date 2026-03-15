@@ -71,6 +71,6 @@ Rectangle {
         fast: true
         cached: true
         transparentBorder: true
-        color: "#19000000"
+        color: QuickMorphismConfig.theme.bottonShadowColor
     }
 }

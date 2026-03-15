@@ -50,7 +50,7 @@ Item {
                 anchors.right: parent.right
                 anchors.rightMargin: parent.rightMargin
                 background: Rectangle {
-                    color: "#00ffffff"
+                    color: "transparent"
                 }
                 contentItem: Rectangle {
                     id: scrollbarIndicator

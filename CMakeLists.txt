@@ -92,6 +92,7 @@ qt_add_resources(${PROJECT_NAME} "quickmorphism_qml"
         QuickMorphism/Card.qml
         QuickMorphism/CheckBox.qml
         QuickMorphism/Chip.qml
+        QuickMorphism/ComboBox.qml
         QuickMorphism/Config.qml
         QuickMorphism/DatePicker.qml
         QuickMorphism/Dialog.qml
@@ -109,6 +110,7 @@ qt_add_resources(${PROJECT_NAME} "quickmorphism_qml"
         QuickMorphism/Ripple.qml
         QuickMorphism/RoundImage.qml
         QuickMorphism/ScrollableContainer.qml
+        QuickMorphism/Separator.qml
         QuickMorphism/SnackBar.qml
         QuickMorphism/Switch.qml
         QuickMorphism/SwitchDelegate.qml

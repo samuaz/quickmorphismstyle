@@ -91,6 +91,7 @@ qt_add_resources(${PROJECT_NAME} "quickmorphism_qml"
         QuickMorphism/Button.qml
         QuickMorphism/CalendarPicker.qml
         QuickMorphism/Card.qml
+        QuickMorphism/ImageCard.qml
         QuickMorphism/CheckBox.qml
         QuickMorphism/Chip.qml
         QuickMorphism/ComboBox.qml

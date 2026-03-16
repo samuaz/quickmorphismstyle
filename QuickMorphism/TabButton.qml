@@ -14,7 +14,7 @@ T.TabButton {
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
                              implicitContentHeight + topPadding + bottomPadding)
 
-    padding: 8 * QuickMorphismConfig.dpScale
+    padding: 6 * QuickMorphismConfig.dpScale
     spacing: 6
 
     icon.width: 20
@@ -26,7 +26,7 @@ T.TabButton {
     background: Rectangle {
         color: QuickMorphismConfig.theme.foregroundColor
         radius: control.radius
-        implicitHeight: 40 * QuickMorphismConfig.dpScale
+        implicitHeight: 30 * QuickMorphismConfig.dpScale
 
         Elevation {
             id: elevation

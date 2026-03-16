@@ -11,8 +11,8 @@ T.TabBar {
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
                              contentHeight + topPadding + bottomPadding)
 
-    padding: 4 * QuickMorphismConfig.dpScale
-    spacing: 2 * QuickMorphismConfig.dpScale
+    padding: 8 * QuickMorphismConfig.dpScale
+    spacing: 8 * QuickMorphismConfig.dpScale
 
     contentItem: ListView {
         model: control.contentModel

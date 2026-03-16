@@ -27,6 +27,7 @@ DatePicker 1.0 DatePicker.qml
 Required 1.0 Required.qml
 Title 1.0 Title.qml
 Card 1.0 Card.qml
+ImageCard 1.0 ImageCard.qml
 Chip 1.0 Chip.qml
 TabBar 1.0 TabBar.qml
 TabButton 1.0 TabButton.qml

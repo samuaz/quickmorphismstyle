@@ -10,6 +10,7 @@ Item {
     property int radius: 12 * QuickMorphismConfig.dpScale
     property bool elevation: true
     property bool clickable: false
+    property double contentPadding: 16 * QuickMorphismConfig.dpScale
     property alias elevation_: elevation_
 
     default property alias content: bodyArea.data
@@ -80,7 +81,7 @@ Item {
         Column {
             id: bodyArea
             width: parent.width
-            padding: 16 * QuickMorphismConfig.dpScale
+            padding: control.contentPadding
 
             T.Label {
                 visible: control.title !== ""
@@ -122,14 +123,4 @@ Item {
         }
     }
 
-    states: [
-        State {
-            name: "cardPressed"
-            when: control.clickable && elevation_.pressed
-            PropertyChanges {
-                target: elevation_
-                pressed: true
-            }
-        }
-    ]
 }
